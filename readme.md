@@ -1,5 +1,5 @@
 # Object-oriented React Architecture
-Object-oriented react architecture sample code.
+Object-oriented react architecture sample code.  
 if you leave an issue or a pull request, we will reflect the insufficient part or improvement. ☺️  
 
 ## Use Stack
