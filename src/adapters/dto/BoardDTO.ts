@@ -7,7 +7,7 @@ export interface IBoardParams {
 
 export interface IBoardDTO {
   readonly id: number
-  readonly author: string;
+  readonly author: string
   readonly content: string
   readonly createAt: Date
 }

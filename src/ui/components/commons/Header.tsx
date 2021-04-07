@@ -1,14 +1,15 @@
-import * as React from "react"
+import * as React from 'react'
 import styled from '@emotion/styled'
-import { useDispatch } from "react-redux"
+import { useSetToken } from '../../hooks/sessionRecoil'
 import ShortBtn from './ShortBtn'
 import di from '../../../di'
 
 const Header: React.FC = () => {
-  const dispatch = useDispatch()
+  const setUserToken = useSetToken();
 
   const handleClickLogout = () => {
-    dispatch(di.session.removeToken())
+    di.session.removeToken()
+    setUserToken('')
   }
 
   return (

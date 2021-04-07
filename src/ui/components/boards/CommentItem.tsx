@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from 'react'
 import styled from '@emotion/styled'
-import { ICommentVM } from "../../../adapters/vm/Comment"
+import { ICommentVM } from '../../../adapters/vm/Comment'
 
 interface IProps {
   comment: ICommentVM

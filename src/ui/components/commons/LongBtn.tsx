@@ -1,8 +1,8 @@
-import * as React from "react"
+import * as React from 'react'
 import styled from '@emotion/styled'
 
 interface IProps {
-  type: "button" | "submit" | "reset"
+  type: 'button' | 'submit' | 'reset'
   value: string
   onClick(): void
 }

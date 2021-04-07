@@ -1,6 +1,6 @@
-import { IBoardAction } from '../interfaces-redux/iBoard';
+import { IBoardVM } from '../../../adapters/vm/Board'
 
 export interface IBoardPresenter {
-  getBoards(): Promise<IBoardAction>
+  getBoards(): Promise<Array<IBoardVM>>
   insertBoard(author: string, content: string): Promise<boolean>
 }

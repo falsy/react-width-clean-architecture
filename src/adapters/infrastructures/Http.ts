@@ -1,4 +1,4 @@
-import { IHttp, IRequestOption } from "./interfaces/iHttp"
+import { IHttp, IRequestOption } from './interfaces/iHttp'
 
 class Http implements IHttp {
 

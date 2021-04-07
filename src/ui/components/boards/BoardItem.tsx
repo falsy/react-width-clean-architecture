@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from 'react'
 import styled from '@emotion/styled'
-import { IBoardVM } from "../../../adapters/vm/Board"
+import { IBoardVM } from '../../../adapters/vm/Board'
 
 interface IProps {
   board: IBoardVM

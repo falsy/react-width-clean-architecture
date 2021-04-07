@@ -1,5 +1,5 @@
-import { IBoardDTO } from "../../dto/boardDTO"
-import { ICommentDTO } from "../../dto/CommentDTO"
+import { IBoardDTO } from '../../dto/boardDTO'
+import { ICommentDTO } from '../../dto/CommentDTO'
 
 export interface IBoardRepository {
   getBoards(): Promise<Array<IBoardDTO>>

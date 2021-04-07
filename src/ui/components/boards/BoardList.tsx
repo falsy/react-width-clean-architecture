@@ -1,8 +1,8 @@
-import * as React from "react"
+import * as React from 'react'
 import styled from '@emotion/styled'
 import BoardItem from './BoardItem'
 import CommentItem from './CommentItem'
-import { IBoardVM } from "../../../adapters/vm/Board"
+import { IBoardVM } from '../../../adapters/vm/Board'
 
 interface IProps {
   list: Array<IBoardVM>;
