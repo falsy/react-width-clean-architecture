@@ -1,7 +1,5 @@
-import { ILoginAction } from "../interfaces-redux/iSession";
-
 export interface ISessionPresenter {
-  login(id: string, pw: string): Promise<ILoginAction>
+  login(id: string, pw: string): Promise<string>
   getToken(): string
   setToken(token: string): any
   removeToken(): void

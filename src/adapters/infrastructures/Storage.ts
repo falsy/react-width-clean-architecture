@@ -1,4 +1,4 @@
-import { IStorage } from "./interfaces/iStorage"
+import { IStorage } from './interfaces/iStorage'
 
 class Storage implements IStorage {
 

@@ -1,8 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Provider } from 'react-redux';
+import { RecoilRoot } from 'recoil'
 import { Global, css } from '@emotion/react'
-import store from '../services/redux/store';
 import MainRouter from './components/commons/Router'
 
 const App = () => (
@@ -21,9 +20,9 @@ const App = () => (
         letter-spacing: 0.3px;
       }
     `}/>
-    <Provider store={store}>
+    <RecoilRoot>
       <MainRouter />
-    </Provider>
+    </RecoilRoot>
   </>
 )
 

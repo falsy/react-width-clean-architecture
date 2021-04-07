@@ -3,7 +3,7 @@ Object-oriented react architecture sample code.
 if you leave an issue or a pull request, we will reflect the insufficient part or improvement. ☺️  
 
 ## Use Stack
-Typescript, Webpack, React, Redux, Emotion
+Typescript, Webpack, React, Recoil, Emotion
 
 ## Directory Structure
 ```
@@ -17,12 +17,10 @@ Typescript, Webpack, React, Redux, Emotion
 │  ├─ presenters
 │  │  ├─ interfaces
 │  │  └─ interfaces-converters
-│  │  └─ interfaces-redux
 │  ├─ dto
 │  └─ vm
 ├─ services
-│  ├─ converters
-│  └─ redux
+│  └─ converters
 ├─ di
 └─ ui
    ├─ components
@@ -55,4 +53,4 @@ $ npm start
 ```
 
 ## Version
-v1.0.0 - [ChangeLog](https://github.com/falsy/object-oriented-react-architecture/blob/master/changelog.md)
+v1.1.0 - [ChangeLog](https://github.com/falsy/object-oriented-react-architecture/blob/master/changelog.md)

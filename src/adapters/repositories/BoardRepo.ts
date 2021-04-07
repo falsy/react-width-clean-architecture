@@ -1,5 +1,5 @@
 import { IBoardRepository } from './interfaces/iBoardRepo'
-import BoardDTO, { IBoardDTO, IBoardParams } from "../dto/BoardDTO"
+import BoardDTO, { IBoardDTO, IBoardParams } from '../dto/BoardDTO'
 import CommentDTO, { ICommentDTO, ICommentParams } from '../dto/CommentDTO'
 import { IHttp } from '../infrastructures/interfaces/iHttp'
 

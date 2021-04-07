@@ -1,4 +1,4 @@
-import { IBoardPresenter } from './iBoardPre';
+import { IBoardPresenter } from './iBoardPre'
 import { ISessionPresenter } from './iSessionPre'
 
 export default interface IPresenters {
