@@ -2,7 +2,7 @@ import { IBoardDTO } from '../../adapters/dto/boardDTO'
 import { ICommentDTO } from '../../adapters/dto/CommentDTO'
 import BoardVM, { IBoardVM } from '../../adapters/vm/Board'
 import CommentVM from '../../adapters/vm/Comment'
-import { IBoardConverter } from '../../adapters/presenters/interfaces-converters/iBoardConv'
+import { IBoardConverter } from '../../adapters/presenters/converter-interfaces/iBoardConv'
 
 class BoardConverter implements IBoardConverter {
   convertBoardVM(boardDTOs: Array<IBoardDTO>, commetDTOs: Array<ICommentDTO>): Array<IBoardVM> {

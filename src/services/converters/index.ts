@@ -1,5 +1,5 @@
 import BoardConverter from './BoardConv'
-import IConverter from '../../adapters/presenters/interfaces-converters'
+import IConverter from '../../adapters/presenters/converter-interfaces'
 
 export default (): IConverter => {
   return {

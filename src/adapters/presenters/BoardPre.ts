@@ -1,4 +1,4 @@
-import { IBoardConverter } from './interfaces-converters/iBoardConv'
+import { IBoardConverter } from './converter-interfaces/iBoardConv'
 import { IBoardVM } from '../vm/Board'
 import { IBoardDTO } from '../dto/boardDTO'
 import { ICommentDTO } from '../dto/CommentDTO'

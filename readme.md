@@ -16,7 +16,7 @@ Typescript, Webpack, React, Recoil, Emotion
 │  │  └─ interfaces
 │  ├─ presenters
 │  │  ├─ interfaces
-│  │  └─ interfaces-converters
+│  │  └─ converter-interfaces
 │  ├─ dto
 │  └─ vm
 ├─ services
@@ -24,7 +24,9 @@ Typescript, Webpack, React, Recoil, Emotion
 ├─ di
 └─ ui
    ├─ components
+   │  └─ ...
    └─ hooks
+      └─ ...
 ```
 
 ## Run Project
@@ -53,4 +55,4 @@ $ npm start
 ```
 
 ## Version
-v1.1.0 - [ChangeLog](https://github.com/falsy/object-oriented-react-architecture/blob/master/changelog.md)
+v1.1.1 - [ChangeLog](https://github.com/falsy/object-oriented-react-architecture/blob/master/changelog.md)

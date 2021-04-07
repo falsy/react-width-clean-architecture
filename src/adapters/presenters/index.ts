@@ -1,4 +1,4 @@
-import IConverter from './interfaces-converters'
+import IConverter from './converter-interfaces'
 import IRepositories from '../repositories/interfaces'
 import BoardPresenter from './BoardPre'
 import IPresenters from './interfaces'
