@@ -9,7 +9,7 @@ if you leave an issue or a pull request, we will reflect the insufficient part o
 Typescript, Webpack, React, Recoil, Emotion
 
 ## Communitaction Flow
-![Alt Communitaction Flow](/_readme/communication-flow-v1.png)
+![Alt Communitaction Flow](/_readme/communication-flow-v2.png)
 in simple diagram, it is as above.
 
 ### Infrastructure
