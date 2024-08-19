@@ -1,9 +1,9 @@
 import { css } from "@emotion/react"
 import ICardTransactionVM from "adapters/vms/interfaces/ICardTransactionVM"
 import CardTransactionVM from "adapters/vms/CardTransactionVM"
+import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM"
 import CardTransactionItem from "./items/CardTransactionItem"
 import AccountTransactionItem from "./items/AccountTransactionItem"
-import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM"
 
 export default function ConsumptionList({
   response

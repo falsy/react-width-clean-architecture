@@ -1,14 +1,24 @@
-import { ValidateNested } from "class-validator"
+import { IsString, ValidateNested } from "class-validator"
 import Transaction from "./Transaction"
-import ICard from "../entities/interfaces/ICard"
-import { ICardTransactionParams } from "./interfaces/ICardTransaction"
+import ICardTransaction, {
+  ICardTransactionParams
+} from "./interfaces/ICardTransaction"
+import CardInfoVO from "../vos/CardInfoVO"
+import ICardInfoVO from "../vos/interfaces/ICardInfoVO"
 
-export default class CardTransaction extends Transaction {
+export default class CardTransaction
+  extends Transaction
+  implements ICardTransaction
+{
   @ValidateNested()
-  readonly card: ICard
+  readonly card: ICardInfoVO
+
+  @IsString()
+  readonly cardId: string
 
   constructor(params: ICardTransactionParams) {
     super(params)
-    this.card = params.card
+    this.card = new CardInfoVO(params.card)
+    this.cardId = params.card.id
   }
 }

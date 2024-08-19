@@ -1,10 +1,10 @@
 import { css } from "@emotion/react"
-import Container from "components/containers/Container"
-import Header from "components/Header"
-import Navigation from "components/Navigation"
-import GreetingSection from "components/containers/GreetingSection"
-import ConsumptionSection from "components/containers/ConsumptionSection"
-import AddConsumptionSection from "components/containers/AddConsumptionSection"
+import Container from "components/commons/containers/Container"
+import Header from "components/commons/Header"
+import Navigation from "components/commons/Navigation"
+import GreetingSection from "components/user/containers/GreetingSection"
+import ConsumptionSection from "components/transaction/containers/ConsumptionSection"
+import AddConsumptionSection from "components/transaction/containers/AddConsumptionSection"
 
 export default function Consumptions() {
   return (

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react"
-import Container from "./containers/Container"
 import IUser from "adapters/domains/entities/interfaces/IUser"
+import Container from "components/commons/containers/Container"
 
 export default function Greeting({ response }: { response?: IUser }) {
   const userName = response?.name || ""

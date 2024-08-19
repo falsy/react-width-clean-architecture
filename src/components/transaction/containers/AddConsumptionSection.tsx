@@ -2,11 +2,12 @@ import { css } from "@emotion/react"
 import { GET_CATEGORIES_CARDS_ACCOUNTS } from "constants/queries"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
-import Error from "components/Error"
-import Loading from "components/Loading"
-import ErrorContainer from "./ErrorContainer"
+import Error from "components/commons/Error"
+import Loading from "components/commons/Loading"
+import ErrorContainer from "../../commons/containers/ErrorContainer"
 import LayerDTO from "adapters/dtos/LayerDTO"
-import AddConsumptionForm from "components/AddConsumptionForm"
+import AddConsumptionForm from "../AddConsumptionForm"
+
 import di from "di"
 
 export default function AddConsumptionSection() {

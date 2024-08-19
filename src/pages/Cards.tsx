@@ -1,9 +1,9 @@
 import { css } from "@emotion/react"
-import Container from "components/containers/Container"
-import Header from "components/Header"
-import Navigation from "components/Navigation"
-import GreetingSection from "components/containers/GreetingSection"
-import CardSection from "components/containers/CardSection"
+import CardSection from "components/card/containers/CardSection"
+import Container from "components/commons/containers/Container"
+import Header from "components/commons/Header"
+import Navigation from "components/commons/Navigation"
+import GreetingSection from "components/user/containers/GreetingSection"
 
 export default function Cards() {
   return (

@@ -1,9 +1,9 @@
+import { useState } from "react"
 import { css } from "@emotion/react"
 import IAccount from "adapters/domains/entities/interfaces/IAccount"
 import ICard from "adapters/domains/entities/interfaces/ICard"
 import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
 import ITxnCategoryDTO from "adapters/dtos/interfaces/ITxnCategoryDTO"
-import { useState } from "react"
 import AddConsumptionAction from "./containers/AddConsumptionAction"
 
 export default function AddConsumptionForm({
@@ -77,24 +77,6 @@ export default function AddConsumptionForm({
         `}
       >
         <div>
-          <p>Keyword</p>
-          <input
-            type="text"
-            name="keyword"
-            value={transactionData.keyword}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <p>Amount</p>
-          <input
-            type="number"
-            name="amount"
-            value={transactionData.amount}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
           <p>Category</p>
           <select
             name="categoryId"
@@ -138,6 +120,24 @@ export default function AddConsumptionForm({
               </option>
             ))}
           </select>
+        </div>
+        <div>
+          <p>Keyword</p>
+          <input
+            type="text"
+            name="keyword"
+            value={transactionData.keyword}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <p>Amount</p>
+          <input
+            type="number"
+            name="amount"
+            value={transactionData.amount}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
       <AddConsumptionAction transactionData={transactionData} />

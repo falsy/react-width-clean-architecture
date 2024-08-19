@@ -1,5 +1,5 @@
 import ITxnCategoryVO from "adapters/domains/vos/interfaces/ITxnCategoryVO"
-import ICard from "adapters/domains/entities/interfaces/ICard"
+import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
 
 export default interface ICardTransactionVM {
   readonly id: string
@@ -7,7 +7,8 @@ export default interface ICardTransactionVM {
   readonly keyword: string
   readonly createdAt: string
   readonly category: ITxnCategoryVO
-  readonly card: ICard
+  readonly card: ICardInfoVO
+  readonly cardId: string
   readonly yearMonthDate: string
   readonly longTime: number
   readonly dayOfWeek: string

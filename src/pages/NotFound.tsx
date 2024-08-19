@@ -1,6 +1,6 @@
-import Navigation from "components/Navigation"
-import Container from "components/containers/Container"
-import Header from "components/Header"
+import Navigation from "components/commons/Navigation"
+import Container from "components/commons/containers/Container"
+import Header from "components/commons/Header"
 
 export default function NotFound() {
   return (

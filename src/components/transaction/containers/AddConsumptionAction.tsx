@@ -1,11 +1,12 @@
 import { css } from "@emotion/react"
-import Loading from "components/Loading"
-import ErrorContainer from "./ErrorContainer"
-import MutationContainer from "components/networks/MutationContainer"
-import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
-import AddConsumptionBtn from "components/items/AddConsumptionBtn"
-import di from "di"
 import { GET_TRANSACTIONS } from "constants/queries"
+import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import Loading from "components/commons/Loading"
+import MutationContainer from "components/networks/MutationContainer"
+import ErrorContainer from "../../commons/containers/ErrorContainer"
+import AddConsumptionBtn from "../items/AddConsumptionBtn"
+
+import di from "di"
 
 export default function AddConsumptionAction({
   transactionData

@@ -8,8 +8,8 @@ export interface IUserParams {
 
 export default interface IUser {
   readonly id: string
-  name: string
-  email: string
-  phone: string
-  address: string
+  readonly name: string
+  readonly email: string
+  readonly phone: string
+  readonly address: string
 }

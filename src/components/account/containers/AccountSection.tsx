@@ -1,14 +1,15 @@
 import { css } from "@emotion/react"
-import { GET_CARDS } from "constants/queries"
+import { GET_ACCOUNTS } from "constants/queries"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
-import Error from "components/Error"
-import Loading from "components/Loading"
-import ErrorContainer from "./ErrorContainer"
-import CardList from "components/CardList"
+import Error from "components/commons/Error"
+import Loading from "components/commons/Loading"
+import ErrorContainer from "../../commons/containers/ErrorContainer"
+import AccountList from "../AccountList"
+
 import di from "di"
 
-export default function CardSection() {
+export default function AccountSection() {
   return (
     <div
       css={css`
@@ -18,16 +19,16 @@ export default function CardSection() {
     >
       <ErrorContainer>
         <QueryContainer
-          queryKey={GET_CARDS}
-          queryFn={() => di.card.getCards()}
+          queryKey={GET_ACCOUNTS}
+          queryFn={() => di.account.getAccounts()}
           loadingComponent={<Loading />}
           errorComponent={
-            <RefetchContainer queryKey={GET_CARDS}>
+            <RefetchContainer queryKey={GET_ACCOUNTS}>
               <Error />
             </RefetchContainer>
           }
         >
-          <CardList />
+          <AccountList />
         </QueryContainer>
       </ErrorContainer>
     </div>

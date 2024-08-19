@@ -1,8 +1,8 @@
 import { IsNumber, IsString, ValidateNested } from "class-validator"
 import IAccountTransaction from "adapters/domains/aggregates/interfaces/IAccountTransaction"
 import ITxnCategoryVO from "adapters/domains/vos/interfaces/ITxnCategoryVO"
-import IAccount from "adapters/domains/entities/interfaces/IAccount"
 import IAccountTransactionVM from "./interfaces/IAccountTransactionVM"
+import IAccountInfoVO from "adapters/domains/vos/interfaces/IAccountInfoVO"
 
 export default class AccountTransactionVM implements IAccountTransactionVM {
   @IsString()
@@ -21,7 +21,10 @@ export default class AccountTransactionVM implements IAccountTransactionVM {
   readonly category: ITxnCategoryVO
 
   @ValidateNested()
-  readonly account: IAccount
+  readonly account: IAccountInfoVO
+
+  @IsString()
+  readonly accountId: string
 
   @IsString()
   readonly yearMonthDate: string
@@ -42,6 +45,7 @@ export default class AccountTransactionVM implements IAccountTransactionVM {
     this.createdAt = params.createdAt
     this.category = params.category
     this.account = params.account
+    this.accountId = params.accountId
     this.yearMonthDate = params.createdAt.split(" ")[0]
     this.longTime = new Date(params.createdAt).getTime()
     this.dayOfWeek = new Date(params.createdAt).toLocaleString("en-US", {
