@@ -8,6 +8,7 @@ export default interface IAccountTransactionVM {
   readonly createdAt: string
   readonly category: ITxnCategoryVO
   readonly account: IAccount
+  readonly yearMonthDate: string
   readonly longTime: number
   readonly dayOfWeek: string
   readonly date: number

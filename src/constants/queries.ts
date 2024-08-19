@@ -1,0 +1,4 @@
+export const GET_USER_INFO = "GET_USER_INFO"
+export const GET_TRANSACTIONS = "GET_TRANSACTIONS"
+export const GET_CARDS = "GET_CARDS"
+export const GET_ACCOUNTS = "GET_ACCOUNTS"

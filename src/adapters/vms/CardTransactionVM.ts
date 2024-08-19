@@ -23,6 +23,9 @@ export default class CardTransactionVM implements ICardTransactionVM {
   @ValidateNested()
   readonly card: ICard
 
+  @IsString()
+  readonly yearMonthDate: string
+
   @IsNumber()
   readonly longTime: number
 
@@ -39,6 +42,7 @@ export default class CardTransactionVM implements ICardTransactionVM {
     this.createdAt = params.createdAt
     this.category = params.category
     this.card = params.card
+    this.yearMonthDate = params.createdAt.split(" ")[0]
     this.longTime = new Date(params.createdAt).getTime()
     this.dayOfWeek = new Date(params.createdAt).toLocaleString("en-US", {
       weekday: "long"

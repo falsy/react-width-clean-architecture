@@ -8,6 +8,7 @@ export default interface ICardTransactionVM {
   readonly createdAt: string
   readonly category: ITxnCategoryVO
   readonly card: ICard
+  readonly yearMonthDate: string
   readonly longTime: number
   readonly dayOfWeek: string
   readonly date: number

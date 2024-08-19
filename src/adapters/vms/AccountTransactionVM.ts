@@ -23,6 +23,9 @@ export default class AccountTransactionVM implements IAccountTransactionVM {
   @ValidateNested()
   readonly account: IAccount
 
+  @IsString()
+  readonly yearMonthDate: string
+
   @IsNumber()
   readonly longTime: number
 
@@ -39,6 +42,7 @@ export default class AccountTransactionVM implements IAccountTransactionVM {
     this.createdAt = params.createdAt
     this.category = params.category
     this.account = params.account
+    this.yearMonthDate = params.createdAt.split(" ")[0]
     this.longTime = new Date(params.createdAt).getTime()
     this.dayOfWeek = new Date(params.createdAt).toLocaleString("en-US", {
       weekday: "long"

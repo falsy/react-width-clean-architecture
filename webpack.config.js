@@ -25,7 +25,6 @@ module.exports = {
       utils: path.resolve(__dirname, "./src/utils/"),
       pages: path.resolve(__dirname, "./src/pages/"),
       hooks: path.resolve(__dirname, "./src/hooks/"),
-      containers: path.resolve(__dirname, "./src/containers/"),
       components: path.resolve(__dirname, "./src/components/")
     }
   },
@@ -48,7 +47,7 @@ module.exports = {
               name: "Falsy",
               email: "mail@mail.com",
               phone: "",
-              Address: ""
+              address: ""
             }
           })
         }, 200)
@@ -77,10 +76,18 @@ module.exports = {
               {
                 id: "txn3",
                 amount: 1500,
-                keyword: "",
+                keyword: "Withdrawal",
                 categoryId: "category5",
                 accountId: "account1",
                 createdAt: "2024-01-03 00:00:00"
+              },
+              {
+                id: "txn4",
+                amount: 3000,
+                keyword: "Burger King",
+                categoryId: "category1",
+                cardId: "card1",
+                createdAt: "2024-01-04 00:00:00"
               }
             ]
           })

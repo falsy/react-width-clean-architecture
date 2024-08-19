@@ -24,7 +24,6 @@
       "utils/*": ["utils/*"],
       "pages/*": ["pages/*"],
       "hooks/*": ["hooks/*"],
-      "containers/*": ["containers/*"],
       "components/*": ["components/*"]
     }
   },
