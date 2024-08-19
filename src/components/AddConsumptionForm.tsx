@@ -55,8 +55,9 @@ export default function AddConsumptionForm({
           grid-gap: 1rem;
           p {
             font-size: 0.6rem;
-            font-weight: bold;
             text-transform: uppercase;
+            font-weight: 600;
+            color: #aaa;
           }
 
           input,

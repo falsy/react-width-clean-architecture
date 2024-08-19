@@ -10,18 +10,24 @@ export default function Accounts() {
     <div>
       <Navigation />
       <GreetingSection />
-      <Container>
-        <div
-          css={css`
-            margin-bottom: 1rem;
-          `}
-        >
-          <Header>
-            <h1>Accounts</h1>
-          </Header>
-        </div>
-        <AccountSection />
-      </Container>
+      <div
+        css={css`
+          padding: 1rem 0;
+        `}
+      >
+        <Container>
+          <div
+            css={css`
+              margin-bottom: 1rem;
+            `}
+          >
+            <Header>
+              <h1>Accounts</h1>
+            </Header>
+          </div>
+          <AccountSection />
+        </Container>
+      </div>
     </div>
   )
 }

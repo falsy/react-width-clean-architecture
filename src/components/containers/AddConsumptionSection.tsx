@@ -14,8 +14,6 @@ export default function AddConsumptionSection() {
     <div
       css={css`
         position: relative;
-        border-top: 1px solid #eaeaea;
-        padding-top: 1rem;
       `}
     >
       <ErrorContainer>

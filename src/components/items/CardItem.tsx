@@ -16,8 +16,9 @@ export default function CardItem({ card }: { card: ICard }) {
           font-size: 0.8rem;
           span {
             font-size: 0.6rem;
-            font-weight: bold;
             text-transform: uppercase;
+            font-weight: 600;
+            color: #aaa;
           }
         }
       `}

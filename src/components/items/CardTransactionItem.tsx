@@ -20,8 +20,9 @@ export default function CardTransactionItem({
           font-size: 0.8rem;
           span {
             font-size: 0.6rem;
-            font-weight: bold;
             text-transform: uppercase;
+            font-weight: 600;
+            color: #aaa;
           }
         }
       `}

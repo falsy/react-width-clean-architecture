@@ -8,28 +8,39 @@ import AddConsumptionSection from "components/containers/AddConsumptionSection"
 
 export default function Consumptions() {
   return (
-    <div
-      css={css`
-        padding-bottom: 5rem;
-      `}
-    >
+    <div>
       <Navigation />
       <GreetingSection />
-      <Container>
-        <div
-          css={css`
-            margin-bottom: 1rem;
-          `}
-        >
-          <Header>
-            <h1>Consumptions</h1>
-          </Header>
-        </div>
-        <ConsumptionSection />
-      </Container>
-      <Container>
-        <AddConsumptionSection />
-      </Container>
+      <div
+        css={css`
+          padding: 1rem 0;
+        `}
+      >
+        <Container>
+          <div
+            css={css`
+              margin-bottom: 1rem;
+            `}
+          >
+            <Header>
+              <h1>Consumptions</h1>
+            </Header>
+          </div>
+          <ConsumptionSection />
+        </Container>
+        <Container>
+          <div
+            css={css`
+              margin-bottom: 1rem;
+            `}
+          >
+            <Header>
+              <h2>Add Consumptions</h2>
+            </Header>
+          </div>
+          <AddConsumptionSection />
+        </Container>
+      </div>
     </div>
   )
 }

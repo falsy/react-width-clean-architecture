@@ -10,18 +10,24 @@ export default function Cards() {
     <div>
       <Navigation />
       <GreetingSection />
-      <Container>
-        <div
-          css={css`
-            margin-bottom: 1rem;
-          `}
-        >
-          <Header>
-            <h1>Cards</h1>
-          </Header>
-        </div>
-        <CardSection />
-      </Container>
+      <div
+        css={css`
+          padding: 1rem 0;
+        `}
+      >
+        <Container>
+          <div
+            css={css`
+              margin-bottom: 1rem;
+            `}
+          >
+            <Header>
+              <h1>Cards</h1>
+            </Header>
+          </div>
+          <CardSection />
+        </Container>
+      </div>
     </div>
   )
 }

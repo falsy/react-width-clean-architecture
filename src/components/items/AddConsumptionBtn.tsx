@@ -4,15 +4,19 @@ export default function AddConsumptionBtn({ action }: { action?: () => void }) {
   return (
     <button
       css={css`
-        padding: 0.4rem 1rem;
-        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
         font-size: 0.8rem;
         border: 1px solid #ccc;
         cursor: pointer;
+        transition: background 0.2s;
+        &:hover {
+          background: #ddd;
+        }
       `}
       onClick={action}
     >
-      Add Consumption
+      Add
     </button>
   )
 }

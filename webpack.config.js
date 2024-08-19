@@ -41,7 +41,7 @@ module.exports = {
         {
           id: "txn1",
           amount: 1000,
-          keyword: "McDonald's",
+          keyword: "Store1",
           categoryId: "category1",
           cardId: "card1",
           createdAt: "2024-01-01 00:00:00"
@@ -49,7 +49,7 @@ module.exports = {
         {
           id: "txn2",
           amount: 2000,
-          keyword: "Starbucks",
+          keyword: "Store2",
           categoryId: "category1",
           cardId: "card2",
           createdAt: "2024-01-02 00:00:00"
@@ -65,9 +65,9 @@ module.exports = {
         {
           id: "txn4",
           amount: 3000,
-          keyword: "Burger King",
+          keyword: "Store3",
           categoryId: "category1",
-          cardId: "card1",
+          cardId: "card3",
           createdAt: "2024-01-04 00:00:00"
         }
       ]
@@ -160,19 +160,19 @@ module.exports = {
               {
                 id: "card1",
                 cardType: "CREDIT",
-                cardCompany: "Financial",
+                cardCompany: "Card1",
                 cardNumber: "4*2*"
               },
               {
                 id: "card2",
                 cardType: "CREDIT",
-                cardCompany: "Financial",
+                cardCompany: "Card2",
                 cardNumber: "1*3*"
               },
               {
                 id: "card3",
                 cardType: "DEBIT",
-                cardCompany: "Financial",
+                cardCompany: "Card3",
                 cardNumber: "5*3*"
               }
             ]
@@ -188,21 +188,21 @@ module.exports = {
               {
                 id: "account1",
                 accountType: "CURRENT",
-                bankName: "Financial",
+                bankName: "Bank1",
                 accountNumber: "5*5*",
                 balance: 10000
               },
               {
                 id: "account2",
                 accountType: "SAVINGS",
-                bankName: "Financial",
+                bankName: "Bank2",
                 accountNumber: "6*2*",
                 balance: 20000
               },
               {
                 id: "account3",
                 accountType: "CURRENT",
-                bankName: "Financial",
+                bankName: "Bank3",
                 accountNumber: "8*4*",
                 balance: 30000
               }
