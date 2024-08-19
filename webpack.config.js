@@ -38,40 +38,116 @@ module.exports = {
     compress: true,
     port: 9000,
     setupMiddlewares: (middlewares, devServer) => {
-      const todoList = [
-        { id: 1, title: "todo1" },
-        { id: 2, title: "todo2" }
-      ]
-
       devServer.app.use(require("express").json())
-      devServer.app.post("/api/login", function (req, res) {
-        const { id, pw } = req.body
-        setTimeout(() => {
-          if (id !== "" || pw !== "") {
-            res.json({ isError: false, data: "mock-jwt-token" })
-          } else {
-            res
-              .status(401)
-              .json({ isError: true, message: "Invalid credentials" })
-          }
-        }, 1000)
-      })
-      devServer.app.get("/api/todos", function (req, res) {
+      devServer.app.use("/api/user", function (req, res) {
         setTimeout(() => {
           res.json({
             isError: false,
-            data: todoList
+            data: {
+              id: "user1",
+              name: "Falsy",
+              email: "mail@mail.com",
+              phone: "",
+              Address: ""
+            }
           })
-        }, 1000)
+        }, 200)
       })
-      devServer.app.post("/api/todo", function (req, res) {
-        const { title } = req.body
-        todoList.push({ id: todoList.length + 1, title })
+      devServer.app.use("/api/transactions", function (req, res) {
         setTimeout(() => {
           res.json({
-            isError: false
+            isError: false,
+            data: [
+              {
+                id: "txn1",
+                amount: 1000,
+                keyword: "McDonald's",
+                categoryId: "category1",
+                cardId: "card1",
+                createdAt: "2024-01-01 00:00:00"
+              },
+              {
+                id: "txn2",
+                amount: 2000,
+                keyword: "Starbucks",
+                categoryId: "category1",
+                cardId: "card2",
+                createdAt: "2024-01-02 00:00:00"
+              },
+              {
+                id: "txn3",
+                amount: 1500,
+                keyword: "",
+                categoryId: "category5",
+                accountId: "account1",
+                createdAt: "2024-01-03 00:00:00"
+              }
+            ]
           })
-        }, 1000)
+        }, 200)
+      })
+      devServer.app.use("/api/txnCategories", function (req, res) {
+        setTimeout(() => {
+          res.json({
+            isError: false,
+            data: [
+              {
+                id: "category1",
+                name: "Food",
+                description: "Food and beverage"
+              },
+              {
+                id: "category5",
+                name: "Withdrawal",
+                description: "Withdraw money from account"
+              }
+            ]
+          })
+        }, 200)
+      })
+      devServer.app.use("/api/cards", function (req, res) {
+        setTimeout(() => {
+          res.json({
+            isError: false,
+            data: [
+              {
+                id: "card1",
+                cardType: "CREDIT",
+                cardCompany: "CitiBank",
+                cardNumber: "4*2*"
+              },
+              {
+                id: "card2",
+                cardType: "CREDIT",
+                cardCompany: "CitiBank",
+                cardNumber: "1*3*"
+              }
+            ]
+          })
+        }, 200)
+      })
+      devServer.app.use("/api/accounts", function (req, res) {
+        setTimeout(() => {
+          res.json({
+            isError: false,
+            data: [
+              {
+                id: "account1",
+                accountType: "CURRENT",
+                bankName: "CitiBank",
+                accountNumber: "5*5*",
+                balance: 10000
+              },
+              {
+                id: "account2",
+                accountType: "CURRENT",
+                bankName: "CitiBank",
+                accountNumber: "6*2*",
+                balance: 20000
+              }
+            ]
+          })
+        }, 200)
       })
       return middlewares
     },

@@ -1,7 +1,7 @@
 {
-  "name": "object-oriented-react-architecture",
-  "version": "1.1.0",
-  "description": "Object-oriented react architecture sample code.",
+  "name": "domain-driven-react-architecture",
+  "version": "2.0.0",
+  "description": "Domain-driven React architecture configuration with a sample project",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",
@@ -15,6 +15,8 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@tanstack/react-query": "^5.51.23",
+    "axios": "^1.7.4",
+    "class-validator": "^0.14.1",
     "emotion-normalize": "^11.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
