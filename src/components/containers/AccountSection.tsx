@@ -1,14 +1,14 @@
 import { css } from "@emotion/react"
-import { GET_TRANSACTIONS } from "constants/queries"
+import { GET_ACCOUNTS } from "constants/queries"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/Error"
 import Loading from "components/Loading"
-import ConsumptionList from "components/ConsumptionList"
 import ErrorContainer from "./ErrorContainer"
 import di from "di"
+import AccountList from "components/AccountList"
 
-export default function ConsumptionSection() {
+export default function AccountSection() {
   return (
     <div
       css={css`
@@ -17,16 +17,16 @@ export default function ConsumptionSection() {
     >
       <ErrorContainer>
         <QueryContainer
-          queryKey={GET_TRANSACTIONS}
-          queryFn={() => di.transaction.getTransactions()}
+          queryKey={GET_ACCOUNTS}
+          queryFn={() => di.account.getAccounts()}
           loadingComponent={<Loading />}
           errorComponent={
-            <RefetchContainer queryKey={GET_TRANSACTIONS}>
+            <RefetchContainer queryKey={GET_ACCOUNTS}>
               <Error />
             </RefetchContainer>
           }
         >
-          <ConsumptionList />
+          <AccountList />
         </QueryContainer>
       </ErrorContainer>
     </div>

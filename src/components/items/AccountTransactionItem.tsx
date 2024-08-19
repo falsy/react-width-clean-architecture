@@ -1,7 +1,7 @@
 import { css } from "@emotion/react"
 import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM"
 
-export default function AccountTransaction({
+export default function AccountTransactionItem({
   transaction
 }: {
   transaction: IAccountTransactionVM

@@ -120,14 +120,20 @@ module.exports = {
               {
                 id: "card1",
                 cardType: "CREDIT",
-                cardCompany: "CitiBank",
+                cardCompany: "Financial",
                 cardNumber: "4*2*"
               },
               {
                 id: "card2",
                 cardType: "CREDIT",
-                cardCompany: "CitiBank",
+                cardCompany: "Financial",
                 cardNumber: "1*3*"
+              },
+              {
+                id: "card3",
+                cardType: "DEBIT",
+                cardCompany: "Financial",
+                cardNumber: "5*3*"
               }
             ]
           })
@@ -141,16 +147,23 @@ module.exports = {
               {
                 id: "account1",
                 accountType: "CURRENT",
-                bankName: "CitiBank",
+                bankName: "Financial",
                 accountNumber: "5*5*",
                 balance: 10000
               },
               {
                 id: "account2",
-                accountType: "CURRENT",
-                bankName: "CitiBank",
+                accountType: "SAVINGS",
+                bankName: "Financial",
                 accountNumber: "6*2*",
                 balance: 20000
+              },
+              {
+                id: "account3",
+                accountType: "CURRENT",
+                bankName: "Financial",
+                accountNumber: "8*4*",
+                balance: 30000
               }
             ]
           })

@@ -3,6 +3,7 @@ import Container from "components/containers/Container"
 import Header from "components/Header"
 import Navigation from "components/Navigation"
 import GreetingSection from "components/containers/GreetingSection"
+import AccountSection from "components/containers/AccountSection"
 
 export default function Accounts() {
   return (
@@ -10,11 +11,16 @@ export default function Accounts() {
       <Navigation />
       <GreetingSection />
       <Container>
-        <div css={css``}>
+        <div
+          css={css`
+            margin-bottom: 1rem;
+          `}
+        >
           <Header>
             <h1>Accounts</h1>
           </Header>
         </div>
+        <AccountSection />
       </Container>
     </div>
   )

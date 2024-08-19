@@ -1,11 +1,11 @@
 import { css } from "@emotion/react"
 import ICardTransactionVM from "adapters/vms/interfaces/ICardTransactionVM"
 import CardTransactionVM from "adapters/vms/CardTransactionVM"
-import CardTransaction from "./items/CardTransaction"
-import AccountTransaction from "./items/AccountTransaction"
+import CardTransactionItem from "./items/CardTransactionItem"
+import AccountTransactionItem from "./items/AccountTransactionItem"
 import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM"
 
-export default function Consumption({
+export default function ConsumptionList({
   response
 }: {
   response?: Array<ICardTransactionVM | IAccountTransactionVM>
@@ -30,9 +30,9 @@ export default function Consumption({
         {sortedTransactions.map((transaction) => (
           <li key={transaction.id}>
             {transaction instanceof CardTransactionVM ? (
-              <CardTransaction transaction={transaction} />
+              <CardTransactionItem transaction={transaction} />
             ) : (
-              <AccountTransaction
+              <AccountTransactionItem
                 transaction={transaction as IAccountTransactionVM}
               />
             )}

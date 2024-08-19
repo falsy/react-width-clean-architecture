@@ -1,7 +1,7 @@
 import { css } from "@emotion/react"
 import ICardTransactionVM from "adapters/vms/interfaces/ICardTransactionVM"
 
-export default function CardTransaction({
+export default function CardTransactionItem({
   transaction
 }: {
   transaction: ICardTransactionVM

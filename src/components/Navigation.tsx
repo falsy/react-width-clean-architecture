@@ -23,11 +23,14 @@ export default function Navigation() {
                 gap: 5rem;
                 list-style: none;
                 font-weight: 500;
+                margin: 0;
                 padding: 0;
                 a {
                   text-decoration: none;
                   color: inherit;
                   text-transform: uppercase;
+                  display: block;
+                  padding: 0.5rem 1rem;
                 }
               `}
             >
