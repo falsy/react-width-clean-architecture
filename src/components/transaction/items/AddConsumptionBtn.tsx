@@ -10,6 +10,7 @@ export default function AddConsumptionBtn({ action }: { action?: () => void }) {
         border: 1px solid #ccc;
         cursor: pointer;
         transition: background 0.2s;
+        background: #eee;
         &:hover {
           background: #ddd;
         }
