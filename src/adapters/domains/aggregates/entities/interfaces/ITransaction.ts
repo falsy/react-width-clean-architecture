@@ -1,4 +1,4 @@
-import ITxnCategoryVO from "../../vos/interfaces/ITxnCategoryVO"
+import ITxnCategoryVO from "adapters/domains/vos/interfaces/ITxnCategoryVO"
 
 export interface ITransactionParams {
   id: string
