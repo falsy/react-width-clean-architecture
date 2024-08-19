@@ -36,10 +36,11 @@ export default class AccountRepository implements IAccountRepository {
         data: accountDTOs
       })
     } catch (error) {
-      console.error(
-        error instanceof Error ? error.message : "Unknown error type"
-      )
-      throw error
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
     }
   }
 }

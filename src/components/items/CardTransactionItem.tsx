@@ -10,11 +10,12 @@ export default function CardTransactionItem({
     <div
       css={css`
         background: #f5f5f5;
-        border-radius: 5px;
+        border-radius: 8px;
         border: 1px solid #eaeaea;
         padding: 0.5rem 1rem;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        grid-gap: 0.5rem;
         p {
           font-size: 0.8rem;
           span {

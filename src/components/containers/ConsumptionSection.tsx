@@ -13,6 +13,7 @@ export default function ConsumptionSection() {
     <div
       css={css`
         position: relative;
+        min-height: 10rem;
       `}
     >
       <ErrorContainer>

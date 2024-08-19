@@ -20,17 +20,18 @@ export default function Navigation() {
             <ul
               css={css`
                 display: flex;
-                gap: 5rem;
+                gap: 2rem;
                 list-style: none;
                 font-weight: 500;
                 margin: 0;
                 padding: 0;
+                font-size: 0.9rem;
                 a {
                   text-decoration: none;
                   color: inherit;
                   text-transform: uppercase;
                   display: block;
-                  padding: 0.5rem 1rem;
+                  padding: 0.5rem 0;
                 }
               `}
             >

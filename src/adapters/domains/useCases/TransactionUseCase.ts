@@ -13,6 +13,7 @@ import AccountTransaction from "../aggregates/AccountTransaction"
 import TxnCategoryVO from "../vos/TxnCateogryVO"
 import Card from "../entities/Card"
 import Account from "../entities/Account"
+import IRequestTransactionDTO from "adapters/dtos/interfaces/IRequestTransactionDTO"
 
 export default class TransactionUseCase implements ITransactionUseCase {
   constructor(
@@ -118,10 +119,21 @@ export default class TransactionUseCase implements ITransactionUseCase {
         data: transactions
       })
     } catch (error) {
-      console.error(
-        error instanceof Error ? error.message : "Unknown error type"
-      )
-      throw error
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
     }
+  }
+
+  addTransaction(
+    reqTransactionDTO: IRequestTransactionDTO
+  ): Promise<ILayerDTO<boolean>> {
+    return this.transactionRepository.addTransaction(reqTransactionDTO)
+  }
+
+  getTxnCateogries(): Promise<ILayerDTO<TxnCategoryVO[]>> {
+    return this.transactionRepository.getTxnCateogries()
   }
 }

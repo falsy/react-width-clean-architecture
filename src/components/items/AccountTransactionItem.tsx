@@ -9,11 +9,12 @@ export default function AccountTransactionItem({
   return (
     <div
       css={css`
-        border-radius: 5px;
+        border-radius: 8px;
         border: 1px solid #eaeaea;
         padding: 0.5rem 1rem;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        grid-gap: 0.5rem;
         p {
           font-size: 0.8rem;
           span {
@@ -28,7 +29,7 @@ export default function AccountTransactionItem({
         <span>Date.</span> {transaction.yearMonthDate}
       </p>
       <p>
-        <span>Category.</span> {transaction.keyword}
+        <span>Category.</span> {transaction.category.name}
       </p>
       <p>
         <span>Account.</span> {transaction.account.bankName}(

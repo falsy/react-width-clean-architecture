@@ -4,10 +4,15 @@ import Header from "components/Header"
 import Navigation from "components/Navigation"
 import GreetingSection from "components/containers/GreetingSection"
 import ConsumptionSection from "components/containers/ConsumptionSection"
+import AddConsumptionSection from "components/containers/AddConsumptionSection"
 
 export default function Consumptions() {
   return (
-    <div>
+    <div
+      css={css`
+        padding-bottom: 5rem;
+      `}
+    >
       <Navigation />
       <GreetingSection />
       <Container>
@@ -21,6 +26,9 @@ export default function Consumptions() {
           </Header>
         </div>
         <ConsumptionSection />
+      </Container>
+      <Container>
+        <AddConsumptionSection />
       </Container>
     </div>
   )

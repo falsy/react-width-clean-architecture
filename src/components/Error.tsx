@@ -31,6 +31,7 @@ export default function Error({ onClick }: { onClick?: () => void }) {
             border-radius: 0.25rem;
             font-size: 0.8rem;
             border: 1px solid #ccc;
+            cursor: pointer;
           `}
           onClick={onClick}
         >

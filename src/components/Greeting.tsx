@@ -5,15 +5,18 @@ import IUser from "adapters/domains/entities/interfaces/IUser"
 export default function Greeting({ response }: { response?: IUser }) {
   const userName = response?.name || ""
   return (
-    <div>
+    <div
+      css={css`
+        background: #f5f5f5;
+      `}
+    >
       <Container>
         <div
           css={css`
-            padding: 1rem;
             text-align: center;
           `}
         >
-          <p>{`Hello ${userName}`}</p>
+          <p>{`Welcome${userName ? ", " + userName + "!" : ""}`}</p>
         </div>
       </Container>
     </div>

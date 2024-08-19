@@ -6,11 +6,12 @@ export default function AccountItem({ account }: { account: IAccount }) {
     <div
       css={css`
         background: ${account.accountType === "CURRENT" ? "#f5f5f5" : "#fff"};
-        border-radius: 5px;
+        border-radius: 8px;
         border: 1px solid #eaeaea;
         padding: 0.5rem 1rem;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        grid-gap: 0.5rem;
         p {
           font-size: 0.8rem;
           span {

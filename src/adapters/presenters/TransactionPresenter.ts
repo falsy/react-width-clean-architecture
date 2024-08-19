@@ -1,3 +1,4 @@
+import { validateOrReject } from "class-validator"
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import ITransactionPresenter from "./interfaces/ITransactionPresenter"
 import ITransactionUseCase from "adapters/domains/useCases/interfaces/ITransactionUseCase"
@@ -9,7 +10,9 @@ import LayerDTO from "adapters/dtos/LayerDTO"
 import CardTransactionVM from "adapters/vms/CardTransactionVM"
 import AccountTransactionVM from "adapters/vms/AccountTransactionVM"
 import CardTransaction from "adapters/domains/aggregates/CardTransaction"
-import { validateOrReject } from "class-validator"
+import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import RequestTransactionDTO from "adapters/dtos/RequestTransactionDTO"
+import TxnCategoryVO from "adapters/domains/vos/TxnCateogryVO"
 
 export default class TransactionPresenter implements ITransactionPresenter {
   constructor(private TransactionUseCase: ITransactionUseCase) {}
@@ -47,10 +50,31 @@ export default class TransactionPresenter implements ITransactionPresenter {
         data: transactionVMs
       })
     } catch (error) {
-      console.error(
-        error instanceof Error ? error.message : "Unknown error type"
-      )
-      throw error
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
+    }
+  }
+
+  getTxnCateogries(): Promise<ILayerDTO<TxnCategoryVO[]>> {
+    return this.TransactionUseCase.getTxnCateogries()
+  }
+
+  addTransaction(
+    transactionParams: IRequestTransactionDTOParams
+  ): Promise<ILayerDTO<boolean>> {
+    try {
+      const reqTransactionDTO = new RequestTransactionDTO(transactionParams)
+      validateOrReject(reqTransactionDTO)
+      return this.TransactionUseCase.addTransaction(reqTransactionDTO)
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
     }
   }
 }

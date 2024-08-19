@@ -39,10 +39,11 @@ export default class AccountUseCase implements IAccountUseCase {
         data: accounts
       })
     } catch (error) {
-      console.error(
-        error instanceof Error ? error.message : "Unknown error type"
-      )
-      throw error
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
     }
   }
 }

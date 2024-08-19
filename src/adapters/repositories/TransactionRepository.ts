@@ -12,6 +12,7 @@ import ITransactionDTO, {
   ITransactionDTOParams
 } from "adapters/dtos/interfaces/ITransactionDTO"
 import TransactionDTO from "adapters/dtos/TransactionDTO"
+import IRequestTransactionDTO from "adapters/dtos/interfaces/IRequestTransactionDTO"
 
 export default class TransactionRepository implements ITransactionRepository {
   constructor(private clientHttp: IClientHTTP) {}
@@ -40,10 +41,39 @@ export default class TransactionRepository implements ITransactionRepository {
         data: transactionDTOs
       })
     } catch (error) {
-      console.error(
-        error instanceof Error ? error.message : "Unknown error type"
-      )
-      throw error
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
+    }
+  }
+
+  async addTransaction(
+    reqTransactionDTO: IRequestTransactionDTO
+  ): Promise<ILayerDTO<boolean>> {
+    try {
+      const res = await this.clientHttp.post(`${API_URI}/api/transaction`, {
+        transaction: reqTransactionDTO
+      })
+      const { isError, message, data } = res.data
+
+      if (isError || !data) {
+        return new LayerDTO({
+          isError,
+          message
+        })
+      }
+
+      return new LayerDTO({
+        data
+      })
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
     }
   }
 
@@ -71,10 +101,11 @@ export default class TransactionRepository implements ITransactionRepository {
         data: txnCategoryDTOs
       })
     } catch (error) {
-      console.error(
-        error instanceof Error ? error.message : "Unknown error type"
-      )
-      throw error
+      if (error instanceof Error) {
+        throw error
+      } else {
+        throw new Error("Unknown error type")
+      }
     }
   }
 }
