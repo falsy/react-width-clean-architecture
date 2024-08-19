@@ -39,18 +39,21 @@ export default class CardTransactionVM implements ICardTransactionVM {
   readonly date: number
 
   constructor(params: ICardTransaction) {
-    this.id = params.id
-    this.amount = params.amount
-    this.keyword = params.keyword
-    this.createdAt = params.createdAt
-    this.category = params.category
+    this.id = params.transaction.id
+    this.amount = params.transaction.amount
+    this.keyword = params.transaction.keyword
+    this.createdAt = params.transaction.createdAt
+    this.category = params.transaction.category
     this.card = params.card
     this.cardId = params.cardId
-    this.yearMonthDate = params.createdAt.split(" ")[0]
-    this.longTime = new Date(params.createdAt).getTime()
-    this.dayOfWeek = new Date(params.createdAt).toLocaleString("en-US", {
-      weekday: "long"
-    })
-    this.date = new Date(params.createdAt).getDate()
+    this.yearMonthDate = params.transaction.createdAt.split(" ")[0]
+    this.longTime = new Date(params.transaction.createdAt).getTime()
+    this.dayOfWeek = new Date(params.transaction.createdAt).toLocaleString(
+      "en-US",
+      {
+        weekday: "long"
+      }
+    )
+    this.date = new Date(params.transaction.createdAt).getDate()
   }
 }

@@ -1,8 +1,8 @@
 import { IsNumber, IsString, ValidateNested } from "class-validator"
+import ITxnCategoryVO from "../../vos/interfaces/ITxnCategoryVO"
 import ITransaction, { ITransactionParams } from "./interfaces/ITransaction"
-import ITxnCategoryVO from "../vos/interfaces/ITxnCategoryVO"
 
-export default abstract class Transaction implements ITransaction {
+export default class Transaction implements ITransaction {
   @IsString()
   readonly id: string
 

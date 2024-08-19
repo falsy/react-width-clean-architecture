@@ -14,6 +14,7 @@ import TxnCategoryVO from "../vos/TxnCateogryVO"
 import Card from "../entities/Card"
 import Account from "../entities/Account"
 import IRequestTransactionDTO from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import Transaction from "../aggregates/entities/Transaction"
 
 export default class TransactionUseCase implements ITransactionUseCase {
   constructor(
@@ -62,6 +63,15 @@ export default class TransactionUseCase implements ITransactionUseCase {
           })
           await validateOrReject(txnCategoryVO)
 
+          const transaction = new Transaction({
+            id: transactionDTO.id,
+            amount: transactionDTO.amount,
+            keyword: transactionDTO.keyword,
+            createdAt: transactionDTO.createdAt,
+            category: txnCategoryVO
+          })
+          await validateOrReject(transaction)
+
           if (transactionDTO.cardId) {
             const cardDTO = cardDTOs.data!.find(
               (card) => card.id === transactionDTO.cardId
@@ -73,18 +83,14 @@ export default class TransactionUseCase implements ITransactionUseCase {
               cardCompany: cardDTO!.cardCompany,
               cardNumber: cardDTO!.cardNumber
             })
-
             await validateOrReject(card)
 
             const cardTransaction = new CardTransaction({
-              id: transactionDTO.id,
-              amount: transactionDTO.amount,
-              keyword: transactionDTO.keyword,
-              createdAt: transactionDTO.createdAt,
-              category: txnCategoryVO,
+              transaction: transaction,
               card: card
             })
             await validateOrReject(cardTransaction)
+
             return cardTransaction
           } else {
             const accountDTO = accountDTOs.data!.find(
@@ -98,18 +104,14 @@ export default class TransactionUseCase implements ITransactionUseCase {
               accountNumber: accountDTO!.accountNumber,
               balance: accountDTO!.balance
             })
-
             await validateOrReject(account)
 
             const accountTransaction = new AccountTransaction({
-              id: transactionDTO.id,
-              amount: transactionDTO.amount,
-              keyword: transactionDTO.keyword,
-              createdAt: transactionDTO.createdAt,
-              category: txnCategoryVO,
+              transaction: transaction,
               account: account
             })
             await validateOrReject(accountTransaction)
+
             return accountTransaction
           }
         })
