@@ -25,6 +25,13 @@ export default function CardTransactionItem({
             color: #aaa;
           }
         }
+        @media (max-width: 500px) {
+          padding: 0.7rem 1rem;
+          grid-template-columns: repeat(2, 1fr);
+          p {
+            margin: 0.3rem 0;
+          }
+        }
       `}
     >
       <p>

@@ -70,6 +70,10 @@ export default function AddConsumptionForm({
             border: 1px solid #ddd;
             padding: 0 0.5rem;
           }
+
+          @media (max-width: 500px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
         `}
       >
         <div>
