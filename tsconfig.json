@@ -1,20 +1,31 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": false,
-    "module": "es6",
-    "target": "es5",
-    "downlevelIteration": true,
-    "jsx": "react-jsx",
+    "noUnusedLocals": true,
     "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noUnusedParameters": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "target": "ES2020",
+    "module": "ES2022",
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "jsxImportSource": "@emotion/react"
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "src",
+    "paths": {
+      "constants/*": ["constants/*"],
+      "adapters/*": ["adapters/*"],
+      "di": ["di/index.ts"],
+      "utils/*": ["utils/*"],
+      "pages/*": ["pages/*"],
+      "hooks/*": ["hooks/*"],
+      "components/*": ["components/*"]
+    }
   },
-  "include": [
-    "./src/**/*",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"]
 }

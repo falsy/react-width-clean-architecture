@@ -1,11 +1,15 @@
-import IInfrastructures from '../infrastructures/interfaces'
-import BoardRepository from './BoardRepo'
-import IRepositories from './interfaces'
-import SessionRepository from './SessionRepo'
+import IClientHTTP from "adapters/infrastructures/interfaces/IClientHTTP"
+import UserRepository from "./UserRepository"
+import IRepositories from "./interfaces"
+import TransactionRepository from "./TransactionRepository"
+import CardRepository from "./CardRepository"
+import AccountRepository from "./AccoutRepository"
 
-export default (infrastructures: IInfrastructures): IRepositories => {
+export default function repositories(clientHttp: IClientHTTP): IRepositories {
   return {
-    session: new SessionRepository(infrastructures.http, infrastructures.storage),
-    board: new BoardRepository(infrastructures.http)
+    user: new UserRepository(clientHttp),
+    transaction: new TransactionRepository(clientHttp),
+    card: new CardRepository(clientHttp),
+    account: new AccountRepository(clientHttp)
   }
 }

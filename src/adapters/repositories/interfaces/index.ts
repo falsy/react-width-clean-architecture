@@ -1,7 +1,11 @@
-import { IBoardRepository } from './iBoardRepo';
-import { ISessionRepository } from './iSessionRepo'
+import IAccountRepository from "./IAccountRepository"
+import ICardRepository from "./ICardRepository"
+import ITransactionRepository from "./ITransactionRepository"
+import IUserRepository from "./IUserRepository"
 
 export default interface IRepositories {
-  session: ISessionRepository
-  board: IBoardRepository
+  user: IUserRepository
+  transaction: ITransactionRepository
+  card: ICardRepository
+  account: IAccountRepository
 }

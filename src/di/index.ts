@@ -1,10 +1,12 @@
-import infrastructures from '../adapters/infrastructures'
-import repositories from '../adapters/repositories'
-import presenter from '../adapters/presenters'
-import converters from '../services/converters'
+/* eslint-disable react-hooks/rules-of-hooks */
+import ClientHTTP from "adapters/infrastructures/ClientHTTP"
+import repositoriesFn from "adapters/repositories"
+import useCasesFn from "adapters/domains/useCases"
+import presentersFn from "adapters/presenters"
 
-const cInfrastructures = infrastructures()
-const cRepositorires = repositories(cInfrastructures)
-const cConverters = converters()
+const clientHttp = new ClientHTTP()
+const repositories = repositoriesFn(clientHttp)
+const useCases = useCasesFn(repositories)
+const presenters = presentersFn(useCases)
 
-export default presenter(cRepositorires, cConverters)
+export default presenters
