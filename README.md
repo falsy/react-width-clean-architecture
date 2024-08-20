@@ -4,9 +4,19 @@ This is a small idea project applying the principles of `Domain-Driven Design(DD
 
 Using `Clean Architecture` as the system architecture, this sample React application aims to clearly separate business logic from UI logic and develop a structure that allows for independent maintenance of each domain.
 
+### Note.
+
 > This document is a work in progress as I study OOP, DDD, Clean Architecture, and related topics. Since my knowledge is still growing, there may be parts that I have misunderstood or explained incorrectly.  
-> If you find any issues or have suggestions for improvement, please feel free to submit them through issues or pull requests, and I will incorporate them. ☺️  
+> If you find any issues or have suggestions for improvement, please feel free to submit them through issues or pull requests, and I will incorporate them. ☺️
+
 > (+ My English is not perfect, so please bear with me.)
+
+### Note.
+
+> It might be helpful to also take a look at the following project in relation to Clean Architecture.
+
+> (Clean Architecture with TypeScript)  
+> https://github.com/falsy/clean-architecture-with-typescript
 
 ## Domains
 
