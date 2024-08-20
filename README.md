@@ -20,8 +20,8 @@ Using `Clean Architecture` as the system architecture, this sample React applica
 
 ## Domains
 
-![Domains](/_images/domains.png#gh-light-mode-only)
-![Domains](/_images/domains-dark.png#gh-dark-mode-only)
+![Domains](/_images/domains-v2.png#gh-light-mode-only)
+![Domains](/_images/domains-v2-dark.png#gh-dark-mode-only)
 
 Let's assume we're dealing with a financial services domain. Within this broad domain, there are many subdomains such as banking, payment services, loan services, wealth management, and fintech. If we break down the fintech subdomain further, we get areas like digital payments, digital banking, crowdfunding, and personal wealth management, among others.
 
@@ -92,6 +92,10 @@ interface ITransaction {
 ## Aggregates
 
 An `Aggregate` is an object that serves as a consistency boundary and can include multiple entities or value objects. It encapsulates its internal state, ensuring that any external access is controlled and can only be modified through the `Aggregate Root`. This consistency boundary helps manage the complexity of relationships within the model, especially as the service scales and transactions become more complex.
+
+![Aggregate](/_images/aggregate.png#gh-light-mode-only)
+![Aggregate](/_images/aggregate-dark.png#gh-dark-mode-only)
+
 In the example project, we have two Aggregates: `CardTransaction` and `AccountTransaction`.
 
 ### AccountTransaction
