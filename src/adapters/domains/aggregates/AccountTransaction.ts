@@ -1,4 +1,3 @@
-import { IsString, ValidateNested } from "class-validator"
 import IAccountTransaction, {
   IAccountTransactionParams
 } from "./interfaces/IAccountTransaction"
@@ -7,13 +6,8 @@ import IAccountInfoVO from "../vos/interfaces/IAccountInfoVO"
 import ITransaction from "./entities/interfaces/ITransaction"
 
 export default class AccountTransaction implements IAccountTransaction {
-  @ValidateNested()
   readonly transaction: ITransaction
-
-  @ValidateNested()
   readonly account: IAccountInfoVO
-
-  @IsString()
   readonly accountId: string
 
   constructor(params: IAccountTransactionParams) {

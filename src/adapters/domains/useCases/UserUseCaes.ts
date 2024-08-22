@@ -1,4 +1,3 @@
-import { validateOrReject } from "class-validator"
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import LayerDTO from "adapters/dtos/LayerDTO"
 import IUserRepository from "adapters/repositories/interfaces/IUserRepository"
@@ -21,8 +20,6 @@ class UserUseCase implements IUserUseCase {
       }
 
       const user = new User(data)
-
-      await validateOrReject(user)
 
       return new LayerDTO({
         data: user

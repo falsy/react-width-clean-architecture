@@ -1,4 +1,3 @@
-import { validateOrReject } from "class-validator"
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import LayerDTO from "adapters/dtos/LayerDTO"
 import ICardRepository from "adapters/repositories/interfaces/ICardRepository"
@@ -21,18 +20,15 @@ export default class CardUseCase implements ICardUseCase {
         }
       }
 
-      const cards = await Promise.all(
-        data.map(async (cardDTO: ICardDTO) => {
-          const card = new Card({
-            id: cardDTO.id,
-            cardType: cardDTO.cardType,
-            cardCompany: cardDTO.cardCompany,
-            cardNumber: cardDTO.cardNumber
-          })
-          await validateOrReject(card)
-          return card
+      const cards = data.map((cardDTO: ICardDTO) => {
+        const card = new Card({
+          id: cardDTO.id,
+          cardType: cardDTO.cardType,
+          cardCompany: cardDTO.cardCompany,
+          cardNumber: cardDTO.cardNumber
         })
-      )
+        return card
+      })
 
       return new LayerDTO({
         data: cards

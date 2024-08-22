@@ -1,5 +1,5 @@
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import IRequestTransactionDTO from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import IRequestTransactionDTO from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 import ITransactionDTO from "adapters/dtos/interfaces/ITransactionDTO"
 import ITxnCategoryDTO from "adapters/dtos/interfaces/ITxnCategoryDTO"
 

@@ -12,7 +12,7 @@ import ITransactionDTO, {
   ITransactionDTOParams
 } from "adapters/dtos/interfaces/ITransactionDTO"
 import TransactionDTO from "adapters/dtos/TransactionDTO"
-import IRequestTransactionDTO from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import IRequestTransactionDTO from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 
 export default class TransactionRepository implements ITransactionRepository {
   constructor(private clientHttp: IClientHTTP) {}

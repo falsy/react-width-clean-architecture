@@ -1,6 +1,4 @@
-import { validateOrReject } from "class-validator"
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import ITransactionPresenter from "./interfaces/ITransactionPresenter"
 import ITransactionUseCase from "adapters/domains/useCases/interfaces/ITransactionUseCase"
 import ICardTransaction from "adapters/domains/aggregates/interfaces/ICardTransaction"
 import IAccountTransaction from "adapters/domains/aggregates/interfaces/IAccountTransaction"
@@ -10,9 +8,10 @@ import LayerDTO from "adapters/dtos/LayerDTO"
 import CardTransactionVM from "adapters/vms/CardTransactionVM"
 import AccountTransactionVM from "adapters/vms/AccountTransactionVM"
 import CardTransaction from "adapters/domains/aggregates/CardTransaction"
-import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
-import RequestTransactionDTO from "adapters/dtos/RequestTransactionDTO"
+import { IRequestTransactionDTOParams } from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 import TxnCategoryVO from "adapters/domains/vos/TxnCateogryVO"
+import RequestTransactionDTO from "adapters/dtos/requests/RequestTransactionDTO"
+import ITransactionPresenter from "./interfaces/ITransactionPresenter"
 
 export default class TransactionPresenter implements ITransactionPresenter {
   constructor(private TransactionUseCase: ITransactionUseCase) {}
@@ -34,15 +33,9 @@ export default class TransactionPresenter implements ITransactionPresenter {
       const transactionVMs = data.map(
         (transaction: ICardTransaction | IAccountTransaction) => {
           if (transaction instanceof CardTransaction) {
-            const cardTransactionVM = new CardTransactionVM(transaction)
-            validateOrReject(cardTransactionVM)
-            return cardTransactionVM
+            return new CardTransactionVM(transaction)
           }
-          const accountTransactionVM = new AccountTransactionVM(
-            transaction as IAccountTransaction
-          )
-          validateOrReject(accountTransactionVM)
-          return accountTransactionVM
+          return new AccountTransactionVM(transaction as IAccountTransaction)
         }
       )
 
@@ -67,7 +60,6 @@ export default class TransactionPresenter implements ITransactionPresenter {
   ): Promise<ILayerDTO<boolean>> {
     try {
       const reqTransactionDTO = new RequestTransactionDTO(transactionParams)
-      validateOrReject(reqTransactionDTO)
       return this.TransactionUseCase.addTransaction(reqTransactionDTO)
     } catch (error) {
       if (error instanceof Error) {

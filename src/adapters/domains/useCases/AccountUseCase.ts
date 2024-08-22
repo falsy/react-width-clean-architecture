@@ -1,4 +1,3 @@
-import { validateOrReject } from "class-validator"
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import LayerDTO from "adapters/dtos/LayerDTO"
 import IAccountDTO from "adapters/dtos/interfaces/IAccountDTO"
@@ -21,19 +20,15 @@ export default class AccountUseCase implements IAccountUseCase {
         }
       }
 
-      const accounts = await Promise.all(
-        data.map(async (accountDTO: IAccountDTO) => {
-          const account = new Account({
-            id: accountDTO.id,
-            accountType: accountDTO.accountType,
-            bankName: accountDTO.bankName,
-            accountNumber: accountDTO.accountNumber,
-            balance: accountDTO.balance
-          })
-          await validateOrReject(account)
-          return account
+      const accounts = data.map((accountDTO: IAccountDTO) => {
+        return new Account({
+          id: accountDTO.id,
+          accountType: accountDTO.accountType,
+          bankName: accountDTO.bankName,
+          accountNumber: accountDTO.accountNumber,
+          balance: accountDTO.balance
         })
-      )
+      })
 
       return new LayerDTO({
         data: accounts

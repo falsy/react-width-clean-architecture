@@ -2,7 +2,7 @@ import { useState } from "react"
 import { css } from "@emotion/react"
 import IAccount from "adapters/domains/entities/interfaces/IAccount"
 import ICard from "adapters/domains/entities/interfaces/ICard"
-import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import { IRequestTransactionDTOParams } from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 import ITxnCategoryDTO from "adapters/dtos/interfaces/ITxnCategoryDTO"
 import AddConsumptionAction from "./containers/AddConsumptionAction"
 
