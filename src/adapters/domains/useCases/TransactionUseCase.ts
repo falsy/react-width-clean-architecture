@@ -1,4 +1,3 @@
-import { validateOrReject } from "class-validator"
 import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import LayerDTO from "adapters/dtos/LayerDTO"
 import ITransactionDTO from "adapters/dtos/interfaces/ITransactionDTO"
@@ -13,7 +12,7 @@ import AccountTransaction from "../aggregates/AccountTransaction"
 import TxnCategoryVO from "../vos/TxnCateogryVO"
 import Card from "../entities/Card"
 import Account from "../entities/Account"
-import IRequestTransactionDTO from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import IRequestTransactionDTO from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 import Transaction from "../aggregates/entities/Transaction"
 
 export default class TransactionUseCase implements ITransactionUseCase {
@@ -61,7 +60,6 @@ export default class TransactionUseCase implements ITransactionUseCase {
             name: txnCategoryDTO!.name,
             description: txnCategoryDTO!.description
           })
-          await validateOrReject(txnCategoryVO)
 
           const transaction = new Transaction({
             id: transactionDTO.id,
@@ -70,7 +68,6 @@ export default class TransactionUseCase implements ITransactionUseCase {
             createdAt: transactionDTO.createdAt,
             category: txnCategoryVO
           })
-          await validateOrReject(transaction)
 
           if (transactionDTO.cardId) {
             const cardDTO = cardDTOs.data!.find(
@@ -83,13 +80,11 @@ export default class TransactionUseCase implements ITransactionUseCase {
               cardCompany: cardDTO!.cardCompany,
               cardNumber: cardDTO!.cardNumber
             })
-            await validateOrReject(card)
 
             const cardTransaction = new CardTransaction({
               transaction: transaction,
               card: card
             })
-            await validateOrReject(cardTransaction)
 
             return cardTransaction
           } else {
@@ -104,13 +99,11 @@ export default class TransactionUseCase implements ITransactionUseCase {
               accountNumber: accountDTO!.accountNumber,
               balance: accountDTO!.balance
             })
-            await validateOrReject(account)
 
             const accountTransaction = new AccountTransaction({
               transaction: transaction,
               account: account
             })
-            await validateOrReject(accountTransaction)
 
             return accountTransaction
           }

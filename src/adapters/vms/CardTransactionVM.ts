@@ -1,41 +1,19 @@
-import { IsNumber, IsString, ValidateNested } from "class-validator"
 import ICardTransaction from "adapters/domains/aggregates/interfaces/ICardTransaction"
 import ITxnCategoryVO from "adapters/domains/vos/interfaces/ITxnCategoryVO"
 import ICardTransactionVM from "./interfaces/ICardTransactionVM"
 import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
 
 export default class CardTransactionVM implements ICardTransactionVM {
-  @IsString()
   readonly id: string
-
-  @IsNumber()
   readonly amount: number
-
-  @IsString()
   readonly keyword: string
-
-  @IsString()
   readonly createdAt: string
-
-  @ValidateNested()
   readonly category: ITxnCategoryVO
-
-  @ValidateNested()
   readonly card: ICardInfoVO
-
-  @IsString()
   readonly cardId: string
-
-  @IsString()
   readonly yearMonthDate: string
-
-  @IsNumber()
   readonly longTime: number
-
-  @IsString()
   readonly dayOfWeek: string
-
-  @IsNumber()
   readonly date: number
 
   constructor(params: ICardTransaction) {

@@ -1,20 +1,10 @@
-import { IsString } from "class-validator"
 import IUser, { IUserParams } from "./interfaces/IUser"
 
 export default class User implements IUser {
-  @IsString()
   readonly id: string
-
-  @IsString()
   name: string
-
-  @IsString()
   email: string
-
-  @IsString()
   phone: string
-
-  @IsString()
   address: string
 
   constructor(params: IUserParams) {

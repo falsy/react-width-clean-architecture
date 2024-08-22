@@ -1,6 +1,6 @@
 # Domain-driven React architecture
 
-This is a small idea project applying the principles of `Domain-Driven Design(DDD)` to a React architecture. The goal is to effectively manage the complexity of the business domain and make maintenance easier by building a modular, domain-centric design.
+This is a small idea project applying the principles of `Domain-driven Design(DDD)` to a React architecture. The goal is to effectively manage the complexity of the business domain and make maintenance easier by building a modular, domain-centric design.
 
 Using `Clean Architecture` as the system architecture, this sample React application aims to clearly separate business logic from UI logic and develop a structure that allows for independent maintenance of each domain.
 
@@ -188,6 +188,9 @@ The `Presenters` layer is where the elements of the Adapter layer are dependency
 
 ## Execution Flow
 
+![Execution Flow](/_images/execution-flow.png#gh-light-mode-only)
+![Execution Flow](/_images/execution-flow-dark.png#gh-dark-mode-only)
+
 In the example project, the core scenario involves retrieving a user's transaction history. This flow begins with the view invoking the getTransactions method of the DI-injected `transaction` presenter, which requests the transaction data.
 
 ```ts
@@ -241,7 +244,9 @@ async getTransactions(): Promise<ILayerDTO<ITransactionDTO[]>> {
 
     const transactionDTOs = await Promise.all(
       data.map(async (transaction: ITransactionDTOParams) => {
-        return new TransactionDTO(transaction)
+        const transactionDTO = new TransactionDTO(transaction)
+        await validateOrReject(transactionDTO)
+        return new TransactionDTO(transactionDTO)
       })
     )
 
@@ -306,9 +311,7 @@ const transactionVMs = data.map(
     if (transaction instanceof CardTransaction) {
       return new CardTransactionVM(transaction)
     }
-    return new AccountTransactionVM(
-      transaction as IAccountTransaction
-    )
+    return new AccountTransactionVM(transaction as IAccountTransaction)
   }
 )
 

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react"
 import { GET_TRANSACTIONS } from "constants/queries"
-import { IRequestTransactionDTOParams } from "adapters/dtos/interfaces/IRequestTransactionDTO"
+import { IRequestTransactionDTOParams } from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 import Loading from "components/commons/Loading"
 import MutationContainer from "components/networks/MutationContainer"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
