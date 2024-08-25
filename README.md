@@ -4,19 +4,25 @@ This is a small idea project applying the principles of `Domain-driven Design(DD
 
 Using `Clean Architecture` as the system architecture, this sample React application aims to clearly separate business logic from UI logic and develop a structure that allows for independent maintenance of each domain.
 
-### Note.
+#### Note.
 
 > This document is a work in progress as I study OOP, DDD, Clean Architecture, and related topics. Since my knowledge is still growing, there may be parts that I have misunderstood or explained incorrectly.  
-> If you find any issues or have suggestions for improvement, please feel free to submit them through issues or pull requests, and I will incorporate them. ☺️
-
+> If you find any issues or have suggestions for improvement, please feel free to submit them through issues or pull requests, and I will incorporate them. ☺️  
 > (+ My English is not perfect, so please bear with me.)
 
-### Note.
+#### Note.
 
-> It might be helpful to also take a look at the following project in relation to Clean Architecture.
-
-> (Clean Architecture with TypeScript)  
+> It might be helpful to also take a look at the following project in relation to Clean Architecture.  
 > https://github.com/falsy/clean-architecture-with-typescript
+
+#### Note.
+
+> The sample code for Next.js is as follows:  
+> https://github.com/falsy/domain-driven-react-architecture-for-nextjs
+
+## Use Stacks
+
+TypeScript, React, React-Query, Emotion, Class-Validator, Axios, Webpack
 
 ## Domains
 
@@ -408,10 +414,6 @@ function AddConsumptionAction({
 ![Screenshot](/_images/screenshot.png)
 
 ## Run Project
-
-### Use Stacks
-
-TypeScript, React, React-Query, React-Error-Boundary, Emotion, Class-Validator, Axios, Webpack
 
 ### Install
 
