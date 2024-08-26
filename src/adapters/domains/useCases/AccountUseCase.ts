@@ -14,10 +14,10 @@ export default class AccountUseCase implements IAccountUseCase {
         await this.accountRepository.getAccounts()
 
       if (isError || !data) {
-        return {
+        return new LayerDTO({
           isError,
           message
-        }
+        })
       }
 
       const accounts = data.map((accountDTO: IAccountDTO) => {

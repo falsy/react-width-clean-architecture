@@ -29,7 +29,7 @@ export default class TransactionUseCase implements ITransactionUseCase {
       const [transactionDTOs, txnCategoryDTOs, cardDTOs, accountDTOs] =
         await Promise.all([
           this.transactionRepository.getTransactions(),
-          this.transactionRepository.getTxnCateogries(),
+          this.transactionRepository.getTxnCategories(),
           this.cardRepository.getCards(),
           this.accountRepository.getAccounts()
         ])
@@ -44,10 +44,10 @@ export default class TransactionUseCase implements ITransactionUseCase {
         !cardDTOs.data ||
         !accountDTOs.data
       ) {
-        return {
+        return new LayerDTO({
           isError: true,
           message: "Error occurred while fetching data"
-        }
+        })
       }
 
       const transactions = await Promise.all(
@@ -128,7 +128,7 @@ export default class TransactionUseCase implements ITransactionUseCase {
     return this.transactionRepository.addTransaction(reqTransactionDTO)
   }
 
-  getTxnCateogries(): Promise<ILayerDTO<TxnCategoryVO[]>> {
-    return this.transactionRepository.getTxnCateogries()
+  getTxnCategories(): Promise<ILayerDTO<TxnCategoryVO[]>> {
+    return this.transactionRepository.getTxnCategories()
   }
 }

@@ -24,7 +24,8 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/no-unknown-property": ["error", { ignore: ["css"] }],
     "no-undef": "off",
-    "react/no-children-prop": "off"
+    "react/no-children-prop": "off",
+    "no-extra-semi": "off"
   },
   settings: {
     react: {

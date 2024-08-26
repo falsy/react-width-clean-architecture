@@ -14,10 +14,10 @@ export default class CardUseCase implements ICardUseCase {
       const { isError, message, data } = await this.cardRepository.getCards()
 
       if (isError || !data) {
-        return {
+        return new LayerDTO({
           isError,
           message
-        }
+        })
       }
 
       const cards = data.map((cardDTO: ICardDTO) => {

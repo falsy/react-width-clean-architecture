@@ -8,5 +8,5 @@ export default interface ITransactionRepository {
   addTransaction(
     reqTransactionDTO: IRequestTransactionDTO
   ): Promise<ILayerDTO<boolean>>
-  getTxnCateogries(): Promise<ILayerDTO<ITxnCategoryDTO[]>>
+  getTxnCategories(): Promise<ILayerDTO<ITxnCategoryDTO[]>>
 }
