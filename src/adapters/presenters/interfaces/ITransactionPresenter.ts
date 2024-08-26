@@ -8,7 +8,7 @@ export default interface ITransactionPresenter {
   getTransactions(): Promise<
     ILayerDTO<Array<ICardTransactionVM | IAccountTransactionVM>>
   >
-  getTxnCateogries(): Promise<ILayerDTO<TxnCategoryVO[]>>
+  getTxnCategories(): Promise<ILayerDTO<TxnCategoryVO[]>>
   addTransaction(
     transactionParams: IRequestTransactionDTOParams
   ): Promise<ILayerDTO<boolean>>

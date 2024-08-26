@@ -77,7 +77,7 @@ export default class TransactionRepository implements ITransactionRepository {
     }
   }
 
-  async getTxnCateogries(): Promise<ILayerDTO<ITxnCategoryDTO[]>> {
+  async getTxnCategories(): Promise<ILayerDTO<ITxnCategoryDTO[]>> {
     try {
       const res = await this.clientHttp.get(`${API_URI}/api/txnCategories`)
       const { isError, message, data } = res.data

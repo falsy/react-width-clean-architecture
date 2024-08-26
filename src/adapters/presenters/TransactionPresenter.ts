@@ -51,8 +51,8 @@ export default class TransactionPresenter implements ITransactionPresenter {
     }
   }
 
-  getTxnCateogries(): Promise<ILayerDTO<TxnCategoryVO[]>> {
-    return this.TransactionUseCase.getTxnCateogries()
+  getTxnCategories(): Promise<ILayerDTO<TxnCategoryVO[]>> {
+    return this.TransactionUseCase.getTxnCategories()
   }
 
   addTransaction(

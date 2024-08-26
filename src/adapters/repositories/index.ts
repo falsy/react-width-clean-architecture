@@ -3,7 +3,7 @@ import UserRepository from "./UserRepository"
 import IRepositories from "./interfaces"
 import TransactionRepository from "./TransactionRepository"
 import CardRepository from "./CardRepository"
-import AccountRepository from "./AccoutRepository"
+import AccountRepository from "./AccountRepository"
 
 export default function repositories(clientHttp: IClientHTTP): IRepositories {
   return {

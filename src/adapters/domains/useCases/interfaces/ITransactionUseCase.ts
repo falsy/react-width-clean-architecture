@@ -11,5 +11,5 @@ export default interface ITransactionUseCase {
   addTransaction(
     reqTransactionDTO: IRequestTransactionDTO
   ): Promise<ILayerDTO<boolean>>
-  getTxnCateogries(): Promise<ILayerDTO<TxnCategoryVO[]>>
+  getTxnCategories(): Promise<ILayerDTO<TxnCategoryVO[]>>
 }
