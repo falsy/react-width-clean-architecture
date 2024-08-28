@@ -24,6 +24,17 @@ Using `Clean Architecture` as the system architecture, this sample React applica
 
 TypeScript, React, React-Query, Emotion, Class-Validator, Axios, Webpack
 
+## Ubiquitous Language
+
+![Ubiquitous Language](/_images/ubiquitous.png#gh-light-mode-only)
+![Ubiquitous Language](/_images/ubiquitous-dark.png#gh-dark-mode-only)
+
+Ubiquitous Language refers to a shared language used by all team members to maintain consistency in communication throughout a project.
+This language should be shared among all project members, including the project leader, domain experts, developers, UI/UX designers, business analysts, QA engineers, and others. Moreover, this language is not only used in documentation or conversations during collaboration but is also reflected in the software models and code.
+
+For example, the term `Transaction` might be interpreted differently by various team members. For the project leader, it could represent an important step or event in the business flow; for developers, it might mean a unit of work in a database; and for domain experts, it could refer to activities related to transactions or payments.
+However, in this sample project, `Transaction` is defined as a unit that constitutes user consumption data, making it a part of the Ubiquitous Language shared by all team members.
+
 ## Domains
 
 ![Domains](/_images/domains-v2.png#gh-light-mode-only)
