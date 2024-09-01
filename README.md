@@ -15,11 +15,6 @@ Using `Clean Architecture` as the system architecture, this sample React applica
 > It might be helpful to also take a look at the following project in relation to Clean Architecture.  
 > https://github.com/falsy/clean-architecture-with-typescript
 
-#### Note.
-
-> The sample code for Next.js is as follows:  
-> https://github.com/falsy/domain-driven-react-architecture-for-nextjs
-
 ## Use Stack
 
 TypeScript, React, React-Query, Emotion, Class-Validator, Axios, Webpack
