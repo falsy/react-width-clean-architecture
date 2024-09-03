@@ -17,9 +17,14 @@ import IRequestTransactionDTO from "adapters/dtos/requests/interfaces/IRequestTr
 export default class TransactionRepository implements ITransactionRepository {
   constructor(private clientHttp: IClientHTTP) {}
 
-  async getTransactions(): Promise<ILayerDTO<ITransactionDTO[]>> {
+  async getTransactions(
+    year?: number,
+    month?: number
+  ): Promise<ILayerDTO<ITransactionDTO[]>> {
     try {
-      const res = await this.clientHttp.get(`${API_URI}/api/transactions`)
+      const res = await this.clientHttp.get(`${API_URI}/api/transactions`, {
+        params: { year, month }
+      })
       const { isError, message, data } = res.data
 
       if (isError || !data) {

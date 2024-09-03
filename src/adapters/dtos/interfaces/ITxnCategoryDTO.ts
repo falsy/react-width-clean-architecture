@@ -1,7 +1,7 @@
 export interface ITxnCategoryDTOParams {
-  id: string
-  name: string
-  description: string
+  readonly id: string
+  readonly name: string
+  readonly description: string
 }
 
 export default interface ITxnCategoryDTO {

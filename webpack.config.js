@@ -41,34 +41,94 @@ module.exports = {
         {
           id: "txn1",
           amount: 1000,
-          keyword: "Store1",
-          categoryId: "category1",
-          cardId: "card1",
-          createdAt: "2024-01-01 00:00:00"
+          keyword: "hambuger",
+          category_id: "category1",
+          card_id: "card1",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: "2024-01-01 00:00:00",
+          created_at: "2024-01-01 00:00:00"
         },
         {
           id: "txn2",
           amount: 2000,
           keyword: "Store2",
-          categoryId: "category1",
-          cardId: "card2",
-          createdAt: "2024-01-02 00:00:00"
+          category_id: "category1",
+          card_id: "card2",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: "2024-01-02T00:00:00",
+          created_at: "2024-01-02T00:00:00"
         },
         {
           id: "txn3",
           amount: 1500,
           keyword: "Withdrawal",
-          categoryId: "category2",
-          accountId: "account1",
-          createdAt: "2024-01-03 00:00:00"
+          category_id: "category2",
+          account_id: "account1",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: "2024-01-03T00:00:00",
+          created_at: "2024-01-03T00:00:00"
         },
         {
           id: "txn4",
           amount: 3000,
           keyword: "Store3",
-          categoryId: "category1",
-          cardId: "card3",
-          createdAt: "2024-01-04 00:00:00"
+          category_id: "category1",
+          card_id: "card3",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: "2024-01-04T00:00:00",
+          created_at: "2024-01-04T00:00:00"
+        },
+        {
+          id: "txn5",
+          amount: 5000,
+          keyword: "Store4",
+          category_id: "category1",
+          card_id: "card3",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: `${new Date().getFullYear()}-${(
+            new Date().getMonth() + 1
+          ).padStart(2, "0")}-05T00:00:00`,
+          created_at: `${new Date().getFullYear()}-${(
+            new Date().getMonth() + 1
+          ).padStart(2, "0")}-05T00:00:00`
+        },
+        {
+          id: "txn6",
+          amount: 15000,
+          keyword: "Store1",
+          category_id: "category1",
+          card_id: "account1",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: `${new Date().getFullYear()}-${(
+            new Date().getMonth() + 1
+          ).padStart(2, "0")}-07T00:00:00`,
+          created_at: `${new Date().getFullYear()}-${(
+            new Date().getMonth() + 1
+          ).padStart(2, "0")}-07T00:00:00`
         }
       ]
 
@@ -89,10 +149,24 @@ module.exports = {
       })
 
       devServer.app.use("/api/transactions", function (req, res) {
+        const { year, month } = req.query
+
+        let filteredTransactions = transactions
+
+        if (year && month) {
+          filteredTransactions = transactions.filter((txn) => {
+            const date = new Date(txn.created_at)
+            return (
+              date.getFullYear() === parseInt(year) &&
+              date.getMonth() + 1 === parseInt(month)
+            )
+          })
+        }
+
         setTimeout(() => {
           res.json({
             isError: false,
-            data: transactions
+            data: filteredTransactions
           })
         }, 500)
       })
@@ -109,7 +183,7 @@ module.exports = {
           const hour = date.getHours().toString().padStart(2, "0")
           const minute = date.getMinutes().toString().padStart(2, "0")
           const second = date.getSeconds().toString().padStart(2, "0")
-          return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+          return `${year}-${month}-${day}T${hour}:${minute}:${second}`
         }
 
         const newTransaction = {
@@ -159,21 +233,27 @@ module.exports = {
             data: [
               {
                 id: "card1",
-                cardType: "CREDIT",
-                cardCompany: "Card1",
-                cardNumber: "4*2*"
+                card_type: "CREDIT",
+                card_company: "Card1",
+                card_number: "4*2*",
+                branch: "Branch1",
+                created_at: "2023-01-01T00:00:00"
               },
               {
                 id: "card2",
-                cardType: "CREDIT",
-                cardCompany: "Card2",
-                cardNumber: "1*3*"
+                card_type: "CREDIT",
+                card_company: "Card2",
+                card_number: "1*3*",
+                branch: "Branch2",
+                created_at: "2023-01-01T00:00:00"
               },
               {
                 id: "card3",
-                cardType: "DEBIT",
-                cardCompany: "Card3",
-                cardNumber: "5*3*"
+                card_type: "DEBIT",
+                card_company: "Card3",
+                card_number: "5*3*",
+                branch: "Branch3",
+                created_at: "2023-01-01T00:00:00"
               }
             ]
           })
@@ -187,24 +267,30 @@ module.exports = {
             data: [
               {
                 id: "account1",
-                accountType: "CURRENT",
-                bankName: "Bank1",
-                accountNumber: "5*5*",
-                balance: 10000
+                account_type: "CURRENT",
+                bank_name: "Bank1",
+                account_number: "5*5*",
+                balance: 10000,
+                branch: "Branch4",
+                created_at: "2023-04-01T00:00:00"
               },
               {
                 id: "account2",
-                accountType: "SAVINGS",
-                bankName: "Bank2",
-                accountNumber: "6*2*",
-                balance: 20000
+                account_type: "SAVINGS",
+                bank_name: "Bank2",
+                account_number: "6*2*",
+                balance: 20000,
+                branch: "Branch5",
+                created_at: "2023-05-01T00:00:00"
               },
               {
                 id: "account3",
-                accountType: "CURRENT",
-                bankName: "Bank3",
-                accountNumber: "8*4*",
-                balance: 30000
+                account_type: "CURRENT",
+                bank_name: "Bank3",
+                account_number: "8*4*",
+                balance: 30000,
+                branch: "Branch6",
+                created_at: "2023-06-01T00:00:00"
               }
             ]
           })

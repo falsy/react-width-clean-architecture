@@ -1,6 +1,5 @@
-import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
-import ICard from "../../entities/interfaces/ICard"
 import ITransaction from "../entities/interfaces/ITransaction"
+import ICard from "../../entities/interfaces/ICard"
 
 export interface ICardTransactionParams {
   transaction: ITransaction
@@ -9,6 +8,5 @@ export interface ICardTransactionParams {
 
 export default interface ICardTransaction {
   readonly transaction: ITransaction
-  readonly card: ICardInfoVO
-  readonly cardId: string
+  readonly card: ICard
 }

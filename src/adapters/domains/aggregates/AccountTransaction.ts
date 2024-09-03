@@ -1,18 +1,16 @@
 import IAccountTransaction, {
   IAccountTransactionParams
 } from "./interfaces/IAccountTransaction"
-import AccountInfoVO from "../vos/AccountInfoVO"
-import IAccountInfoVO from "../vos/interfaces/IAccountInfoVO"
 import ITransaction from "./entities/interfaces/ITransaction"
+import IAccount from "../entities/interfaces/IAccount"
+import Account from "../entities/Account"
 
 export default class AccountTransaction implements IAccountTransaction {
   readonly transaction: ITransaction
-  readonly account: IAccountInfoVO
-  readonly accountId: string
+  readonly account: IAccount
 
   constructor(params: IAccountTransactionParams) {
     this.transaction = params.transaction
-    this.account = new AccountInfoVO(params.account)
-    this.accountId = params.account.id
+    this.account = new Account(params.account)
   }
 }

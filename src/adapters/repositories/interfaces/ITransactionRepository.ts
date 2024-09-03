@@ -4,7 +4,10 @@ import ITransactionDTO from "adapters/dtos/interfaces/ITransactionDTO"
 import ITxnCategoryDTO from "adapters/dtos/interfaces/ITxnCategoryDTO"
 
 export default interface ITransactionRepository {
-  getTransactions(): Promise<ILayerDTO<ITransactionDTO[]>>
+  getTransactions(
+    year?: number,
+    month?: number
+  ): Promise<ILayerDTO<ITransactionDTO[]>>
   addTransaction(
     reqTransactionDTO: IRequestTransactionDTO
   ): Promise<ILayerDTO<boolean>>
