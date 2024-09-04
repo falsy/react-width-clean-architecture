@@ -5,6 +5,7 @@ import IAccountTxnSummaryVM from "./interfaces/IAccountTxnSummaryVM"
 export default class AccountTxnSummaryVM implements IAccountTxnSummaryVM {
   readonly id: string
   readonly amount: number
+  readonly keyword: string
   readonly account: IAccountInfoVO
   readonly longTime: number
   readonly dayOfWeek: string
@@ -15,10 +16,11 @@ export default class AccountTxnSummaryVM implements IAccountTxnSummaryVM {
 
     this.id = params.id
     this.amount = params.amount
+    this.keyword = params.keyword
     this.account = params.account
     this.longTime = date.getTime()
     this.dayOfWeek = date.toLocaleString("en", {
-      weekday: "long"
+      weekday: "short"
     })
     this.day = date.getDate().toString().padStart(2, "0")
   }

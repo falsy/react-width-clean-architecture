@@ -12,16 +12,18 @@ export default function MutationContainer<TData, TVariables>({
   mutationFn: (variables: TVariables) => Promise<TData>
   loadingComponent?: JSX.Element
   errorComponent?: JSX.Element
-  invalidateQueryKeys?: string[]
+  invalidateQueryKeys?: string[][]
 }) {
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
     mutationFn: (params: TVariables) => mutationFn(params),
     onSuccess: () => {
-      if (invalidateQueryKeys.length > 0) {
-        queryClient.invalidateQueries({ queryKey: invalidateQueryKeys })
-      }
+      Promise.all(
+        invalidateQueryKeys.map((key) =>
+          queryClient.invalidateQueries({ queryKey: key })
+        )
+      )
     }
   })
 

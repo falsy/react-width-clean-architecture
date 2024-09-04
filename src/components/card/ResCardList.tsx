@@ -9,9 +9,6 @@ export default function ResCardList({ response }: { response?: Array<ICard> }) {
     <div>
       <ul
         css={css`
-          margin: 0;
-          padding: 0;
-          list-style: none;
           li:not(:first-of-type) {
             margin-top: 0.5rem;
           }

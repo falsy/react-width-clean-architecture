@@ -126,6 +126,24 @@ module.exports = {
           created_at: `${new Date().getFullYear()}-${String(
             new Date().getMonth() + 1
           ).padStart(2, "0")}-07T00:00:00`
+        },
+        {
+          id: "txn7",
+          amount: 500,
+          keyword: "Store5",
+          franchise_id: "franchise2",
+          card_id: "card2",
+          location: {
+            name: "City",
+            latitude: 37.5665,
+            longitude: 126.978
+          },
+          updated_at: `${new Date().getFullYear()}-${String(
+            new Date().getMonth() + 1
+          ).padStart(2, "0")}-07T00:00:00`,
+          created_at: `${new Date().getFullYear()}-${String(
+            new Date().getMonth() + 1
+          ).padStart(2, "0")}-07T00:00:00`
         }
       ]
 
@@ -158,7 +176,7 @@ module.exports = {
         }
 
         if (type) {
-          filteredTransactions = transactions.filter((txn) => {
+          filteredTransactions = filteredTransactions.filter((txn) => {
             return (
               (type === "CARD" && txn.card_id) ||
               (type === "ACCOUNT" && txn.account_id)

@@ -20,7 +20,7 @@ export default class CardTxnSummaryVM implements ICardTxnSummaryVM {
     this.card = params.card
     this.longTime = date.getTime()
     this.dayOfWeek = date.toLocaleString("en", {
-      weekday: "long"
+      weekday: "short"
     })
     this.day = date.getDate().toString().padStart(2, "0")
   }

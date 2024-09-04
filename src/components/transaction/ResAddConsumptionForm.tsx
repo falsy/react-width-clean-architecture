@@ -5,7 +5,11 @@ import ICard from "adapters/domains/entities/interfaces/ICard"
 import { ICreateTxnParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 import ErrorContainer from "components/commons/containers/ErrorContainer"
 import MutationContainer from "components/networks/MutationContainer"
-import { GET_TRANSACTIONS } from "constants/queries"
+import {
+  GET_RECENT_ACCOUNT_TRANSACTIONS,
+  GET_RECENT_CARD_TRANSACTIONS,
+  GET_TRANSACTIONS
+} from "constants/queries"
 import Loader from "components/commons/Loader"
 import ActAddConsumptionBtn from "./ActAddConsumptionBtn"
 import di from "di"
@@ -145,7 +149,11 @@ export default function ResAddConsumptionForm({
                 accountId
               })
             }}
-            invalidateQueryKeys={[GET_TRANSACTIONS]}
+            invalidateQueryKeys={[
+              [GET_TRANSACTIONS],
+              [GET_RECENT_ACCOUNT_TRANSACTIONS],
+              [GET_RECENT_CARD_TRANSACTIONS]
+            ]}
             loadingComponent={<Loader />}
           >
             <ActAddConsumptionBtn />
