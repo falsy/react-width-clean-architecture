@@ -27,8 +27,9 @@ export default class TransactionDTO implements ITransactionDTO {
   @IsString()
   readonly accountId?: string
 
+  @IsOptional()
   @ValidateNested()
-  readonly location: ILocationVO
+  readonly location?: ILocationVO
 
   @IsString()
   readonly updatedAt: string
@@ -43,7 +44,7 @@ export default class TransactionDTO implements ITransactionDTO {
     if (params.franchise_id) this.franchiseId = params.franchise_id
     if (params.card_id) this.cardId = params.card_id
     if (params.account_id) this.accountId = params.account_id
-    this.location = new LocationVO(params.location)
+    if (params.location) this.location = new LocationVO(params.location)
     this.updatedAt = params.updated_at
     this.createdAt = params.created_at
   }

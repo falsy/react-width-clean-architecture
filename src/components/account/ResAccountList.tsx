@@ -2,7 +2,7 @@ import { css } from "@emotion/react"
 import IAccount from "adapters/domains/entities/interfaces/IAccount"
 import AccountItem from "./items/AccountItem"
 
-export default function AccountList({
+export default function ResAccountList({
   response
 }: {
   response?: Array<IAccount>

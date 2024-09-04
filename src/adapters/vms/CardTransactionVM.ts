@@ -10,10 +10,8 @@ export default class CardTransactionVM implements ICardTransactionVM {
   readonly franchise?: IFranchise
   readonly createdAt: string
   readonly card: ICardInfoVO
-  readonly yearMonthDate: string
   readonly longTime: number
-  readonly dayOfWeek: string
-  readonly date: number
+  readonly date: string
 
   constructor(params: ICardTransaction) {
     this.id = params.id
@@ -22,11 +20,13 @@ export default class CardTransactionVM implements ICardTransactionVM {
     this.createdAt = params.createdAt
     if (params.franchise) this.franchise = params.franchise
     this.card = params.card
-    this.yearMonthDate = params.createdAt.split(" ")[0]
     this.longTime = new Date(params.createdAt).getTime()
-    this.dayOfWeek = new Date(params.createdAt).toLocaleString("en", {
-      weekday: "long"
-    })
-    this.date = new Date(params.createdAt).getDate()
+    this.date = this.getParseDate(new Date(params.createdAt))
+  }
+
+  private getParseDate(date: Date): string {
+    return `${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
   }
 }

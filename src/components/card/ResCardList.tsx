@@ -2,7 +2,7 @@ import { css } from "@emotion/react"
 import ICard from "adapters/domains/entities/interfaces/ICard"
 import CardItem from "./items/CardItem"
 
-export default function CardList({ response }: { response?: Array<ICard> }) {
+export default function ResCardList({ response }: { response?: Array<ICard> }) {
   const cards = response || []
 
   return (

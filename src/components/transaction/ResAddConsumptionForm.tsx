@@ -2,10 +2,15 @@ import { useState } from "react"
 import { css } from "@emotion/react"
 import IAccount from "adapters/domains/entities/interfaces/IAccount"
 import ICard from "adapters/domains/entities/interfaces/ICard"
-import AddConsumptionAction from "./containers/AddConsumptionAction"
-import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
+import { ICreateTxnParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
+import ErrorContainer from "components/commons/containers/ErrorContainer"
+import MutationContainer from "components/networks/MutationContainer"
+import { GET_TRANSACTIONS } from "constants/queries"
+import Loader from "components/commons/Loader"
+import ActAddConsumptionBtn from "./ActAddConsumptionBtn"
+import di from "di"
 
-export default function AddConsumptionForm({
+export default function ResAddConsumptionForm({
   response
 }: {
   response?: {
@@ -18,13 +23,12 @@ export default function AddConsumptionForm({
     accounts: []
   }
 
-  const [transactionData, setTransactionData] =
-    useState<IRequestTransactionParams>({
-      amount: 0,
-      keyword: "",
-      cardId: "",
-      accountId: ""
-    })
+  const [transactionData, setTransactionData] = useState<ICreateTxnParams>({
+    amount: 0,
+    keyword: "",
+    cardId: "",
+    accountId: ""
+  })
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -121,7 +125,33 @@ export default function AddConsumptionForm({
           />
         </div>
       </div>
-      <AddConsumptionAction transactionData={transactionData} />
+      <div
+        css={css`
+          padding: 1rem 0;
+        `}
+      >
+        <ErrorContainer>
+          <MutationContainer
+            mutationFn={() => {
+              const { amount, keyword, cardId, accountId } = transactionData
+              if (!amount || !keyword || (!cardId && !accountId)) {
+                window.alert("Please fill all fields")
+                throw new Error("Please fill all fields")
+              }
+              return di.transaction.addTransaction({
+                amount,
+                keyword,
+                cardId,
+                accountId
+              })
+            }}
+            invalidateQueryKeys={[GET_TRANSACTIONS]}
+            loadingComponent={<Loader />}
+          >
+            <ActAddConsumptionBtn />
+          </MutationContainer>
+        </ErrorContainer>
+      </div>
     </div>
   )
 }

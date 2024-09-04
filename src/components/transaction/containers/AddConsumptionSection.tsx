@@ -3,9 +3,9 @@ import { GET_CATEGORIES_CARDS_ACCOUNTS } from "constants/queries"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
-import Loading from "components/commons/Loading"
+import Loader from "components/commons/Loader"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
-import AddConsumptionForm from "../AddConsumptionForm"
+import ResAddConsumptionForm from "../ResAddConsumptionForm"
 
 import di from "di"
 
@@ -30,14 +30,14 @@ export default function AddConsumptionSection() {
               accounts
             }
           }}
-          loadingComponent={<Loading />}
+          loadingComponent={<Loader />}
           errorComponent={
             <RefetchContainer queryKey={GET_CATEGORIES_CARDS_ACCOUNTS}>
               <Error />
             </RefetchContainer>
           }
         >
-          <AddConsumptionForm />
+          <ResAddConsumptionForm />
         </QueryContainer>
       </ErrorContainer>
     </div>

@@ -1,6 +1,10 @@
 import { css } from "@emotion/react"
 
-export default function AddConsumptionBtn({ action }: { action?: () => void }) {
+export default function ActAddConsumptionBtn({
+  action
+}: {
+  action?: () => void
+}) {
   return (
     <button
       css={css`

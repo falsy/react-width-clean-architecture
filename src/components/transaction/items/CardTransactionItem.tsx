@@ -35,7 +35,7 @@ export default function CardTransactionItem({
       `}
     >
       <p>
-        <span>Date.</span> {transaction.yearMonthDate}
+        <span>Date.</span> {transaction.date}
       </p>
       <p>
         <span>Franchise.</span> {transaction.franchise?.name}

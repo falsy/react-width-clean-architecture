@@ -5,7 +5,7 @@ import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM
 import CardTransactionItem from "./items/CardTransactionItem"
 import AccountTransactionItem from "./items/AccountTransactionItem"
 
-export default function ConsumptionList({
+export default function ResConsumptionList({
   response
 }: {
   response?: Array<ICardTransactionVM | IAccountTransactionVM>

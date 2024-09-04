@@ -1,14 +1,17 @@
-import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
+import {
+  ICreateTxnParams,
+  IFilterTxnParams
+} from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM"
+import IAccountTxnSummaryVM from "adapters/vms/interfaces/IAccountTxnSummaryVM"
 import ICardTransactionVM from "adapters/vms/interfaces/ICardTransactionVM"
+import ICardTxnSummaryVM from "adapters/vms/interfaces/ICardTxnSummaryVM"
 
 export default interface ITransactionPresenter {
-  getCurrentMonthTransactions(
-    year?: number,
-    month?: number
+  getRecentAccountTransactionSummary(): Promise<IAccountTxnSummaryVM[]>
+  getRecentCardTransactionSummary(): Promise<ICardTxnSummaryVM[]>
+  getTransactions(
+    params?: IFilterTxnParams
   ): Promise<Array<ICardTransactionVM | IAccountTransactionVM>>
-  getTransactions(): Promise<Array<ICardTransactionVM | IAccountTransactionVM>>
-  addTransaction(
-    reqTransactionParams: IRequestTransactionParams
-  ): Promise<boolean>
+  addTransaction(reqTransactionParams: ICreateTxnParams): Promise<boolean>
 }

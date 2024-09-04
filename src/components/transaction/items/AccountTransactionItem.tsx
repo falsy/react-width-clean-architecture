@@ -34,7 +34,7 @@ export default function AccountTransactionItem({
       `}
     >
       <p>
-        <span>Date.</span> {transaction.yearMonthDate}
+        <span>Date.</span> {transaction.date}
       </p>
       <p></p>
       <p>

@@ -5,19 +5,19 @@ import ITransactionRepository from "./interfaces/ITransactionRepository"
 import ITransactionDTO, {
   ITransactionDTOParams
 } from "adapters/dtos/interfaces/ITransactionDTO"
-import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
+import {
+  IFilterTxnParams,
+  ICreateTxnParams
+} from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 import TransactionDTO from "adapters/dtos/TransactionDTO"
 
 export default class TransactionRepository implements ITransactionRepository {
   constructor(private clientHttp: IClientHTTP) {}
 
-  async getTransactions(
-    year?: number,
-    month?: number
-  ): Promise<ITransactionDTO[]> {
+  async getTransactions(params: IFilterTxnParams): Promise<ITransactionDTO[]> {
     try {
       const res = await this.clientHttp.get(`${API_URI}/api/transactions`, {
-        params: { year, month }
+        params: { year: params?.year, month: params?.month, type: params?.type }
       })
 
       if (res.status !== 200) {
@@ -42,12 +42,15 @@ export default class TransactionRepository implements ITransactionRepository {
     }
   }
 
-  async addTransaction(
-    reqTransactionParams: IRequestTransactionParams
-  ): Promise<boolean> {
+  async addTransaction(params: ICreateTxnParams): Promise<boolean> {
     try {
       const res = await this.clientHttp.post(`${API_URI}/api/transaction`, {
-        transaction: reqTransactionParams
+        transaction: {
+          keyword: params.keyword,
+          amount: params.amount,
+          card_id: params.cardId,
+          account_id: params.accountId
+        }
       })
 
       if (res.status !== 201) {

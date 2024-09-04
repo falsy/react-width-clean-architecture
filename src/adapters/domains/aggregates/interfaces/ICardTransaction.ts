@@ -9,12 +9,7 @@ export interface ICardTransactionParams {
   card: ICard
 }
 
-export default interface ICardTransaction {
-  readonly id: string
-  readonly amount: number
-  readonly keyword: string
+export default interface ICardTransaction extends ITransaction {
   readonly franchise?: IFranchise
-  readonly cardId?: string
   readonly card: ICardInfoVO
-  readonly createdAt: string
 }

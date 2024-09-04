@@ -143,7 +143,7 @@ module.exports = {
       })
 
       devServer.app.use("/api/transactions", function (req, res) {
-        const { year, month } = req.query
+        const { year, month, type } = req.query
 
         let filteredTransactions = transactions
 
@@ -157,13 +157,22 @@ module.exports = {
           })
         }
 
+        if (type) {
+          filteredTransactions = transactions.filter((txn) => {
+            return (
+              (type === "CARD" && txn.card_id) ||
+              (type === "ACCOUNT" && txn.account_id)
+            )
+          })
+        }
+
         setTimeout(() => {
           res.json(filteredTransactions)
         }, 500)
       })
 
       devServer.app.use("/api/transaction", function (req, res) {
-        const { amount, keyword, cardId, accountId } = req.body.transaction
+        const { amount, keyword, card_id, account_id } = req.body.transaction
 
         const makeDateSet = () => {
           const date = new Date()
@@ -180,15 +189,16 @@ module.exports = {
           id: `txn${transactions.length + 1}`,
           amount,
           keyword,
-          cardId,
-          accountId,
-          createdAt: makeDateSet()
+          card_id,
+          account_id,
+          created_at: makeDateSet(),
+          updated_at: makeDateSet()
         }
 
         transactions.push(newTransaction)
 
         setTimeout(() => {
-          res.json(true)
+          res.status(201).json(true)
         }, 200)
       })
 

@@ -6,7 +6,10 @@ import IFranchiseRepository from "adapters/repositories/interfaces/IFranchiseRep
 import ITransactionUseCase from "./interfaces/ITransactionUseCase"
 import ICardTransaction from "../aggregates/interfaces/ICardTransaction"
 import IAccountTransaction from "../aggregates/interfaces/IAccountTransaction"
-import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
+import {
+  IFilterTxnParams,
+  ICreateTxnParams
+} from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 import Card from "../entities/Card"
 import Account from "../entities/Account"
 import Transaction from "../aggregates/entities/Transaction"
@@ -23,12 +26,11 @@ export default class TransactionUseCase implements ITransactionUseCase {
   ) {}
 
   async getTransactions(
-    year?: number,
-    month?: number
+    params: IFilterTxnParams
   ): Promise<Array<ICardTransaction | IAccountTransaction>> {
     const [transactionDTOs, franchiseDTOs, cardDTOs, accountDTOs] =
       await Promise.all([
-        this.transactionRepository.getTransactions(year, month),
+        this.transactionRepository.getTransactions(params),
         this.franchiseRepository.getFranchises(),
         this.cardRepository.getCards(),
         this.accountRepository.getAccounts()
@@ -80,9 +82,7 @@ export default class TransactionUseCase implements ITransactionUseCase {
     return transactions
   }
 
-  addTransaction(
-    reqTransactionParams: IRequestTransactionParams
-  ): Promise<boolean> {
-    return this.transactionRepository.addTransaction(reqTransactionParams)
+  addTransaction(params: ICreateTxnParams): Promise<boolean> {
+    return this.transactionRepository.addTransaction(params)
   }
 }

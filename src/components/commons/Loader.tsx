@@ -1,6 +1,6 @@
 import { css } from "@emotion/react"
 
-export default function Loading() {
+export default function Loader() {
   return (
     <div
       css={css`

@@ -8,8 +8,6 @@ export default interface ICardTransactionVM {
   readonly franchise?: IFranchise
   readonly createdAt: string
   readonly card: ICardInfoVO
-  readonly yearMonthDate: string
   readonly longTime: number
-  readonly dayOfWeek: string
-  readonly date: number
+  readonly date: string
 }
