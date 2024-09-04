@@ -1,15 +1,9 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import IRequestTransactionDTO from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
 import ITransactionDTO from "adapters/dtos/interfaces/ITransactionDTO"
-import ITxnCategoryDTO from "adapters/dtos/interfaces/ITxnCategoryDTO"
+import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 
 export default interface ITransactionRepository {
-  getTransactions(
-    year?: number,
-    month?: number
-  ): Promise<ILayerDTO<ITransactionDTO[]>>
+  getTransactions(year?: number, month?: number): Promise<ITransactionDTO[]>
   addTransaction(
-    reqTransactionDTO: IRequestTransactionDTO
-  ): Promise<ILayerDTO<boolean>>
-  getTxnCategories(): Promise<ILayerDTO<ITxnCategoryDTO[]>>
+    reqTransactionParams: IRequestTransactionParams
+  ): Promise<boolean>
 }

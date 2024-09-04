@@ -1,7 +1,7 @@
 import { IsEmail, IsString } from "class-validator"
-import IUserInfoDTO, { IUserInfoDTOParams } from "./interfaces/IUserInfoDTO"
+import IUserDTO, { IUserDTOParams } from "./interfaces/IUserInfoDTO"
 
-export default class UserInfoDTO implements IUserInfoDTO {
+export default class UserDTO implements IUserDTO {
   @IsString()
   readonly id: string
 
@@ -17,7 +17,7 @@ export default class UserInfoDTO implements IUserInfoDTO {
   @IsString()
   readonly address: string
 
-  constructor(params: IUserInfoDTOParams) {
+  constructor(params: IUserDTOParams) {
     this.id = params.id
     this.name = params.name
     this.email = params.email

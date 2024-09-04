@@ -4,7 +4,7 @@ export interface ITransactionDTOParams {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly category_id: string
+  readonly franchise_id: string
   readonly card_id?: string
   readonly account_id?: string
   readonly location: ILocationVO
@@ -16,7 +16,7 @@ export default interface ITransactionDTO {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly categoryId: string
+  readonly franchiseId: string
   readonly cardId?: string
   readonly accountId?: string
   readonly location: ILocationVO

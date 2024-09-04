@@ -1,15 +1,13 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import IAccountTransaction from "adapters/domains/aggregates/interfaces/IAccountTransaction"
 import ICardTransaction from "adapters/domains/aggregates/interfaces/ICardTransaction"
-import IRequestTransactionDTO from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
-import TxnCategoryVO from "adapters/domains/vos/TxnCateogryVO"
+import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 
 export default interface ITransactionUseCase {
-  getTransactions(): Promise<
-    ILayerDTO<Array<ICardTransaction | IAccountTransaction>>
-  >
+  getTransactions(
+    year?: number,
+    month?: number
+  ): Promise<Array<ICardTransaction | IAccountTransaction>>
   addTransaction(
-    reqTransactionDTO: IRequestTransactionDTO
-  ): Promise<ILayerDTO<boolean>>
-  getTxnCategories(): Promise<ILayerDTO<TxnCategoryVO[]>>
+    reqTransactionParams: IRequestTransactionParams
+  ): Promise<boolean>
 }

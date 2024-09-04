@@ -10,6 +10,7 @@ export default function useCases(repositories: IRepositories): IUseCases {
     user: new UserUseCase(repositories.user),
     transaction: new TransactionUseCase(
       repositories.transaction,
+      repositories.franchise,
       repositories.card,
       repositories.account
     ),

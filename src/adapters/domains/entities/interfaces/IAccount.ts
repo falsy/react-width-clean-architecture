@@ -1,9 +1,10 @@
 export interface IAccountParams {
-  id: string
-  accountType: "SAVINGS" | "CURRENT"
-  bankName: string
-  accountNumber: string
-  balance: number
+  readonly id: string
+  readonly accountType: "SAVINGS" | "CURRENT"
+  readonly bankName: string
+  readonly accountNumber: string
+  readonly balance: number
+  readonly branch: string
 }
 
 export default interface IAccount {
@@ -12,4 +13,5 @@ export default interface IAccount {
   readonly bankName: string
   readonly accountNumber: string
   readonly balance: number
+  readonly branch: string
 }

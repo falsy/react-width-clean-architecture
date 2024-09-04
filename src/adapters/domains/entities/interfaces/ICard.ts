@@ -1,8 +1,9 @@
 export interface ICardParams {
-  id: string
-  cardType: "CREDIT" | "DEBIT"
-  cardCompany: string
-  cardNumber: string
+  readonly id: string
+  readonly cardType: "CREDIT" | "DEBIT"
+  readonly cardCompany: string
+  readonly cardNumber: string
+  readonly branch: string
 }
 
 export default interface ICard {
@@ -10,4 +11,5 @@ export default interface ICard {
   readonly cardType: "CREDIT" | "DEBIT"
   readonly cardCompany: string
   readonly cardNumber: string
+  readonly branch: string
 }

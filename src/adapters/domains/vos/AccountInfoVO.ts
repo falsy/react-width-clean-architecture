@@ -1,19 +1,16 @@
-import IAccount, { IAccountParams } from "./interfaces/IAccount"
+import IAccount from "../entities/interfaces/IAccount"
+import IAccountInfoVO from "./interfaces/IAccountInfoVO"
 
-export default class Account implements IAccount {
-  readonly id: string
+export default class AccountInfoVO implements IAccountInfoVO {
   readonly accountType: "SAVINGS" | "CURRENT"
   readonly bankName: string
   readonly accountNumber: string
   readonly balance: number
-  readonly branch: string
 
-  constructor(params: IAccountParams) {
-    this.id = params.id
+  constructor(params: IAccount) {
     this.accountType = params.accountType
     this.bankName = params.bankName
     this.accountNumber = params.accountNumber
     this.balance = params.balance
-    this.branch = params.branch
   }
 }

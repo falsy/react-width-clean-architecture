@@ -42,7 +42,7 @@ module.exports = {
           id: "txn1",
           amount: 1000,
           keyword: "hambuger",
-          category_id: "category1",
+          franchise: "franchise1",
           card_id: "card1",
           location: {
             name: "City",
@@ -56,7 +56,7 @@ module.exports = {
           id: "txn2",
           amount: 2000,
           keyword: "Store2",
-          category_id: "category1",
+          franchise: "franchise1",
           card_id: "card2",
           location: {
             name: "City",
@@ -70,7 +70,7 @@ module.exports = {
           id: "txn3",
           amount: 1500,
           keyword: "Withdrawal",
-          category_id: "category2",
+          franchise: "franchise2",
           account_id: "account1",
           location: {
             name: "City",
@@ -84,7 +84,7 @@ module.exports = {
           id: "txn4",
           amount: 3000,
           keyword: "Store3",
-          category_id: "category1",
+          franchise: "franchise2",
           card_id: "card3",
           location: {
             name: "City",
@@ -98,7 +98,7 @@ module.exports = {
           id: "txn5",
           amount: 5000,
           keyword: "Store4",
-          category_id: "category1",
+          franchise: "franchise2",
           card_id: "card3",
           location: {
             name: "City",
@@ -116,7 +116,7 @@ module.exports = {
           id: "txn6",
           amount: 15000,
           keyword: "Store1",
-          category_id: "category1",
+          franchise: "franchise2",
           card_id: "account1",
           location: {
             name: "City",
@@ -172,7 +172,7 @@ module.exports = {
       })
 
       devServer.app.use("/api/transaction", function (req, res) {
-        const { amount, keyword, categoryId, cardId, accountId } =
+        const { amount, keyword, franchise, cardId, accountId } =
           req.body.transaction
 
         const makeDateSet = () => {
@@ -190,7 +190,7 @@ module.exports = {
           id: `txn${transactions.length + 1}`,
           amount,
           keyword,
-          categoryId,
+          franchise,
           cardId,
           accountId,
           createdAt: makeDateSet()
@@ -206,20 +206,22 @@ module.exports = {
         }, 200)
       })
 
-      devServer.app.use("/api/txnCategories", function (req, res) {
+      devServer.app.use("/api/franchises", function (req, res) {
         setTimeout(() => {
           res.json({
             isError: false,
             data: [
               {
-                id: "category1",
-                name: "category1",
-                description: "Food and beverage"
+                id: "franchise1",
+                name: "franchise1",
+                address: "address1",
+                brand: "brand1"
               },
               {
-                id: "category2",
-                name: "category2",
-                description: "Withdraw money from account"
+                id: "franchise2",
+                name: "franchise2",
+                address: "address2",
+                brand: "brand2"
               }
             ]
           })

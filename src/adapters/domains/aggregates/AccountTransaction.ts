@@ -1,16 +1,18 @@
 import IAccountTransaction, {
   IAccountTransactionParams
 } from "./interfaces/IAccountTransaction"
-import ITransaction from "./entities/interfaces/ITransaction"
-import IAccount from "../entities/interfaces/IAccount"
-import Account from "../entities/Account"
+import AccountInfoVO from "../vos/AccountInfoVO"
+import IAccountInfoVO from "../vos/interfaces/IAccountInfoVO"
+import Transaction from "./entities/Transaction"
 
-export default class AccountTransaction implements IAccountTransaction {
-  readonly transaction: ITransaction
-  readonly account: IAccount
+export default class AccountTransaction
+  extends Transaction
+  implements IAccountTransaction
+{
+  readonly account: IAccountInfoVO
 
   constructor(params: IAccountTransactionParams) {
-    this.transaction = params.transaction
-    this.account = new Account(params.account)
+    super(params.transaction)
+    this.account = new AccountInfoVO(params.account)
   }
 }

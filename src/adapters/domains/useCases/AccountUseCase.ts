@@ -1,44 +1,18 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import LayerDTO from "adapters/dtos/LayerDTO"
 import IAccountDTO from "adapters/dtos/interfaces/IAccountDTO"
 import IAccountUseCase from "./interfaces/IAccountUseCase"
 import IAccount from "../entities/interfaces/IAccount"
 import Account from "../entities/Account"
+import IAccountRepository from "adapters/repositories/interfaces/IAccountRepository"
 
 export default class AccountUseCase implements IAccountUseCase {
-  constructor(private accountRepository: IAccountUseCase) {}
+  constructor(private accountRepository: IAccountRepository) {}
 
-  async getAccounts(): Promise<ILayerDTO<IAccount[]>> {
-    try {
-      const { isError, message, data } =
-        await this.accountRepository.getAccounts()
+  async getAccounts(): Promise<IAccount[]> {
+    const accountDTOs = await this.accountRepository.getAccounts()
+    const accounts = accountDTOs.map((accountDTO: IAccountDTO) => {
+      return new Account(accountDTO)
+    })
 
-      if (isError || !data) {
-        return new LayerDTO({
-          isError,
-          message
-        })
-      }
-
-      const accounts = data.map((accountDTO: IAccountDTO) => {
-        return new Account({
-          id: accountDTO.id,
-          accountType: accountDTO.accountType,
-          bankName: accountDTO.bankName,
-          accountNumber: accountDTO.accountNumber,
-          balance: accountDTO.balance
-        })
-      })
-
-      return new LayerDTO({
-        data: accounts
-      })
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error
-      } else {
-        throw new Error("Unknown error type")
-      }
-    }
+    return accounts
   }
 }

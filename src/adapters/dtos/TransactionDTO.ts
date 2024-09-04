@@ -3,6 +3,7 @@ import ITransactionDTO, {
   ITransactionDTOParams
 } from "./interfaces/ITransactionDTO"
 import ILocationVO from "adapters/domains/vos/interfaces/ILocationVO"
+import LocationVO from "adapters/domains/vos/LocationVO"
 
 export default class TransactionDTO implements ITransactionDTO {
   @IsString()
@@ -15,7 +16,7 @@ export default class TransactionDTO implements ITransactionDTO {
   readonly keyword: string
 
   @IsString()
-  readonly categoryId: string
+  readonly franchiseId: string
 
   @IsOptional()
   @IsString()
@@ -38,10 +39,10 @@ export default class TransactionDTO implements ITransactionDTO {
     this.id = params.id
     this.amount = params.amount
     this.keyword = params.keyword
-    this.categoryId = params.category_id
+    this.franchiseId = params.franchise_id
     this.cardId = params.card_id
     this.accountId = params.account_id
-    this.location = params.location
+    this.location = new LocationVO(params.location)
     this.updatedAt = params.updated_at
     this.createdAt = params.created_at
   }
