@@ -1,5 +1,5 @@
 import { IsEmail, IsString } from "class-validator"
-import IUserDTO, { IUserDTOParams } from "./interfaces/IUserInfoDTO"
+import IUserDTO, { IUserDTOParams } from "./interfaces/IUserDTO"
 
 export default class UserDTO implements IUserDTO {
   @IsString()
