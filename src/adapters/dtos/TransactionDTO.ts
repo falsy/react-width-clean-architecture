@@ -15,8 +15,9 @@ export default class TransactionDTO implements ITransactionDTO {
   @IsString()
   readonly keyword: string
 
+  @IsOptional()
   @IsString()
-  readonly franchiseId: string
+  readonly franchiseId?: string
 
   @IsOptional()
   @IsString()
@@ -39,9 +40,9 @@ export default class TransactionDTO implements ITransactionDTO {
     this.id = params.id
     this.amount = params.amount
     this.keyword = params.keyword
-    this.franchiseId = params.franchise_id
-    this.cardId = params.card_id
-    this.accountId = params.account_id
+    if (params.franchise_id) this.franchiseId = params.franchise_id
+    if (params.card_id) this.cardId = params.card_id
+    if (params.account_id) this.accountId = params.account_id
     this.location = new LocationVO(params.location)
     this.updatedAt = params.updated_at
     this.createdAt = params.created_at

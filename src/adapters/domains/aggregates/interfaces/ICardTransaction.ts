@@ -5,7 +5,7 @@ import IFranchise from "../entities/interfaces/IFranchise"
 
 export interface ICardTransactionParams {
   transaction: ITransaction
-  franchise: IFranchise
+  franchise?: IFranchise | null
   card: ICard
 }
 
@@ -13,7 +13,7 @@ export default interface ICardTransaction {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly franchise: IFranchise
+  readonly franchise?: IFranchise
   readonly cardId?: string
   readonly card: ICardInfoVO
   readonly createdAt: string

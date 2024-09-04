@@ -5,7 +5,7 @@ export default interface ICardTransactionVM {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly franchise: IFranchise
+  readonly franchise?: IFranchise
   readonly createdAt: string
   readonly card: ICardInfoVO
   readonly yearMonthDate: string

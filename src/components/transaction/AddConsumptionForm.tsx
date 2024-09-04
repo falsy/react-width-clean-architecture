@@ -2,30 +2,26 @@ import { useState } from "react"
 import { css } from "@emotion/react"
 import IAccount from "adapters/domains/entities/interfaces/IAccount"
 import ICard from "adapters/domains/entities/interfaces/ICard"
-import { IRequestTransactionDTOParams } from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
-import ITxnCategoryDTO from "adapters/dtos/interfaces/ITxnCategoryDTO"
 import AddConsumptionAction from "./containers/AddConsumptionAction"
+import { IRequestTransactionParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 
 export default function AddConsumptionForm({
   response
 }: {
   response?: {
-    txnCategories: ITxnCategoryDTO[]
     cards: ICard[]
     accounts: IAccount[]
   }
 }) {
-  const { txnCategories, cards, accounts } = response || {
-    txnCategories: [],
+  const { cards, accounts } = response || {
     cards: [],
     accounts: []
   }
 
   const [transactionData, setTransactionData] =
-    useState<IRequestTransactionDTOParams>({
+    useState<IRequestTransactionParams>({
       amount: 0,
       keyword: "",
-      categoryId: "",
       cardId: "",
       accountId: ""
     })
@@ -51,7 +47,7 @@ export default function AddConsumptionForm({
           border: 1px solid #eaeaea;
           padding: 0.5rem 1rem 1rem;
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           grid-gap: 1rem;
           p {
             font-size: 0.6rem;
@@ -76,21 +72,6 @@ export default function AddConsumptionForm({
           }
         `}
       >
-        <div>
-          <p>Category</p>
-          <select
-            name="categoryId"
-            value={transactionData.categoryId}
-            onChange={handleInputChange}
-          >
-            <option value="">Select a Category</option>
-            {txnCategories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
         <div>
           <p>Card</p>
           <select

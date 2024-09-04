@@ -38,18 +38,18 @@ export default class TransactionUseCase implements ITransactionUseCase {
         const transaction = new Transaction(transactionDTO)
 
         if (transactionDTO.cardId) {
-          const franchiseDTO = franchiseDTOs.find(
-            (franchise) => franchise.id === transactionDTO.franchiseId
-          )
           const cardDTO = cardDTOs.find(
             (card) => card.id === transactionDTO.cardId
           )
-
-          if (!franchiseDTO || !cardDTO) {
-            throw new Error("FranchiseDTO or CardDTO not found")
+          if (!cardDTO) {
+            throw new Error("CardDTO not found")
           }
 
-          const franchise = new Franchise(franchiseDTO)
+          const franchiseDTO = franchiseDTOs.find(
+            (franchise) => franchise.id === transactionDTO.franchiseId
+          )
+
+          const franchise = franchiseDTO ? new Franchise(franchiseDTO) : null
           const card = new Card(cardDTO)
           const cardTransaction = new CardTransaction({
             transaction,
@@ -62,7 +62,6 @@ export default class TransactionUseCase implements ITransactionUseCase {
           const accountDTO = accountDTOs.find(
             (account) => account.id === transactionDTO.accountId
           )
-
           if (!accountDTO) {
             throw new Error("AccountDTO not found")
           }

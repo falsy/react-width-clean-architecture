@@ -20,7 +20,7 @@ export default function GreetingSection() {
       <ErrorContainer>
         <QueryContainer
           queryKey={GET_USER_INFO}
-          queryFn={() => di.user.getUserInfo()}
+          queryFn={() => di.user.getUser()}
           loadingComponent={<Loading />}
           errorComponent={
             <RefetchContainer queryKey={GET_USER_INFO}>

@@ -36,9 +36,7 @@ export default function AccountTransactionItem({
       <p>
         <span>Date.</span> {transaction.yearMonthDate}
       </p>
-      <p>
-        <span>Category.</span> {transaction.category.name}
-      </p>
+      <p></p>
       <p>
         <span>Account.</span> {transaction.account.bankName}(
         {transaction.account.accountNumber})

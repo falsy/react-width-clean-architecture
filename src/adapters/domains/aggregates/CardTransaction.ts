@@ -10,12 +10,12 @@ export default class CardTransaction
   extends Transaction
   implements ICardTransaction
 {
-  readonly franchise: IFranchise
+  readonly franchise?: IFranchise
   readonly card: ICardInfoVO
 
   constructor(params: ICardTransactionParams) {
     super(params.transaction)
-    this.franchise = params.franchise
+    if (params.franchise) this.franchise = params.franchise
     this.card = new CardInfoVO(params.card)
   }
 }

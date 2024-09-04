@@ -7,7 +7,7 @@ export default class CardTransactionVM implements ICardTransactionVM {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly franchise: IFranchise
+  readonly franchise?: IFranchise
   readonly createdAt: string
   readonly card: ICardInfoVO
   readonly yearMonthDate: string
@@ -20,7 +20,7 @@ export default class CardTransactionVM implements ICardTransactionVM {
     this.amount = params.amount
     this.keyword = params.keyword
     this.createdAt = params.createdAt
-    this.franchise = params.franchise
+    if (params.franchise) this.franchise = params.franchise
     this.card = params.card
     this.yearMonthDate = params.createdAt.split(" ")[0]
     this.longTime = new Date(params.createdAt).getTime()
