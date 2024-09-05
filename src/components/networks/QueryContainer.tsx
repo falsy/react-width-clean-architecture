@@ -1,6 +1,5 @@
 import { cloneElement } from "react"
 import { useQuery } from "@tanstack/react-query"
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 
 export default function QueryContainer<TData, TVariables>({
   children,
@@ -12,7 +11,7 @@ export default function QueryContainer<TData, TVariables>({
 }: {
   children: JSX.Element
   queryKey: string
-  queryFn: (variables?: TVariables) => Promise<ILayerDTO<TData>>
+  queryFn: (variables?: TVariables) => Promise<TData>
   variables?: TVariables
   loadingComponent?: JSX.Element
   errorComponent?: JSX.Element
@@ -25,7 +24,11 @@ export default function QueryContainer<TData, TVariables>({
     }
   })
 
-  const response = query.data?.isError === false ? query.data.data : undefined
+  const response = query.data || undefined
+
+  if (query.status === "error") {
+    console.error(query.error)
+  }
 
   return (
     <>

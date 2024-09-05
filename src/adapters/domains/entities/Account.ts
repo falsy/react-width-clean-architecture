@@ -6,6 +6,7 @@ export default class Account implements IAccount {
   readonly bankName: string
   readonly accountNumber: string
   readonly balance: number
+  readonly branch: string
 
   constructor(params: IAccountParams) {
     this.id = params.id
@@ -13,5 +14,6 @@ export default class Account implements IAccount {
     this.bankName = params.bankName
     this.accountNumber = params.accountNumber
     this.balance = params.balance
+    this.branch = params.branch
   }
 }

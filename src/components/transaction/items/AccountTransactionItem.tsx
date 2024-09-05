@@ -16,8 +16,11 @@ export default function AccountTransactionItem({
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 0.5rem;
         p {
+          margin: 0.5rem 0;
           font-size: 0.8rem;
           span {
+            display: block;
+            margin-bottom: 5px;
             font-size: 0.6rem;
             text-transform: uppercase;
             font-weight: 600;
@@ -34,11 +37,9 @@ export default function AccountTransactionItem({
       `}
     >
       <p>
-        <span>Date.</span> {transaction.yearMonthDate}
+        <span>Date.</span> {transaction.date}
       </p>
-      <p>
-        <span>Category.</span> {transaction.category.name}
-      </p>
+      <p></p>
       <p>
         <span>Account.</span> {transaction.account.bankName}(
         {transaction.account.accountNumber})

@@ -1,18 +1,21 @@
-import Transaction from "./entities/Transaction"
 import ICardTransaction, {
   ICardTransactionParams
 } from "./interfaces/ICardTransaction"
-import CardInfoVO from "../vos/CardInfoVO"
 import ICardInfoVO from "../vos/interfaces/ICardInfoVO"
+import IFranchise from "./entities/interfaces/IFranchise"
+import CardInfoVO from "../vos/CardInfoVO"
+import Transaction from "./entities/Transaction"
 
-export default class CardTransaction implements ICardTransaction {
-  readonly transaction: Transaction
+export default class CardTransaction
+  extends Transaction
+  implements ICardTransaction
+{
+  readonly franchise?: IFranchise
   readonly card: ICardInfoVO
-  readonly cardId: string
 
   constructor(params: ICardTransactionParams) {
-    this.transaction = params.transaction
+    super(params.transaction)
+    if (params.franchise) this.franchise = params.franchise
     this.card = new CardInfoVO(params.card)
-    this.cardId = params.card.id
   }
 }

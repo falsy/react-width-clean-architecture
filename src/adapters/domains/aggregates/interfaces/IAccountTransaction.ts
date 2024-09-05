@@ -7,8 +7,6 @@ export interface IAccountTransactionParams {
   account: IAccount
 }
 
-export default interface IAccountTransaction {
-  readonly transaction: ITransaction
+export default interface IAccountTransaction extends ITransaction {
   readonly account: IAccountInfoVO
-  readonly accountId: string
 }

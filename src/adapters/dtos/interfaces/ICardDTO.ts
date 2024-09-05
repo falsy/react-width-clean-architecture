@@ -1,8 +1,10 @@
 export interface ICardDTOParams {
-  id: string
-  cardType: "CREDIT" | "DEBIT"
-  cardCompany: string
-  cardNumber: string
+  readonly id: string
+  readonly card_type: "CREDIT" | "DEBIT"
+  readonly card_company: string
+  readonly card_number: string
+  readonly branch: string
+  readonly created_at: string
 }
 
 export default interface ICardDTO {
@@ -10,4 +12,6 @@ export default interface ICardDTO {
   readonly cardType: "CREDIT" | "DEBIT"
   readonly cardCompany: string
   readonly cardNumber: string
+  readonly branch: string
+  readonly createdAt: string
 }

@@ -4,8 +4,8 @@ import ErrorContainer from "../../commons/containers/ErrorContainer"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
-import Loading from "components/commons/Loading"
-import Greeting from "../Greeting"
+import Loader from "components/commons/Loader"
+import ResGreeting from "../ResGreeting"
 
 import di from "di"
 
@@ -20,15 +20,15 @@ export default function GreetingSection() {
       <ErrorContainer>
         <QueryContainer
           queryKey={GET_USER_INFO}
-          queryFn={() => di.user.getUserInfo()}
-          loadingComponent={<Loading />}
+          queryFn={() => di.user.getUser()}
+          loadingComponent={<Loader />}
           errorComponent={
             <RefetchContainer queryKey={GET_USER_INFO}>
               <Error />
             </RefetchContainer>
           }
         >
-          <Greeting />
+          <ResGreeting />
         </QueryContainer>
       </ErrorContainer>
     </div>

@@ -1,34 +1,25 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import LayerDTO from "adapters/dtos/LayerDTO"
+import { validateOrReject } from "class-validator"
+import { API_URI } from "constants/networks"
 import IClientHTTP from "adapters/infrastructures/interfaces/IClientHTTP"
 import IUserRepository from "./interfaces/IUserRepository"
-import { API_URI } from "constants/networks"
-import { validateOrReject } from "class-validator"
-import UserInfoDTO from "adapters/dtos/UserInfoDTO"
-import IUserInfoDTO from "adapters/dtos/interfaces/IUserInfoDTO"
+import IUserDTO from "adapters/dtos/interfaces/IUserDTO"
+import UserDTO from "adapters/dtos/UserDTO"
 
 class UserRepository implements IUserRepository {
   constructor(private clientHttp: IClientHTTP) {}
 
-  async getUserInfo(): Promise<ILayerDTO<IUserInfoDTO>> {
+  async getUser(): Promise<IUserDTO> {
     try {
       const res = await this.clientHttp.get(`${API_URI}/api/user`)
-      const { isError, message, data } = res.data
 
-      if (isError) {
-        return new LayerDTO({
-          isError,
-          message
-        })
+      if (res.status !== 200) {
+        throw new Error("Error occurred while fetching data")
       }
 
-      const userInfoDTO = new UserInfoDTO(data)
+      const userDTO = new UserDTO(res.data)
+      await validateOrReject(userDTO)
 
-      await validateOrReject(userInfoDTO)
-
-      return new LayerDTO({
-        data: userInfoDTO
-      })
+      return userDTO
     } catch (error) {
       if (error instanceof Error) {
         throw error

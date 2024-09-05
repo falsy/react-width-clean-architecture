@@ -17,11 +17,19 @@ export default class AccountDTO implements IAccountDTO {
   @IsNumber()
   readonly balance: number
 
+  @IsString()
+  readonly branch: string
+
+  @IsString()
+  readonly createdAt: string
+
   constructor(params: IAccountDTOParams) {
     this.id = params.id
-    this.accountType = params.accountType
-    this.bankName = params.bankName
-    this.accountNumber = params.accountNumber
+    this.accountType = params.account_type
+    this.bankName = params.bank_name
+    this.accountNumber = params.account_number
     this.balance = params.balance
+    this.branch = params.branch
+    this.createdAt = params.created_at
   }
 }

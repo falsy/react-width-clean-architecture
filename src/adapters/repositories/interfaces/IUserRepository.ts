@@ -1,6 +1,5 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import IUserInfoDTO from "adapters/dtos/interfaces/IUserInfoDTO"
+import IUserDTO from "adapters/dtos/interfaces/IUserDTO"
 
 export default interface IUserRepository {
-  getUserInfo(): Promise<ILayerDTO<IUserInfoDTO>>
+  getUser(): Promise<IUserDTO>
 }

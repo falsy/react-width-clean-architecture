@@ -1,5 +1,3 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
-import LayerDTO from "adapters/dtos/LayerDTO"
 import ICardRepository from "adapters/repositories/interfaces/ICardRepository"
 import ICardDTO from "adapters/dtos/interfaces/ICardDTO"
 import ICardUseCase from "./interfaces/ICardUseCase"
@@ -9,36 +7,12 @@ import Card from "../entities/Card"
 export default class CardUseCase implements ICardUseCase {
   constructor(private cardRepository: ICardRepository) {}
 
-  async getCards(): Promise<ILayerDTO<ICard[]>> {
-    try {
-      const { isError, message, data } = await this.cardRepository.getCards()
+  async getCards(): Promise<ICard[]> {
+    const cardDTOs = await this.cardRepository.getCards()
+    const cards = cardDTOs.map((cardDTO: ICardDTO) => {
+      return new Card(cardDTO)
+    })
 
-      if (isError || !data) {
-        return new LayerDTO({
-          isError,
-          message
-        })
-      }
-
-      const cards = data.map((cardDTO: ICardDTO) => {
-        const card = new Card({
-          id: cardDTO.id,
-          cardType: cardDTO.cardType,
-          cardCompany: cardDTO.cardCompany,
-          cardNumber: cardDTO.cardNumber
-        })
-        return card
-      })
-
-      return new LayerDTO({
-        data: cards
-      })
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error
-      } else {
-        throw new Error("Unknown error type")
-      }
-    }
+    return cards
   }
 }

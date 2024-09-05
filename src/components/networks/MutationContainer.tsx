@@ -1,6 +1,5 @@
 import { cloneElement } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 
 export default function MutationContainer<TData, TVariables>({
   children,
@@ -10,19 +9,21 @@ export default function MutationContainer<TData, TVariables>({
   invalidateQueryKeys = []
 }: {
   children: JSX.Element
-  mutationFn: (variables: TVariables) => Promise<ILayerDTO<TData>>
+  mutationFn: (variables: TVariables) => Promise<TData>
   loadingComponent?: JSX.Element
   errorComponent?: JSX.Element
-  invalidateQueryKeys?: string[]
+  invalidateQueryKeys?: string[][]
 }) {
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
     mutationFn: (params: TVariables) => mutationFn(params),
     onSuccess: () => {
-      if (invalidateQueryKeys.length > 0) {
-        queryClient.invalidateQueries({ queryKey: invalidateQueryKeys })
-      }
+      Promise.all(
+        invalidateQueryKeys.map((key) =>
+          queryClient.invalidateQueries({ queryKey: key })
+        )
+      )
     }
   })
 
@@ -30,8 +31,7 @@ export default function MutationContainer<TData, TVariables>({
     mutation.mutate(requestParams)
   }
 
-  const response =
-    mutation.data?.isError === false ? mutation.data.data : undefined
+  const response = mutation.data || undefined
 
   return (
     <>

@@ -14,10 +14,18 @@ export default class CardDTO implements ICardDTO {
   @IsString()
   readonly cardNumber: string
 
+  @IsString()
+  readonly branch: string
+
+  @IsString()
+  readonly createdAt: string
+
   constructor(params: ICardDTOParams) {
     this.id = params.id
-    this.cardType = params.cardType
-    this.cardCompany = params.cardCompany
-    this.cardNumber = params.cardNumber
+    this.cardType = params.card_type
+    this.cardCompany = params.card_company
+    this.cardNumber = params.card_number
+    this.branch = params.branch
+    this.createdAt = params.created_at
   }
 }

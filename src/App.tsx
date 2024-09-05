@@ -14,6 +14,12 @@ export default function App() {
             body {
               font-family: "Inter", sans-serif;
             }
+
+            ul {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+            }
           `}
         />
         <Routes />

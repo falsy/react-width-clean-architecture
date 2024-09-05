@@ -3,9 +3,9 @@ import { GET_CARDS } from "constants/queries"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
-import Loading from "components/commons/Loading"
+import Loader from "components/commons/Loader"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
-import CardList from "../CardList"
+import ResCardList from "../ResCardList"
 
 import di from "di"
 
@@ -21,14 +21,14 @@ export default function CardSection() {
         <QueryContainer
           queryKey={GET_CARDS}
           queryFn={() => di.card.getCards()}
-          loadingComponent={<Loading />}
+          loadingComponent={<Loader />}
           errorComponent={
             <RefetchContainer queryKey={GET_CARDS}>
               <Error />
             </RefetchContainer>
           }
         >
-          <CardList />
+          <ResCardList />
         </QueryContainer>
       </ErrorContainer>
     </div>

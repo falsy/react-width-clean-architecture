@@ -3,9 +3,9 @@ import { GET_ACCOUNTS } from "constants/queries"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
-import Loading from "components/commons/Loading"
+import Loader from "components/commons/Loader"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
-import AccountList from "../AccountList"
+import ResAccountList from "../ResAccountList"
 
 import di from "di"
 
@@ -21,14 +21,14 @@ export default function AccountSection() {
         <QueryContainer
           queryKey={GET_ACCOUNTS}
           queryFn={() => di.account.getAccounts()}
-          loadingComponent={<Loading />}
+          loadingComponent={<Loader />}
           errorComponent={
             <RefetchContainer queryKey={GET_ACCOUNTS}>
               <Error />
             </RefetchContainer>
           }
         >
-          <AccountList />
+          <ResAccountList />
         </QueryContainer>
       </ErrorContainer>
     </div>

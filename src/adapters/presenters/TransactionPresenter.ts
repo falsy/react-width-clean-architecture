@@ -1,72 +1,76 @@
-import ILayerDTO from "adapters/dtos/interfaces/ILayerDTO"
 import ITransactionUseCase from "adapters/domains/useCases/interfaces/ITransactionUseCase"
 import ICardTransaction from "adapters/domains/aggregates/interfaces/ICardTransaction"
 import IAccountTransaction from "adapters/domains/aggregates/interfaces/IAccountTransaction"
 import ICardTransactionVM from "adapters/vms/interfaces/ICardTransactionVM"
 import IAccountTransactionVM from "adapters/vms/interfaces/IAccountTransactionVM"
-import LayerDTO from "adapters/dtos/LayerDTO"
+import ITransactionPresenter from "./interfaces/ITransactionPresenter"
+import {
+  ICreateTxnParams,
+  IFilterTxnParams
+} from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 import CardTransactionVM from "adapters/vms/CardTransactionVM"
 import AccountTransactionVM from "adapters/vms/AccountTransactionVM"
 import CardTransaction from "adapters/domains/aggregates/CardTransaction"
-import { IRequestTransactionDTOParams } from "adapters/dtos/requests/interfaces/IRequestTransactionDTO"
-import TxnCategoryVO from "adapters/domains/vos/TxnCateogryVO"
-import RequestTransactionDTO from "adapters/dtos/requests/RequestTransactionDTO"
-import ITransactionPresenter from "./interfaces/ITransactionPresenter"
+import IAccountTxnSummaryVM from "adapters/vms/interfaces/IAccountTxnSummaryVM"
+import AccountTxnSummaryVM from "adapters/vms/AccountTxnSummaryVM"
+import ICardTxnSummaryVM from "adapters/vms/interfaces/ICardTxnSummaryVM"
+import CardTxnSummaryVM from "adapters/vms/CardTxnSummaryVM"
 
 export default class TransactionPresenter implements ITransactionPresenter {
   constructor(private TransactionUseCase: ITransactionUseCase) {}
 
-  async getTransactions(): Promise<
-    ILayerDTO<Array<ICardTransactionVM | IAccountTransactionVM>>
-  > {
-    try {
-      const { isError, message, data } =
-        await this.TransactionUseCase.getTransactions()
+  async getRecentAccountTransactionSummary(): Promise<IAccountTxnSummaryVM[]> {
+    const currentDate = new Date()
+    const transactions = (await this.TransactionUseCase.getTransactions({
+      year: currentDate.getFullYear(),
+      month: currentDate.getMonth() + 1,
+      type: "ACCOUNT"
+    })) as IAccountTransaction[]
 
-      if (isError || !data) {
-        return new LayerDTO({
-          isError,
-          message
-        })
+    const recentAccountTransactionSummaryVMs = transactions.map(
+      (transaction: IAccountTransaction) => {
+        return new AccountTxnSummaryVM(transaction)
       }
+    )
 
-      const transactionVMs = data.map(
-        (transaction: ICardTransaction | IAccountTransaction) => {
-          if (transaction instanceof CardTransaction) {
-            return new CardTransactionVM(transaction)
-          }
-          return new AccountTransactionVM(transaction as IAccountTransaction)
+    return recentAccountTransactionSummaryVMs
+  }
+
+  async getRecentCardTransactionSummary(): Promise<ICardTxnSummaryVM[]> {
+    const currentDate = new Date()
+    const transactions = (await this.TransactionUseCase.getTransactions({
+      year: currentDate.getFullYear(),
+      month: currentDate.getMonth() + 1,
+      type: "CARD"
+    })) as ICardTransaction[]
+
+    const recentCardTransactionSummaryVMs = transactions.map(
+      (transaction: ICardTransaction) => {
+        return new CardTxnSummaryVM(transaction)
+      }
+    )
+
+    return recentCardTransactionSummaryVMs
+  }
+
+  async getTransactions(
+    params: IFilterTxnParams
+  ): Promise<Array<ICardTransactionVM | IAccountTransactionVM>> {
+    const transactions = await this.TransactionUseCase.getTransactions(params)
+
+    const transactionVMs = transactions.map(
+      (transaction: ICardTransaction | IAccountTransaction) => {
+        if (transaction instanceof CardTransaction) {
+          return new CardTransactionVM(transaction)
         }
-      )
-
-      return new LayerDTO({
-        data: transactionVMs
-      })
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error
-      } else {
-        throw new Error("Unknown error type")
+        return new AccountTransactionVM(transaction as IAccountTransaction)
       }
-    }
+    )
+
+    return transactionVMs
   }
 
-  getTxnCategories(): Promise<ILayerDTO<TxnCategoryVO[]>> {
-    return this.TransactionUseCase.getTxnCategories()
-  }
-
-  addTransaction(
-    transactionParams: IRequestTransactionDTOParams
-  ): Promise<ILayerDTO<boolean>> {
-    try {
-      const reqTransactionDTO = new RequestTransactionDTO(transactionParams)
-      return this.TransactionUseCase.addTransaction(reqTransactionDTO)
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error
-      } else {
-        throw new Error("Unknown error type")
-      }
-    }
+  addTransaction(reqTransactionParams: ICreateTxnParams): Promise<boolean> {
+    return this.TransactionUseCase.addTransaction(reqTransactionParams)
   }
 }
