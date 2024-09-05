@@ -133,7 +133,7 @@ interface ICardTransaction extends ITransaction {
 
 `CardTransaction` is defined as an extension of the `Transaction` entity, containing the `Franchise` entity and the `card` information in the form of a `Value Object`.
 
-While the current sample project does not include any modifications, the `Card` entity is designed to be immutable by defining its value as a `Value Object` at creation time, ensuring immutability within the service.
+Although there are no modifications in the current sample project, the `Card` entity is encapsulated as a `Value object` when creating an `Aggregate`, ensuring its immutability within the service.
 
 Since Franchise is not used outside of CardTransaction (`Aggregate Root`) within the service, it is only accessible through CardTransaction, reducing the complexity of relationships between models in the service.
 
@@ -262,8 +262,6 @@ export default function ResCardList({ response }: { response?: Array<ICard> }) {
 ```
 
 To explicitly distinguish between components that receive data using `useQuery` and those that modify data using `useMutation` in the HOC structure, components receiving data are prefixed with `Res-`, while those modifying data are prefixed with `Act-`.
-
-> This configuration using React-Query and HOC is still experimental.
 
 ## Screenshot
 

@@ -132,7 +132,7 @@ interface ICardTransaction extends ITransaction {
 
 `Transaction` Entity의 확장으로 `CardTransaction`를 정의하고 그 안에는 `Franchise` Entity와 `Card`의 정보를 담은 `Value Object`를 가지고 있습니다.
 
-현재 샘플 프로젝트의 모든 Entity는 수정에 대한 부분이 없지만, `Card` Entity의 경우 서비스에서 `CardTransaction` 외에서 독립적으로도 사용되기 때문에 생성 시점에 `Value Object` 값으로 정의함으로써 불편의 값임 보장합니다.
+현재 샘플 프로젝트의 모든 Entity는 수정에 대한 부분이 없지만, `Card` Entity의 경우 서비스에서 `CardTransaction` 외에서 독립적으로도 사용되기 때문에 생성 시점에 `Value Object`로 캡슐화하여 불편성 보장합니다.
 
 `Franchise`의 경우 현재 서비스에서 `CardTransaction` 외에서는 사용되지 않기 때문에 `CardTransaction(Aggregate Root)`를 통해서만 접근이 가능하도록 하여 서비스 내의 모델간 관계의 복잡성을 낮춥니다.
 
@@ -261,8 +261,6 @@ export default function ResCardList({ response }: { response?: Array<ICard> }) {
 ```
 
 그리고 고차 컴포넌트 구성에서 데이터를 받는 컴포넌트를 명시적으로 구분하기 위해 `useQuery`를 사용하여 데이터를 받는 컴포넌트의 경우 `Res-`라는 프리픽스를, `useMutation`를 사용하여 데이터를 변화시키는 컴포넌트의 경우 `Act-`라는 프리픽스를 사용하여 구성하였습니다.
-
-> `React-Query`와 `HOC`를 활용한 컴포넌트 구성은 아직 실험중인 구성입니다.
 
 ## Screenshot
 
