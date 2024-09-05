@@ -171,7 +171,7 @@ The `Use Cases` layer uses domain objects (`Entity`, `Aggregate`, `Value Object`
 
 Since the `Use Cases` layer is a higher layer than the `Repository` layer and should not depend on it, it relies on abstract interfaces of the `Repository` and operates through DI(Dependency Injection).
 
-### Presenters
+## Presenters
 
 The `Presenter` layer is ultimately DI-injected(Dependency Injection) to interact with the UI and configure the service. `Presenters` provide specific methods used in the UI layer and encapsulate data into a VM (View Model) optimized for UI use.
 
