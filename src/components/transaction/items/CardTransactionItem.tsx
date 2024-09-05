@@ -17,8 +17,11 @@ export default function CardTransactionItem({
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 0.5rem;
         p {
+          margin: 0.5rem 0;
           font-size: 0.8rem;
           span {
+            display: block;
+            margin-bottom: 5px;
             font-size: 0.6rem;
             text-transform: uppercase;
             font-weight: 600;
@@ -37,9 +40,13 @@ export default function CardTransactionItem({
       <p>
         <span>Date.</span> {transaction.date}
       </p>
-      <p>
-        <span>Franchise.</span> {transaction.franchise?.name}
-      </p>
+      {transaction.franchise?.name ? (
+        <p>
+          <span>Franchise.</span> {transaction.franchise.name}
+        </p>
+      ) : (
+        <p></p>
+      )}
       <p>
         <span>Card.</span> {transaction.card.cardCompany}(
         {transaction.card.cardNumber})

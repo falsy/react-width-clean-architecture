@@ -1,10 +1,10 @@
 import ICardTransaction, {
   ICardTransactionParams
 } from "./interfaces/ICardTransaction"
-import CardInfoVO from "../vos/CardInfoVO"
 import ICardInfoVO from "../vos/interfaces/ICardInfoVO"
-import Transaction from "./entities/Transaction"
 import IFranchise from "./entities/interfaces/IFranchise"
+import CardInfoVO from "../vos/CardInfoVO"
+import Transaction from "./entities/Transaction"
 
 export default class CardTransaction
   extends Transaction

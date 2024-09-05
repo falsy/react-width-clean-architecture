@@ -16,8 +16,11 @@ export default function AccountTransactionItem({
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 0.5rem;
         p {
+          margin: 0.5rem 0;
           font-size: 0.8rem;
           span {
+            display: block;
+            margin-bottom: 5px;
             font-size: 0.6rem;
             text-transform: uppercase;
             font-weight: 600;

@@ -1,9 +1,9 @@
 import { validateOrReject } from "class-validator"
 import { API_URI } from "constants/networks"
 import ICardRepository from "./interfaces/ICardRepository"
-import CardDTO from "adapters/dtos/CardDTO"
 import ICardDTO, { ICardDTOParams } from "adapters/dtos/interfaces/ICardDTO"
 import IClientHTTP from "adapters/infrastructures/interfaces/IClientHTTP"
+import CardDTO from "adapters/dtos/CardDTO"
 
 export default class CardRepository implements ICardRepository {
   constructor(private clientHttp: IClientHTTP) {}

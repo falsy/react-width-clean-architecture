@@ -13,7 +13,7 @@ export default function AccountSummarySection() {
     <div
       css={css`
         position: relative;
-        min-height: 180px;
+        min-height: 60px;
       `}
     >
       <ErrorContainer>

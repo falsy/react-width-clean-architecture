@@ -1,8 +1,8 @@
 import IAccountTransaction, {
   IAccountTransactionParams
 } from "./interfaces/IAccountTransaction"
-import AccountInfoVO from "../vos/AccountInfoVO"
 import IAccountInfoVO from "../vos/interfaces/IAccountInfoVO"
+import AccountInfoVO from "../vos/AccountInfoVO"
 import Transaction from "./entities/Transaction"
 
 export default class AccountTransaction

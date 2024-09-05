@@ -1,23 +1,24 @@
 # Domain-driven React architecture
 
-This is a small idea project applying the principles of `Domain-driven Design(DDD)` to a React architecture. The goal is to effectively manage the complexity of the business domain and make maintenance easier by building a modular, domain-centric design.
+This project is a small idea project that applies the principles of Domain-driven Design (`DDD`) to a React architecture. The goal of this project is to effectively manage the complexity of the business domain and build a modular, domain-centric design that makes service expansion and maintenance easier.
 
-Using `Clean Architecture` as the system architecture, this sample React application aims to clearly separate business logic from UI logic and develop a structure that allows for independent maintenance of each domain.
+The implementation of the sample project follows the principles of `Clean Architecture` for the system architecture. Although this project uses the React framework, it is designed to minimize framework dependency, adhering as much as possible to the core principle of `framework independence`. The main domain logic and business rules are written independently of the framework, with only the UI layer depending on React.
 
 #### Note.
 
-> This document is a work in progress as I study OOP, DDD, Clean Architecture, and related topics. Since my knowledge is still growing, there may be parts that I have misunderstood or explained incorrectly.  
-> If you find any issues or have suggestions for improvement, please feel free to submit them through issues or pull requests, and I will incorporate them. ☺️  
+> This project is a part of my learning journey in Object-Oriented Programming (OOP), Domain-Driven Design (DDD), Clean Architecture, and related topics. While I continue to update it, there may still be areas where my understanding is lacking or where I may have made mistakes.
+> If you find any issues or have suggestions for improvement, please feel free to submit an issue or a pull request. ☺️  
 > (+ My English is not perfect, so please bear with me.)
 
-#### Note.
+#### Additional Resources.
 
 > It might be helpful to also take a look at the following project in relation to Clean Architecture.  
 > https://github.com/falsy/clean-architecture-with-typescript
 
-## Use Stack
+## Languages
 
-TypeScript, React, React-Query, Emotion, Class-Validator, Axios, Webpack
+- [English](https://github.com/falsy/domain-driven-react-architecture)
+- [한글](https://github.com/falsy/domain-driven-react-architecture/blob/main/README-ko.md)
 
 ## Ubiquitous Language
 
@@ -35,110 +36,43 @@ However, in this sample project, `Transaction` is defined as a unit that constit
 ![Domains](/_images/domains-v2.png#gh-light-mode-only)
 ![Domains](/_images/domains-v2-dark.png#gh-dark-mode-only)
 
-Let's assume we're dealing with a financial services domain. Within this broad domain, there are many subdomains such as banking, payment services, loan services, wealth management, and fintech. If we break down the fintech subdomain further, we get areas like digital payments, digital banking, crowdfunding, and personal wealth management, among others.
+Let’s assume we’re dealing with a financial services domain. Within this broad domain of finance, there are many subdomains such as banking, payment services, lending services, asset management, and fintech. Further breaking down the fintech domain, we can have smaller domains like digital payments, digital banking, crowdfunding, and personal asset management.
 
-For this project, we will explore a very simple example application within the personal wealth management domain.
-
-## Use Cases
-
-In the personal wealth management service, users can view a list of their cards and accounts, check recent transactions, and manually add new transactions.
-
-- Users can view their personal information.
-- Users can view their list of owned cards.
-- Users can view their list of owned accounts.
-- Users can view their transaction history.
-- Users can add new transactions.
+In this sample project, we will look at a very simple example application in `the Personal Asset Management` domain.
 
 ## Entities
 
-Based on the use cases above, we have defined four entities.  
-Since there are no use cases involving modifications to these entities, all their properties are marked as `readonly`.
-
-### User
-
-```ts
-interface IUser {
-  readonly id: string
-  readonly name: string
-  readonly email: string
-  readonly phone: string
-  readonly address: string
-}
-```
-
-### Card
-
-```ts
-interface ICard {
-  readonly id: string
-  readonly cardType: "CREDIT" | "DEBIT"
-  readonly cardCompany: string
-  readonly cardNumber: string
-}
-```
-
-### Account
-
-```ts
-interface IAccount {
-  readonly id: string
-  readonly accountType: "SAVINGS" | "CURRENT"
-  readonly bankName: string
-  readonly accountNumber: string
-  readonly balance: number
-}
-```
-
-### Transaction
-
-```ts
-interface ITransaction {
-  readonly id: string
-  readonly amount: number
-  readonly keyword: string
-  readonly createdAt: string
-  readonly category: ITxnCategoryVO
-}
-```
+An `Entity` is one of the core concepts of domain modeling, representing an object that maintains identity through a unique identifier while having state and behavior. An `Entity` is not just a data holder but also plays a role in directly controlling and managing its data, expressing important business rules and logic within the domain.
 
 ## Aggregates
-
-An `Aggregate` is an object that serves as a consistency boundary and can include multiple entities or value objects. It encapsulates its internal state, ensuring that any external access is controlled and can only be modified through the `Aggregate Root`. This consistency boundary helps manage the complexity of relationships within the model, especially as the service scales and transactions become more complex.
 
 ![Aggregate](/_images/aggregate.png#gh-light-mode-only)
 ![Aggregate](/_images/aggregate-dark.png#gh-dark-mode-only)
 
-In the example project, we have two Aggregates: `CardTransaction` and `AccountTransaction`.
+An `Aggregate` is an object that serves as a consistency boundary and can include multiple entities or value objects. It encapsulates its internal state, ensuring that any external access is controlled and can only be modified through the `Aggregate Root`. This consistency boundary helps manage the complexity of relationships within the model, especially as the service scales and transactions become more complex.
 
-### AccountTransaction
+## Use Cases
 
-```ts
-interface IAccountTransaction {
-  readonly transaction: ITransaction
-  readonly account: IAccountInfoVO
-  readonly accountId: string
-}
-```
+A `Use Case` defines the interactions between the user and the service and clarifies the business functions the service must provide using domain objects (`Entity`, `Aggregate`, `Value Object`). From a system architecture perspective, a `Use Case` separates application logic from business rules, allowing the application to use the business rules and logic contained in the domain objects without directly controlling the business logic.
 
-### CardTransaction
+# Sample Project
 
-```ts
-interface ICardTransaction {
-  readonly transaction: ITransaction
-  readonly card: ICardInfoVO
-  readonly cardId: string
-}
-```
+Through a very simple sample project that shows the user’s cards, accounts, and consumption data, and allows for adding consumption data, we will examine the data flow and how each layer of the architecture interacts.
 
-Within the Aggregate, there are `Transaction` entities and either a `Card` or an `Account` entity. Although these entities are currently marked as readonly, they may be used independently or have their values modified outside of the Aggregate as use cases evolve.
+## Use Stack
 
-To maintain the integrity of the consistency boundary, `Card` (or `Account`) is defined as a `Value Object` containing information at the time the Aggregate is created, and only its identifier is referenced externally. This prevents any modifications to the `Card` (or `Account`) from violating the Aggregate's consistency.
+TypeScript, Webpack, React, React-Query, Emotion, Class-Validator, Axios
 
-As for the `Transaction` entity, it is entirely managed within the Aggregate. If a use case arises where the state of a `Transaction` needs to be modified, that logic will be implemented within the Aggregate, ensuring that the state can only be changed through the `Aggregate Root`.
+## Communitaction Flow
+
+![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
+![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
+
+The basic layers and communication flow follow the principles of `Clean Architecture`.
 
 ## Directory Structure
 
-> The interface directory is omitted for simplicity.
+> For simplicity, the interface directory is omitted.
 
 ```
 /src
@@ -148,223 +82,158 @@ As for the `Transaction` entity, it is entirely managed within the Aggregate. If
 │  │  │  └─ entities
 │  │  ├─ entities
 │  │  ├─ useCases
-│  │  └─ vos //(Value Objects)
+│  │  └─ vos
 │  ├─ presenters
 │  ├─ repositories
 │  ├─ infrastructures
-│  ├─ dtos //(Data Transfer Objects)
-│  └─ vms //(View Models)
+│  ├─ dtos
+│  └─ vms
 ├─ di
 ├─ components
 │  ├─ commons
 │  ├─ networks
-│  ├─ user
-│  ├─ card
-│  ├─ account
-│  └─ transaction
+│  └─ ...
 ├─ constants
 │  ├─ networks
-│  └─ queries
+│  ├─ queries
+│  └─ ...
 └─ pages
    └─ ...
 ```
 
-The domain is clearly divided between entities and aggregates. Since transaction is controlled exclusively through the aggregate root, it is placed in the entities directory within the aggregates directory to further clarify this distinction. In the UI layer, common components are placed in the commons folder, components related to react-query are located in the networks folder, and the rest are organized by domain.
+Directories are clearly separated by system layers. Within the domain directory, `Entities` and `Aggregates` are separated, and `Entities` used only within an `Aggregate` are placed inside the `Aggregate` to clearly indicate restricted external access. In the sample project, common components of the UI layer are placed in the commons folder, components related to react-query are in the networks folder, and other components are placed in domain-specific directories.
 
-## Communitaction Flow
+## Entities
 
-![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
-![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
+The sample project defines five entities: `User`, `Transaction`, `Franchise`, `Card`, and `Account`. All of these have unique identifiers and state values. However, this sample project is very simple and only displays data to the user, so it does not include business logic for modifying state or interacting with other entities.
 
-The basic layering and communication flow follow `Clean Architecture` principles. Let's walk through the `transactions` flow, the core of this example project, to understand how each layer interacts.
+## Aggregates
 
-### Domains
+To reduce the complexity of `entities` and `value objects` used in the service, two aggregates, `CardTransaction` and `AccountTransaction`, are defined with the `Transaction` entity as the Aggregate Root.
+A simple interface for `CardTransaction` looks like this:
 
-The domain layer contains entities, use cases, and value objects used to define the entities. Entities define the domain model and business logic of the service, while use cases describe the actions from the user's perspective.
+### CardTransaction
 
-### Infrastructures
+```ts
+interface ITransaction {
+  readonly id: string
+  readonly amount: number
+  readonly keyword: string
+  readonly franchiseId?: string
+  readonly cardId?: string
+  readonly accountId?: string
+  readonly createdAt: string
+}
 
-The Infrastructure layer manages external connections. In this example project, a basic clientHTTP class is used for HTTP communication, leveraging the axios library internally. While this project doesn’t include them, classes for connecting with Web APIs like LocalStorage or mobile message communication in an in-app browser could also be placed in this layer.
+interface ICardTransaction extends ITransaction {
+  readonly franchise?: IFranchise
+  readonly card: ICardInfoVO
+}
+```
 
-### Repositories
+`CardTransaction` is defined as an extension of the `Transaction` entity, containing the `Franchise` entity and the `card` information in the form of a `Value Object`.
 
-Based on the scenarios defined in the `Use Cases`, repositories select the external communication method and encapsulate the data received from external services into DTOs for internal service layer communication.
+While the current sample project does not include any modifications, the `Card` entity is designed to be immutable by defining its value as a `Value Object` at creation time, ensuring immutability within the service.
 
-### Use Cases
+Since Franchise is not used outside of CardTransaction (`Aggregate Root`) within the service, it is only accessible through CardTransaction, reducing the complexity of relationships between models in the service.
 
-In the `Use Cases` layer, DTOs are re-encapsulated into entities when necessary based on business logic and the necessary logic is performed.
+## Infrastructures
+
+The `Infrastructure` layer manages connections with the outside of the application, such as communication with external servers using HTTP or browser Web APIs like LocalStorage.
+In the sample project, the ClientHTTP class is defined to handle HTTP communication with external servers using the axios library.
+
+## Repositories
+
+In backend services, the `Repository` layer typically performs `CRUD` operations related to databases, handling basic data manipulation like storing, querying, updating, and deleting data. It abstracts the interaction with the database so that the business logic does not need to be aware of the data storage details.
+
+Similarly, in the sample project, the `Repository` layer handles `POST`, `GET`, `PUT`, and `DELETE` operations related to HTTP communication with the server, abstracting these interactions so the business logic does not need to know the data's origin. Furthermore, data received from the external server is encapsulated as `DTO` and validated to ensure stability when used within the client.
+
+## Use Cases
+
+The sample project includes very simple business logic:
+
+- Users can view their consumption history.
+  1.  Retrieve a list of franchises, cards, and accounts.
+  2.  Include account information for account transactions.
+  3.  Include card information for card transactions.
+  4.  Include franchise information for card transactions.
+  5.  Display the transactions to the user.
+- Users can view their list of owned cards.
+- Users can view their list of owned accounts.
+- Users can add new consumption data.
+
+The `Use Cases` layer uses domain objects (`Entity`, `Aggregate`, `Value Object`) to encapsulate the required `DTO` values back into `Entities` and `Aggregates` to execute the business logic.
+
+### Inversion of Control
+
+![Alt Inversion Of Control](/_images/inversion-of-control.png#gh-light-mode-only)
+![Alt Inversion Of Control](/_images/inversion-of-control-dark.png#gh-dark-mode-only)
+
+Since the `Use Cases` layer is a higher layer than the `Repository` layer and should not depend on it, it relies on abstract interfaces of the `Repository` and operates through DI(Dependency Injection).
 
 ### Presenters
 
-The `Presenters` layer is where the elements of the Adapter layer are dependency injected and directly connected to the view(UI) components. It handles user requests and, when necessary, encapsulates the entities or DTOs received from the use cases into view models (VMs) to be easily consumed by the view.
+The `Presenter` layer is ultimately DI-injected(Dependency Injection) to interact with the UI and configure the service. `Presenters` provide specific methods used in the UI layer and encapsulate data into a VM (View Model) optimized for UI use.
 
-## Execution Flow
+In the sample project, to display the `recent summary of card transactions` in the UI, the `getRecentCardTransactionSummary` method of the Presenter is called. This method calls the `getTransaction` method of the Use Case with parameters for a specific period and type(card or account). In this process, the `UI` does not need to know the internal logic of the `Use Case`, nor the details about the period or type of data.
 
-![Execution Flow](/_images/execution-flow.png#gh-light-mode-only)
-![Execution Flow](/_images/execution-flow-dark.png#gh-dark-mode-only)
-
-In the example project, the core scenario involves retrieving a user's transaction history. This flow begins with the view invoking the getTransactions method of the DI-injected `transaction` presenter, which requests the transaction data.
+Additionally, by encapsulating the `CardTransaction` Aggregate received as a response into a VM suitable for the UI, the complexity of the data is reduced, and the dependency between the UI and the Presenter is minimized. Below is a VM class that encapsulates the Aggregate:
 
 ```ts
-// transaction presenter
-async getTransactions(): Promise<
-  ILayerDTO<Array<ICardTransactionVM | IAccountTransactionVM>>
-> {
-  try {
-    const { isError, message, data } =
-      await this.TransactionUseCase.getTransactions()
-    ...
-  }
+interface ICardTxnSummaryVM {
+  readonly id: string
+  readonly amount: number
+  readonly keyword: string
+  readonly card: ICardInfoVO
+  readonly longTime: number
+  readonly dayOfWeek: string
+  readonly day: string
 }
 ```
 
-The Use Cases layer requests the Repositories layer for data to create CardTransaction and AccountTransaction aggregates corresponding to the Transaction.
+By minimizing dependency between the UI and the Presenter, we mean that if the UI wants to change how the date is displayed, from `5(Tue)` to `09/05`, for example, it can do so by modifying only how the `createdAt` value of CardTransaction is used in the VM’s constructor, without requiring any changes to the Presenter. This allows for flexible formatting adjustments directly in the UI by redefining date properties, such as switching from `dayOfWeek` and `day` to `year` and `month` in the VM.
+
+## UI
+
+The `UI` layer ultimately configures the service by its relationship with the DI-injected Presenter.
 
 ```ts
-// transaction useCase
-async getTransactions(): Promise<
-  ILayerDTO<Array<ICardTransaction | IAccountTransaction>>
-> {
-  try {
-    const [transactionDTOs, txnCategoryDTOs, cardDTOs, accountDTOs] =
-      await Promise.all([
-        this.transactionRepository.getTransactions(),
-        this.transactionRepository.getTxnCateogries(),
-        this.cardRepository.getCards(),
-        this.accountRepository.getAccounts()
-      ])
-    ...
-  }
+import ClientHTTP from "adapters/infrastructures/ClientHTTP"
+import repositoriesFn from "adapters/repositories"
+import useCasesFn from "adapters/domains/useCases"
+import presentersFn from "adapters/presenters"
 
+// DI
+const clientHttp = new ClientHTTP()
+const repositories = repositoriesFn(clientHttp)
+const useCases = useCasesFn(repositories)
+const presenters = presentersFn(useCases)
+
+export default presenters
 ```
 
-Each repository uses the clientHTTP class to retrieve data from the API server and returns the appropriate DTO instances.
+In the sample project, the components of the UI are designed to lower dependency on `React-Query` and configure the service more component-centrically by using React-Query and Higher-Order Components(HOC).
+
+For example, the component structure that displays the list of cards in the sample project is as follows:
 
 ```ts
-// transaction repository
-async getTransactions(): Promise<ILayerDTO<ITransactionDTO[]>> {
-  try {
-    const res = await this.clientHttp.get(`${API_URI}/api/transactions`)
-    const { isError, message, data } = res.data
-
-    if (isError || !data) {
-      return new LayerDTO({
-        isError,
-        message
-      })
-    }
-
-    const transactionDTOs = await Promise.all(
-      data.map(async (transaction: ITransactionDTOParams) => {
-        const transactionDTO = new TransactionDTO(transaction)
-        await validateOrReject(transactionDTO)
-        return new TransactionDTO(transactionDTO)
-      })
-    )
-
-    return new LayerDTO({
-      data: transactionDTOs
-    })
-  }
-  ...
-}
-```
-
-In the Use Case layer, once all the DTO responses are received, the data is combined to create the CardTransaction and AccountTransaction aggregates.
-
-```ts
-const transactions = await Promise.all(
-  transactionDTOs.data.map(async (transactionDTO: ITransactionDTO) => {
-    const txnCategoryDTO = txnCategoryDTOs.data!.find(
-      (txnCategory) => txnCategory.id === transactionDTO.categoryId
-    )
-    const txnCategoryVO = new TxnCategoryVO({
-      id: txnCategoryDTO!.id,
-      name: txnCategoryDTO!.name,
-      description: txnCategoryDTO!.description,
-    })
-
-    const transaction = new Transaction({
-      id: transactionDTO.id,
-      amount: transactionDTO.amount,
-      keyword: transactionDTO.keyword,
-      createdAt: transactionDTO.createdAt,
-      category: txnCategoryVO,
-    })
-
-    ...
-
-    const account = new Account({
-      id: accountDTO!.id,
-      accountType: accountDTO!.accountType,
-      bankName: accountDTO!.bankName,
-      accountNumber: accountDTO!.accountNumber,
-      balance: accountDTO!.balance,
-    })
-
-    const accountTransaction = new AccountTransaction({
-      transaction: transaction,
-      account: account,
-    })
-
-    return accountTransaction
-  })
-)
-```
-
-In summary, the DTO data is used to create the Transaction entity and Category value object. Depending on whether the transactionDTO contains a cardId, either a Card entity or an Account entity is created. These entities are then used to form the CardTransaction and AccountTransaction aggregates, which are returned as the response.
-
-Finally, the presenter receives the aggregate and transforms the data into a View Model (VM) to make it easier to use in the view, and then sends the response to the view.
-
-```ts
-// transaction presenter
-const transactionVMs = data.map(
-  (transaction: ICardTransaction | IAccountTransaction) => {
-    if (transaction instanceof CardTransaction) {
-      return new CardTransactionVM(transaction)
-    }
-    return new AccountTransactionVM(transaction as IAccountTransaction)
-  }
-)
-
-return new LayerDTO({
-  data: transactionVMs
-})
+// CardSection.tsx
 ...
-```
-
-## Networks HOC
-
-In this example project, we use React-Query for HTTP communication. React-Query is encapsulated within a Higher-Order Component(HOC). This minimizes the dependency between UI components and React-Query while simplifying the process of fetching external data and rendering it in the UI via component composition.
-
-Below is a simple component that fetches user information via external communication and displays it in the view.
-
-```ts
-function Greeting({ response }: { response?: IUser }) {
-  const userName = response?.name || ""
-
-  return (
-    <div>
-      <Container>
-        <div>
-          <p>{`Welcome, ${userName}`}</p>
-        </div>
-      </Container>
-    </div>
-  )
-}
-```
-
-```ts
-function GreetingSection() {
+export default function CardSection() {
   return (
     <div>
       <ErrorContainer>
         <QueryContainer
-          queryKey={GET_USER_INFO}
-          queryFn={() => di.user.getUserInfo()}
+          queryKey={GET_CARDS}
+          queryFn={() => di.card.getCards()}
+          loadingComponent={<Loader />}
+          errorComponent={
+            <RefetchContainer queryKey={GET_CARDS}>
+              <Error />
+            </RefetchContainer>
+          }
         >
-          <Greeting />
+          <ResCardList />
         </QueryContainer>
       </ErrorContainer>
     </div>
@@ -372,52 +241,33 @@ function GreetingSection() {
 }
 ```
 
-Using MutationContainer, you can not only perform GET requests but also handle POST and PUT operations.
-
 ```ts
-function AddConsumptionBtn({ action }: { action?: () => void }) {
-  return <button onClick={action}>Add</button>
-}
-```
-
-```ts
-function AddConsumptionAction({
-  transactionData
-}: {
-  transactionData: IRequestTransactionDTOParams
-}) {
-  const { amount, keyword, categoryId, cardId, accountId } = transactionData
+// ResCardList.tsx
+...
+export default function ResCardList({ response }: { response?: Array<ICard> }) {
+  const cards = response || []
 
   return (
     <div>
-      <ErrorContainer>
-        <MutationContainer
-          mutationFn={() => {
-            if (!amount || !keyword || !categoryId || (!cardId && !accountId)) {
-              window.alert("Please fill all fields")
-              throw new Error("Please fill all fields")
-            }
-            return di.transaction.addTransaction({
-              amount,
-              keyword,
-              categoryId,
-              cardId,
-              accountId
-            })
-          }}
-          invalidateQueryKeys={[GET_TRANSACTIONS]}
-        >
-          <AddConsumptionBtn />
-        </MutationContainer>
-      </ErrorContainer>
+      <ul>
+        {cards.map((card) => (
+          <li key={card.id}>
+            <CardItem card={card} />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
 ```
 
+To explicitly distinguish between components that receive data using `useQuery` and those that modify data using `useMutation` in the HOC structure, components receiving data are prefixed with `Res-`, while those modifying data are prefixed with `Act-`.
+
+> This configuration using React-Query and HOC is still experimental.
+
 ## Screenshot
 
-![Screenshot](/_images/screenshot.png)
+![Screenshot](/_images/screenshot-v2.png)
 
 ## Run Project
 
