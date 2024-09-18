@@ -1,5 +1,5 @@
 import IFranchise from "adapters/domains/aggregates/entities/interfaces/IFranchise"
-import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
+import ICard from "adapters/domains/entities/interfaces/ICard"
 
 export default interface ICardTransactionVM {
   readonly id: string
@@ -7,7 +7,7 @@ export default interface ICardTransactionVM {
   readonly keyword: string
   readonly franchise?: IFranchise
   readonly createdAt: string
-  readonly card: ICardInfoVO
+  readonly card: ICard
   readonly longTime: number
   readonly date: string
 }

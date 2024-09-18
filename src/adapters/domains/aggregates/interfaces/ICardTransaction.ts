@@ -1,4 +1,3 @@
-import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
 import ICard from "../../entities/interfaces/ICard"
 import ITransaction from "../entities/interfaces/ITransaction"
 import IFranchise from "../entities/interfaces/IFranchise"
@@ -11,5 +10,5 @@ export interface ICardTransactionParams {
 
 export default interface ICardTransaction extends ITransaction {
   readonly franchise?: IFranchise
-  readonly card: ICardInfoVO
+  readonly card: ICard
 }

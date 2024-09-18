@@ -10,7 +10,7 @@ import ICardTxnSummaryVM from "adapters/vms/interfaces/ICardTxnSummaryVM"
 export default interface ITransactionPresenter {
   getRecentAccountTransactionSummary(): Promise<IAccountTxnSummaryVM[]>
   getRecentCardTransactionSummary(): Promise<ICardTxnSummaryVM[]>
-  getTransactions(
+  getTotalTransactions(
     params?: IFilterTxnParams
   ): Promise<Array<ICardTransactionVM | IAccountTransactionVM>>
   addTransaction(reqTransactionParams: ICreateTxnParams): Promise<boolean>

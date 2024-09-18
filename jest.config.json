@@ -11,10 +11,10 @@
   "moduleNameMapper": {
     "^constants/(.*)$": "<rootDir>/constants/$1",
     "^adapters/(.*)$": "<rootDir>/adapters/$1",
-    "^di$": "<rootDir>/di/index.ts",
     "^utils/(.*)$": "<rootDir>/utils/$1",
-    "^pages/(.*)$": "<rootDir>/pages/$1",
     "^hooks/(.*)$": "<rootDir>/hooks/$1",
-    "^components/(.*)$": "<rootDir>/components/$1"
+    "^di/(.*)$": "<rootDir>/di/$1",
+    "^components/(.*)$": "<rootDir>/components/$1",
+    "^pages/(.*)$": "<rootDir>/pages/$1"
   }
 }

@@ -10,7 +10,6 @@ import {
 } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 import CardTransactionVM from "adapters/vms/CardTransactionVM"
 import AccountTransactionVM from "adapters/vms/AccountTransactionVM"
-import CardTransaction from "adapters/domains/aggregates/CardTransaction"
 import IAccountTxnSummaryVM from "adapters/vms/interfaces/IAccountTxnSummaryVM"
 import AccountTxnSummaryVM from "adapters/vms/AccountTxnSummaryVM"
 import ICardTxnSummaryVM from "adapters/vms/interfaces/ICardTxnSummaryVM"
@@ -21,10 +20,9 @@ export default class TransactionPresenter implements ITransactionPresenter {
 
   async getRecentAccountTransactionSummary(): Promise<IAccountTxnSummaryVM[]> {
     const currentDate = new Date()
-    const transactions = (await this.TransactionUseCase.getTransactions({
+    const transactions = (await this.TransactionUseCase.getAccountTransactions({
       year: currentDate.getFullYear(),
-      month: currentDate.getMonth() + 1,
-      type: "ACCOUNT"
+      month: currentDate.getMonth() + 1
     })) as IAccountTransaction[]
 
     const recentAccountTransactionSummaryVMs = transactions.map(
@@ -38,10 +36,9 @@ export default class TransactionPresenter implements ITransactionPresenter {
 
   async getRecentCardTransactionSummary(): Promise<ICardTxnSummaryVM[]> {
     const currentDate = new Date()
-    const transactions = (await this.TransactionUseCase.getTransactions({
+    const transactions = (await this.TransactionUseCase.getCardTransactions({
       year: currentDate.getFullYear(),
-      month: currentDate.getMonth() + 1,
-      type: "CARD"
+      month: currentDate.getMonth() + 1
     })) as ICardTransaction[]
 
     const recentCardTransactionSummaryVMs = transactions.map(
@@ -53,19 +50,24 @@ export default class TransactionPresenter implements ITransactionPresenter {
     return recentCardTransactionSummaryVMs
   }
 
-  async getTransactions(
-    params: IFilterTxnParams
+  async getTotalTransactions(
+    params?: IFilterTxnParams
   ): Promise<Array<ICardTransactionVM | IAccountTransactionVM>> {
-    const transactions = await this.TransactionUseCase.getTransactions(params)
+    const [accountTransaction, cardTransaction] = await Promise.all([
+      this.TransactionUseCase.getAccountTransactions(params),
+      this.TransactionUseCase.getCardTransactions(params)
+    ])
 
-    const transactionVMs = transactions.map(
-      (transaction: ICardTransaction | IAccountTransaction) => {
-        if (transaction instanceof CardTransaction) {
-          return new CardTransactionVM(transaction)
-        }
-        return new AccountTransactionVM(transaction as IAccountTransaction)
-      }
-    )
+    const accountTransactionVMs = accountTransaction.map((transaction) => {
+      return new AccountTransactionVM(transaction)
+    })
+    const cardTransactionVMs = cardTransaction.map((transaction) => {
+      return new CardTransactionVM(transaction)
+    })
+
+    const transactionVMs = [...accountTransactionVMs, ...cardTransactionVMs]
+
+    transactionVMs.sort((a, b) => a.longTime - b.longTime)
 
     return transactionVMs
   }
