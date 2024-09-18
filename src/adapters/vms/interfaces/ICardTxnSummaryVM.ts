@@ -1,10 +1,10 @@
-import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
+import ICard from "adapters/domains/entities/interfaces/ICard"
 
 export default interface ICardTxnSummaryVM {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly card: ICardInfoVO
+  readonly card: ICard
   readonly longTime: number
   readonly dayOfWeek: string
   readonly day: string
