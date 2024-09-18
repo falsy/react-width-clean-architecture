@@ -1,6 +1,5 @@
 import { css } from "@emotion/react"
 import { GET_ACCOUNTS } from "constants/queries"
-import useDependencies from "hooks/useDependencies"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
@@ -8,9 +7,9 @@ import Loader from "components/commons/Loader"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
 import ResAccountList from "../ResAccountList"
 
-export default function AccountSection() {
-  const { presenters } = useDependencies()
+import di from "di"
 
+export default function AccountSection() {
   return (
     <div
       css={css`
@@ -21,7 +20,7 @@ export default function AccountSection() {
       <ErrorContainer>
         <QueryContainer
           queryKey={GET_ACCOUNTS}
-          queryFn={() => presenters.account.getAccounts()}
+          queryFn={() => di.account.getAccounts()}
           loadingComponent={<Loader />}
           errorComponent={
             <RefetchContainer queryKey={GET_ACCOUNTS}>

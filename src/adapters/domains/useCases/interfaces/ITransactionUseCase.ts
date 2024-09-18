@@ -6,11 +6,8 @@ import {
 } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
 
 export default interface ITransactionUseCase {
-  getCardTransactions(
+  getTransactions(
     params?: IFilterTxnParams
-  ): Promise<Array<ICardTransaction>>
-  getAccountTransactions(
-    params?: IFilterTxnParams
-  ): Promise<Array<IAccountTransaction>>
+  ): Promise<Array<ICardTransaction | IAccountTransaction>>
   addTransaction(params: ICreateTxnParams): Promise<boolean>
 }

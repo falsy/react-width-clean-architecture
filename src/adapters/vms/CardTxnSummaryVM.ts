@@ -1,12 +1,12 @@
 import ICardTransaction from "adapters/domains/aggregates/interfaces/ICardTransaction"
+import ICardInfoVO from "adapters/domains/vos/interfaces/ICardInfoVO"
 import ICardTxnSummaryVM from "./interfaces/ICardTxnSummaryVM"
-import ICard from "adapters/domains/entities/interfaces/ICard"
 
 export default class CardTxnSummaryVM implements ICardTxnSummaryVM {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly card: ICard
+  readonly card: ICardInfoVO
   readonly longTime: number
   readonly dayOfWeek: string
   readonly day: string

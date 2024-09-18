@@ -20,11 +20,11 @@
     "paths": {
       "constants/*": ["constants/*"],
       "adapters/*": ["adapters/*"],
+      "di": ["di/index.ts"],
       "utils/*": ["utils/*"],
+      "pages/*": ["pages/*"],
       "hooks/*": ["hooks/*"],
-      "di/*": ["di/*"],
-      "components/*": ["components/*"],
-      "pages/*": ["pages/*"]
+      "components/*": ["components/*"]
     }
   },
   "include": ["src"]
