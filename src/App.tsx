@@ -1,9 +1,8 @@
 import { RecoilRoot } from "recoil"
 import { css, Global } from "@emotion/react"
 import normalize from "emotion-normalize"
-import DependencyProvider from "di/DependencyProvider"
-import QueryClientContainer from "components/networks/QueryClientContainer"
 import { Routes } from "pages/Routes"
+import QueryClientContainer from "components/networks/QueryClientContainer"
 
 export default function App() {
   return (
@@ -23,9 +22,7 @@ export default function App() {
             }
           `}
         />
-        <DependencyProvider>
-          <Routes />
-        </DependencyProvider>
+        <Routes />
       </RecoilRoot>
     </QueryClientContainer>
   )

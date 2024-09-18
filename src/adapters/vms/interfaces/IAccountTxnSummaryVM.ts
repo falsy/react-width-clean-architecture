@@ -1,10 +1,10 @@
-import IAccount from "adapters/domains/entities/interfaces/IAccount"
+import IAccountInfoVO from "adapters/domains/vos/interfaces/IAccountInfoVO"
 
 export default interface IAccountTxnSummaryVM {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly account: IAccount
+  readonly account: IAccountInfoVO
   readonly longTime: number
   readonly dayOfWeek: string
   readonly day: string

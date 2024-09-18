@@ -88,6 +88,7 @@ The basic layers and communication flow follow the principles of `Clean Architec
 │  ├─ infrastructures
 │  ├─ dtos
 │  └─ vms
+├─ di
 ├─ components
 │  ├─ commons
 │  ├─ networks
@@ -96,8 +97,6 @@ The basic layers and communication flow follow the principles of `Clean Architec
 │  ├─ networks
 │  ├─ queries
 │  └─ ...
-├─ di
-├─ hooks
 └─ pages
    └─ ...
 ```
@@ -127,20 +126,16 @@ interface ITransaction {
 }
 
 interface ICardTransaction extends ITransaction {
-  readonly id: string
-  readonly amount: number
-  readonly keyword: string
-  readonly franchiseId?: string
-  readonly cardId?: string
-  readonly createdAt: string
   readonly franchise?: IFranchise
-  readonly card: ICard
+  readonly card: ICardInfoVO
 }
 ```
 
-As an extension of the `Transaction` entity, we define `CardTransaction`, which includes both the `Franchise` and `Card` entities.
+`CardTransaction` is defined as an extension of the `Transaction` entity, containing the `Franchise` entity and the `card` information in the form of a `Value Object`.
 
-Currently, `Franchise` is not used anywhere else in the service outside of `CardTransaction`, and while `Card` can be used independently as a list outside of `CardTransaction`, it is not displayed simultaneously on the client’s screen and does not require separate state management logic. Therefore, we define `Card` and `Franchise` within `CardTransaction` (as the Aggregate Root), ensuring that `Franchise` and `Card` can only be accessed through `CardTransaction` when it is in use, thereby reducing the complexity of relationships between models within the service.
+Although there are no modifications in the current sample project, the `Card` entity is encapsulated as a `Value object` when creating an `Aggregate`, ensuring its immutability within the service.
+
+Since Franchise is not used outside of CardTransaction (`Aggregate Root`) within the service, it is only accessible through CardTransaction, reducing the complexity of relationships between models in the service.
 
 ## Infrastructures
 
@@ -152,8 +147,6 @@ In the sample project, the ClientHTTP class is defined to handle HTTP communicat
 In backend services, the `Repository` layer typically performs `CRUD` operations related to databases, handling basic data manipulation like storing, querying, updating, and deleting data. It abstracts the interaction with the database so that the business logic does not need to be aware of the data storage details.
 
 Similarly, in the sample project, the `Repository` layer handles `POST`, `GET`, `PUT`, and `DELETE` operations related to HTTP communication with the server, abstracting these interactions so the business logic does not need to know the data's origin. Furthermore, data received from the external server is encapsulated as `DTO` and validated to ensure stability when used within the client.
-
-When an API server is used by multiple clients, the clients may receive properties that are not immediately needed. However, in the `Repository`, all data—including those not currently in use—is declared and encapsulated to ensure the integrity and extensibility of API communication.
 
 ## Use Cases
 
@@ -170,8 +163,6 @@ The sample project includes very simple business logic:
 - Users can add new consumption data.
 
 The `Use Cases` layer uses domain objects (`Entity`, `Aggregate`, `Value Object`) to encapsulate the required `DTO` values back into `Entities` and `Aggregates` to execute the business logic.
-
-And since all properties were encapsulated in a `DTO` within the `Repository`, any unused properties are removed at this stage when they are encapsulated as an `Entity` in the `Use Case`.
 
 ### Inversion of Control
 
@@ -206,32 +197,22 @@ By minimizing dependency between the UI and the Presenter, we mean that if the U
 
 The `UI` layer ultimately configures the service by its relationship with the DI-injected Presenter.
 
-`DI(Dependency Injection)` is implemented using the Context API, Provider, and Hooks.
-
 ```ts
-export default function DependencyProvider({
-  children
-}: {
-  children: ReactNode
-}) {
-  const infrastructures = infrastructuresFn()
-  const repositories = repositoriesFn(infrastructures.clientHTTP)
-  const useCases = useCasesFn(repositories)
-  const presenters = presentersFn(useCases)
+import ClientHTTP from "adapters/infrastructures/ClientHTTP"
+import repositoriesFn from "adapters/repositories"
+import useCasesFn from "adapters/domains/useCases"
+import presentersFn from "adapters/presenters"
 
-  const dependencies = {
-    presenters
-  }
+// DI
+const clientHttp = new ClientHTTP()
+const repositories = repositoriesFn(clientHttp)
+const useCases = useCasesFn(repositories)
+const presenters = presentersFn(useCases)
 
-  return (
-    <DependencyContext.Provider value={dependencies}>
-      {children}
-    </DependencyContext.Provider>
-  )
-}
+export default presenters
 ```
 
-In the sample project, the components of the UI are designed to lower dependency on `React-Query` and configure the service more component-centrically by using `React-Query` and Higher-Order Components(HOC).
+In the sample project, the components of the UI are designed to lower dependency on `React-Query` and configure the service more component-centrically by using React-Query and Higher-Order Components(HOC).
 
 For example, the component structure that displays the list of cards in the sample project is as follows:
 

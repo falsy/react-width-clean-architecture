@@ -1,18 +1,18 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
+import IAccount from "adapters/domains/entities/interfaces/IAccount"
+import ICard from "adapters/domains/entities/interfaces/ICard"
+import { ICreateTxnParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
+import ErrorContainer from "components/commons/containers/ErrorContainer"
+import MutationContainer from "components/networks/MutationContainer"
 import {
   GET_RECENT_ACCOUNT_TRANSACTIONS,
   GET_RECENT_CARD_TRANSACTIONS,
   GET_TRANSACTIONS
 } from "constants/queries"
-import IAccount from "adapters/domains/entities/interfaces/IAccount"
-import ICard from "adapters/domains/entities/interfaces/ICard"
-import { ICreateTxnParams } from "adapters/dtos/interfaces/requests/IRequestTransactionDTO"
-import useDependencies from "hooks/useDependencies"
-import ErrorContainer from "components/commons/containers/ErrorContainer"
-import MutationContainer from "components/networks/MutationContainer"
 import Loader from "components/commons/Loader"
 import ActAddConsumptionBtn from "./ActAddConsumptionBtn"
+import di from "di"
 
 export default function ResAddConsumptionForm({
   response
@@ -22,8 +22,6 @@ export default function ResAddConsumptionForm({
     accounts: IAccount[]
   }
 }) {
-  const { presenters } = useDependencies()
-
   const { cards, accounts } = response || {
     cards: [],
     accounts: []
@@ -144,7 +142,7 @@ export default function ResAddConsumptionForm({
                 window.alert("Please fill all fields")
                 throw new Error("Please fill all fields")
               }
-              return presenters.transaction.addTransaction({
+              return di.transaction.addTransaction({
                 amount,
                 keyword,
                 cardId,

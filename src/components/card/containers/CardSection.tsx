@@ -1,6 +1,5 @@
 import { css } from "@emotion/react"
 import { GET_CARDS } from "constants/queries"
-import useDependencies from "hooks/useDependencies"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
@@ -8,9 +7,9 @@ import Loader from "components/commons/Loader"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
 import ResCardList from "../ResCardList"
 
-export default function CardSection() {
-  const { presenters } = useDependencies()
+import di from "di"
 
+export default function CardSection() {
   return (
     <div
       css={css`
@@ -21,7 +20,7 @@ export default function CardSection() {
       <ErrorContainer>
         <QueryContainer
           queryKey={GET_CARDS}
-          queryFn={() => presenters.card.getCards()}
+          queryFn={() => di.card.getCards()}
           loadingComponent={<Loader />}
           errorComponent={
             <RefetchContainer queryKey={GET_CARDS}>
