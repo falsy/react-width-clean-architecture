@@ -6,7 +6,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
       css={css`
         h1 {
           font-weight: 500;
-          font-size: 1rem;
+          font-size: 0.8rem;
           text-transform: uppercase;
         }
         h2 {
