@@ -126,12 +126,6 @@ interface ITransaction {
 }
 
 interface ICardTransaction extends ITransaction {
-  readonly id: string
-  readonly amount: number
-  readonly keyword: string
-  readonly franchiseId?: string
-  readonly cardId?: string
-  readonly createdAt: string
   readonly franchise?: IFranchise
   readonly card: ICard
 }
