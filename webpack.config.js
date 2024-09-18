@@ -21,16 +21,16 @@ module.exports = {
     alias: {
       constants: path.resolve(__dirname, "./src/constants/"),
       adapters: path.resolve(__dirname, "./src/adapters/"),
-      di: path.resolve(__dirname, "./src/di/index.ts"),
       utils: path.resolve(__dirname, "./src/utils/"),
-      pages: path.resolve(__dirname, "./src/pages/"),
       hooks: path.resolve(__dirname, "./src/hooks/"),
-      components: path.resolve(__dirname, "./src/components/")
+      di: path.resolve(__dirname, "./src/di/"),
+      components: path.resolve(__dirname, "./src/components/"),
+      pages: path.resolve(__dirname, "./src/pages/")
     }
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./dist/index.html"
+      template: "./public/index.html"
     })
   ],
   devServer: {

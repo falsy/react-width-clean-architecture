@@ -87,7 +87,6 @@ TypeScript, Webpack, React, React-Query, Emotion, Class-Validator, Axios
 │  ├─ infrastructures
 │  ├─ dtos
 │  └─ vms
-├─ di
 ├─ components
 │  ├─ commons
 │  ├─ networks
@@ -96,6 +95,8 @@ TypeScript, Webpack, React, React-Query, Emotion, Class-Validator, Axios
 │  ├─ networks
 │  ├─ queries
 │  └─ ...
+├─ di
+├─ hooks
 └─ pages
    └─ ...
 ```
@@ -125,16 +126,20 @@ interface ITransaction {
 }
 
 interface ICardTransaction extends ITransaction {
+  readonly id: string
+  readonly amount: number
+  readonly keyword: string
+  readonly franchiseId?: string
+  readonly cardId?: string
+  readonly createdAt: string
   readonly franchise?: IFranchise
-  readonly card: ICardInfoVO
+  readonly card: ICard
 }
 ```
 
-`Transaction` Entity의 확장으로 `CardTransaction`를 정의하고 그 안에는 `Franchise` Entity와 `Card`의 정보를 담은 `Value Object`를 가지고 있습니다.
+`Transaction` Entity의 확장으로 `CardTransaction`를 정의하고 그 안에는 `Franchise` Entity와 `Card` Entity를 가지고 있습니다.
 
-현재 샘플 프로젝트의 모든 Entity는 수정에 대한 부분이 없지만, `Card` Entity의 경우 서비스에서 `CardTransaction` 외에서 독립적으로도 사용되기 때문에 생성 시점에 `Value Object`로 캡슐화하여 불편성 보장합니다.
-
-`Franchise`의 경우 현재 서비스에서 `CardTransaction` 외에서는 사용되지 않기 때문에 `CardTransaction(Aggregate Root)`를 통해서만 접근이 가능하도록 하여 서비스 내의 모델간 관계의 복잡성을 낮춥니다.
+`Franchise`는 현재 서비스 전체에서 `CardTransaction` 외에서는 사용되지 않으며 `Card`는 `CardTransaction` 외의 독립적으로 리스트로 사용되기도 하지만 클라이언트의 화면에서 동시에 사용되지 않고 별도로 상태에 대한 변화의 로직이 없기 때문에 `CardTransaction(Aggregate Root)`에 함께 정의하여 `CardTransaction`가 사용될 때의 `Franchise`와 `Card`는 `CardTransaction`를 통해서만 접근이 가능하도록 하여 서비스 내의 모델간 관계의 복잡성을 낮추었습니다.
 
 ## Infrastructures
 
@@ -146,6 +151,8 @@ interface ICardTransaction extends ITransaction {
 일반적으로 백엔드에서 서버에서 `Repository` 레이어는 데이터베이스와 관련된 `CRUD` 작업을 수행하며 데이터의 저장, 조회, 수정, 삭제와 같은 기본적인 데이터 조작을 처리합니다. 그리고 그러한 데이터베이스와의 상호작용을 추상화하여 비즈니스 로직에서 데이터 저장소에 대해 알 필요가 없도록 합니다.
 
 같은 원리로 샘플 프로젝트에서 `Repository` 레이어는 서버와의 HTTP 통신에 관련된 `POST`, `GET`, `PUT`, `DELETE` 작업을 수행하며 그 상호작용을 추상화하여 비즈니스 로직에서는 데이터의 출처에 대해서 알 필요가 없도록 하였습니다. 그리고 외부 서버로부터 받은 데이터는 `DTO`로 캡슐화하고 이를 검증하는 로직을 수행함으로써, 이후 이 데이터가 클라이언트 내부에서 사용될 때의 안정성을 보장합니다.
+
+API 서버가 여러 클라이언트에서 사용되는 경우 당장 클라이언트에 필요하지 않은 속성들도 수신 받게 됩니다. 하지만 `Repository`에서는 API 통신에 대한 무결성을 확인과 확장성을 위해 당장 사용하지 않는 데이터도 모두 선언하여 캡슐화 하였습니다.
 
 ## Use Cases
 
@@ -162,6 +169,8 @@ interface ICardTransaction extends ITransaction {
 - 사용자는 새로운 소비 내역을 추가할 수 있습니다.
 
 `Use Cases` 레이어에서는 도메인 객체(`Entity`, `Aggregate`, `Value Object`)를 활용하여 필요로 하는 `DTO` 값을 다시 `Entity`로 그리고 `Aggregate`로 다시 캡슐화하며 위 비즈니스 로직을 수행합니다.
+
+그리고 앞서 `Repository`에서 모든 속성을 가지고 `DTO`로 캡슐화였기 때문에 `Use Case`에서 `Entity`로 캡슐화하며 사용하지 않는 속성들은 이 단계에서 제거됩니다.
 
 ### Inversion of Control
 
@@ -194,21 +203,31 @@ interface ICardTxnSummaryVM {
 
 ## UI
 
-`UI` 레이어에서는 최종적으로 `DI`한 `Presenter`와의 관계로 서비스를 구성합니다.
+`UI` 레이어에서는 최종적으로 DI된 Presenter와의 관계로 서비스를 구성합니다.
+
+`DI(Dependency injection)`는 Context API와 Provider, Hooks를 사용하여 구성하였습니다.
 
 ```ts
-import ClientHTTP from "adapters/infrastructures/ClientHTTP"
-import repositoriesFn from "adapters/repositories"
-import useCasesFn from "adapters/domains/useCases"
-import presentersFn from "adapters/presenters"
+export default function DependencyProvider({
+  children
+}: {
+  children: ReactNode
+}) {
+  const infrastructures = infrastructuresFn()
+  const repositories = repositoriesFn(infrastructures.clientHTTP)
+  const useCases = useCasesFn(repositories)
+  const presenters = presentersFn(useCases)
 
-// DI
-const clientHttp = new ClientHTTP()
-const repositories = repositoriesFn(clientHttp)
-const useCases = useCasesFn(repositories)
-const presenters = presentersFn(useCases)
+  const dependencies = {
+    presenters
+  }
 
-export default presenters
+  return (
+    <DependencyContext.Provider value={dependencies}>
+      {children}
+    </DependencyContext.Provider>
+  )
+}
 ```
 
 그 밖의 샘플 프로젝트에서는 `React-Query`와 고차 컴포넌트(HOC: Higher-Order Component)를 활용하여 UI의 구성 요소들과 `React-Query`와의 의존성을 낮추고 조금 더 컴포넌트 중심으로 서비스를 구성할 수 있도록 설계하였습니다.

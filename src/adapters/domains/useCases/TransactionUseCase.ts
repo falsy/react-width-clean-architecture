@@ -25,57 +25,75 @@ export default class TransactionUseCase implements ITransactionUseCase {
     private accountRepository: IAccountRepository
   ) {}
 
-  async getTransactions(
-    params: IFilterTxnParams
-  ): Promise<Array<ICardTransaction | IAccountTransaction>> {
-    const [transactionDTOs, franchiseDTOs, cardDTOs, accountDTOs] =
-      await Promise.all([
-        this.transactionRepository.getTransactions(params),
-        this.franchiseRepository.getFranchises(),
-        this.cardRepository.getCards(),
-        this.accountRepository.getAccounts()
-      ])
+  async getCardTransactions(
+    params?: IFilterTxnParams
+  ): Promise<Array<ICardTransaction>> {
+    const [transactionDTOs, franchiseDTOs, cardDTOs] = await Promise.all([
+      this.transactionRepository.getTransactions({
+        ...params,
+        type: "CARD"
+      }),
+      this.franchiseRepository.getFranchises(),
+      this.cardRepository.getCards()
+    ])
     const transactions = transactionDTOs.map(
       (transactionDTO: ITransactionDTO) => {
         const transaction = new Transaction(transactionDTO)
 
-        if (transactionDTO.cardId) {
-          const cardDTO = cardDTOs.find(
-            (card) => card.id === transactionDTO.cardId
-          )
-          if (!cardDTO) {
-            throw new Error("CardDTO not found")
-          }
-
-          const franchiseDTO = franchiseDTOs.find(
-            (franchise) => franchise.id === transactionDTO.franchiseId
-          )
-
-          const franchise = franchiseDTO ? new Franchise(franchiseDTO) : null
-          const card = new Card(cardDTO)
-          const cardTransaction = new CardTransaction({
-            transaction,
-            franchise,
-            card
-          })
-
-          return cardTransaction
-        } else {
-          const accountDTO = accountDTOs.find(
-            (account) => account.id === transactionDTO.accountId
-          )
-          if (!accountDTO) {
-            throw new Error("AccountDTO not found")
-          }
-
-          const account = new Account(accountDTO)
-          const accountTransaction = new AccountTransaction({
-            transaction,
-            account
-          })
-
-          return accountTransaction
+        const cardDTO = cardDTOs.find(
+          (card) => card.id === transactionDTO.cardId
+        )
+        if (!cardDTO) {
+          throw new Error("CardDTO not found")
         }
+
+        const franchiseDTO = franchiseDTOs.find(
+          (franchise) => franchise.id === transactionDTO.franchiseId
+        )
+
+        const franchise = franchiseDTO ? new Franchise(franchiseDTO) : null
+        const card = new Card(cardDTO)
+        const cardTransaction = new CardTransaction({
+          transaction,
+          franchise,
+          card
+        })
+
+        return cardTransaction
+      }
+    )
+
+    return transactions
+  }
+
+  async getAccountTransactions(
+    params?: IFilterTxnParams
+  ): Promise<Array<IAccountTransaction>> {
+    const [transactionDTOs, accountDTOs] = await Promise.all([
+      this.transactionRepository.getTransactions({
+        ...params,
+        type: "ACCOUNT"
+      }),
+      this.accountRepository.getAccounts()
+    ])
+    const transactions = transactionDTOs.map(
+      (transactionDTO: ITransactionDTO) => {
+        const transaction = new Transaction(transactionDTO)
+
+        const accountDTO = accountDTOs.find(
+          (account) => account.id === transactionDTO.accountId
+        )
+        if (!accountDTO) {
+          throw new Error("AccountDTO not found")
+        }
+
+        const account = new Account(accountDTO)
+        const accountTransaction = new AccountTransaction({
+          transaction,
+          account
+        })
+
+        return accountTransaction
       }
     )
 

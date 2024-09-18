@@ -1,12 +1,12 @@
 import IAccountTransaction from "adapters/domains/aggregates/interfaces/IAccountTransaction"
-import IAccountInfoVO from "adapters/domains/vos/interfaces/IAccountInfoVO"
 import IAccountTransactionVM from "./interfaces/IAccountTransactionVM"
+import IAccount from "adapters/domains/entities/interfaces/IAccount"
 
 export default class AccountTransactionVM implements IAccountTransactionVM {
   readonly id: string
   readonly amount: number
   readonly keyword: string
-  readonly account: IAccountInfoVO
+  readonly account: IAccount
   readonly longTime: number
   readonly date: string
 

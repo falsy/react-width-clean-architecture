@@ -1,5 +1,6 @@
 import { css } from "@emotion/react"
 import { GET_CATEGORIES_CARDS_ACCOUNTS } from "constants/queries"
+import useDependencies from "hooks/useDependencies"
 import QueryContainer from "components/networks/QueryContainer"
 import RefetchContainer from "components/networks/RefetchContainer"
 import Error from "components/commons/Error"
@@ -7,9 +8,9 @@ import Loader from "components/commons/Loader"
 import ErrorContainer from "../../commons/containers/ErrorContainer"
 import ResAddConsumptionForm from "../ResAddConsumptionForm"
 
-import di from "di"
-
 export default function AddConsumptionSection() {
+  const { presenters } = useDependencies()
+
   return (
     <div
       css={css`
@@ -21,8 +22,8 @@ export default function AddConsumptionSection() {
           queryKey={GET_CATEGORIES_CARDS_ACCOUNTS}
           queryFn={async () => {
             const [cards, accounts] = await Promise.all([
-              di.card.getCards(),
-              di.account.getAccounts()
+              presenters.card.getCards(),
+              presenters.account.getAccounts()
             ])
 
             return {
