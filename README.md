@@ -1,19 +1,14 @@
-# Domain-driven React architecture
+# React with Clean Architecture
 
-This project is a small idea project that applies the principles of Domain-driven Design (`DDD`) to a React architecture. The goal of this project is to effectively manage the complexity of the business domain and build a modular, domain-centric design that makes service expansion and maintenance easier.
+This project is a small idea project for a React architecture based on the principles of `Domain-Driven Design (DDD)` and `Clean Architecture`. The goal of this project is to effectively manage the complexity of the business domain and build a modular, domain-centric design to facilitate easier service expansion and maintenance.
 
-The implementation of the sample project follows the principles of `Clean Architecture` for the system architecture. Although this project uses the React framework, it is designed to minimize framework dependency, adhering as much as possible to the core principle of `framework independence`. The main domain logic and business rules are written independently of the framework, with only the UI layer depending on React.
+While the project uses the `React` framework, it is designed to minimize framework dependency and maintain the core Clean Architecture principle of `framework independence.` The main domain logic and business rules are written independently of any framework, with React being utilized only in the UI layer.
 
 #### Note.
 
-> This project is a part of my learning journey in Object-Oriented Programming (OOP), Domain-Driven Design (DDD), Clean Architecture, and related topics. While I continue to update it, there may still be areas where my understanding is lacking or where I may have made mistakes.
-> If you find any issues or have suggestions for improvement, please feel free to submit an issue or a pull request. ☺️  
-> (+ My English is not perfect, so please bear with me.)
+> This project is a part of my learning journey in Object-Oriented Programming (OOP), Domain-Driven Design (DDD), Clean Architecture, and related topics. While I continue to update it, there may still be areas where my understanding is lacking or where I may have made mistakes. If you find any issues or have suggestions for improvement, please feel free to submit an issue or a pull request. ☺️
 
-#### Additional Resources.
-
-> It might be helpful to also take a look at the following project in relation to Clean Architecture.  
-> https://github.com/falsy/clean-architecture-with-typescript
+> \+ My English is not perfect, so please bear with me.
 
 ## Languages
 
@@ -40,6 +35,25 @@ Let’s assume we’re dealing with a financial services domain. Within this bro
 
 In this sample project, we will look at a very simple example application in `the Personal Asset Management` domain.
 
+## Clean Architecture
+
+![Alt Clean architecture](/_images/clean-architecture.png#gh-light-mode-only)
+![Alt Clean architecture](/_images/clean-architecture-dark.png#gh-dark-mode-only)
+
+As with many architectures, the primary goal of Clean Architecture is to separate concerns. It divides layers according to each concern, designs around the domain rather than detailed implementations, and ensures the inner layers do not depend on external elements like frameworks, databases, or UIs.
+
+- Separate the detailed implementation area and the domain area.
+- The architecture does not depend on the framework.
+- The outer layers can depend on the inner layers, but the inner layers cannot depend on the outer layers.
+- Both high-level and low-level modules depend on abstractions.
+
+## Communitaction Flow
+
+![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
+![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
+
+The flow of Clean Architecture can be briefly illustrated in the diagram above.
+
 ## Entities
 
 An `Entity` is one of the core concepts of domain modeling, representing an object that maintains identity through a unique identifier while having state and behavior. An `Entity` is not just a data holder but also plays a role in directly controlling and managing its data, expressing important business rules and logic within the domain.
@@ -61,14 +75,7 @@ Through a very simple sample project that shows the user’s cards, accounts, an
 
 ## Use Stack
 
-TypeScript, Webpack, React, React-Query, Emotion, Class-Validator, Axios
-
-## Communitaction Flow
-
-![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
-![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
-
-The basic layers and communication flow follow the principles of `Clean Architecture`.
+TypeScript, Webpack, React, TanStack Query, Emotion, Class-Validator, Axios
 
 ## Directory Structure
 
@@ -202,7 +209,9 @@ The `UI` layer ultimately configures the service by its relationship with the DI
 
 `DI(Dependency Injection)` is implemented using the Context API, Provider, and Hooks.
 
-```ts
+```tsx
+export const DependencyContext = createContext<IDependencies | null>(null)
+
 export default function DependencyProvider({
   children
 }: {
@@ -225,11 +234,24 @@ export default function DependencyProvider({
 }
 ```
 
-In the sample project, the components of the UI are designed to lower dependency on `React-Query` and configure the service more component-centrically by using `React-Query` and Higher-Order Components(HOC).
+```tsx
+import { useContext } from "react"
+import { DependencyContext } from "di/DependencyContext"
+
+export default function useDependencies() {
+  const dependencies = useContext(DependencyContext)
+  if (!dependencies) {
+    throw new Error("Dependencies not found in context")
+  }
+  return dependencies
+}
+```
+
+In the sample project, the components of the UI are designed to lower dependency on `TanStack Query` and configure the service more component-centrically by using `TanStack Query` and Higher-Order Components(HOC).
 
 For example, the component structure that displays the list of cards in the sample project is as follows:
 
-```ts
+```tsx
 // CardSection.tsx
 ...
 export default function CardSection() {
@@ -254,7 +276,7 @@ export default function CardSection() {
 }
 ```
 
-```ts
+```tsx
 // ResCardList.tsx
 ...
 export default function ResCardList({ response }: { response?: Array<ICard> }) {

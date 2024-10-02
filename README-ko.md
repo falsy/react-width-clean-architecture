@@ -1,18 +1,14 @@
-# Domain-driven React architecture
+# React with Clean Architecture
 
-이 프로젝트는 `도메인 주도 디자인(DDD: Domain-driven Design)`의 원칙을 React 아키텍처에 적용한 작은 아이디어 프로젝트입니다. 이 프로젝트의 목표는 비즈니스 도메인의 복잡성을 효과적으로 관리하고 모듈식 도메인 중심 디자인을 구축하여 서비스의 확장과 유지 관리를 더 쉽게 만드는 것입니다.
+이 프로젝트는 `도메인 주도 디자인(DDD: Domain-driven Design)`의 원칙과 `클린 아키텍처`를 기반으로 하는 React 아키텍처의 작은 아이디어 프로젝트입니다. 이 프로젝트의 목표는 비즈니스 도메인의 복잡성을 효과적으로 관리하고 모듈식 도메인 중심 디자인을 구축하여 서비스의 확장과 유지 관리를 더 쉽게 만드는 것입니다.
 
-그리고 샘플 프로젝트의 구현은 `클린 아키텍처`를 시스템 아키텍처를 사용합니다. 이 프로젝트는 리액트 프레임워크를 사용하지만, 프레임워크 의존성을 최소화 하여 핵심 원칙인 `프레임워크 독립성`을 최대한 유지하도록 설계하였습니다. 주요 도메인 로직과 비즈니스 규칙은 프레임워크와 무관하게 작성되었으며, UI레이어에 한해서만 리액트에 의존하도록 설계하였습니다.
+이 프로젝트는 React 프레임워크를 사용하지만, 프레임워크 의존성을 최소화하여 클린 아키텍처의 핵심 원칙인 `프레임워크 독립성`을 최대한 유지하도록 설계하였습니다. 주요 도메인 로직과 비즈니스 규칙은 프레임워크와 무관하게 작성되었으며, UI 레이어에 한해서만 React에 의존하도록 설계하였습니다.
 
 #### Note.
 
-> 이 프로젝트는 제가 OOP, DDD, 클린 아키텍처 그리고 관련한 주제들을 공부하며 진행하고 있는 프로젝트입니다. 계속 업데이트 하고 있지만, 여전히 저의 지식이 부족하기 때문에 제가 오해하거나 잘못 설명한 부분이 있을 수 있습니다.  
+> 이 프로젝트는 제가 OOP, DDD, 클린 아키텍처 그리고 관련한 주제들을 공부하며 진행하고 있는 프로젝트입니다. 계속 업데이트 하고 있지만, 여전히 저의 지식이 부족하기 때문에 제가 오해하거나 잘못 설명한 부분이 있을 수 있습니다.
+
 > 문제점이나 개선 사항이 있다면 이슈나 풀 리퀘스트 부탁드립니다. ☺️
-
-#### Additional Resources.
-
-> 클린 아키텍처와 관련된 다음 프로젝트도 함께 살펴보시면 좋을 것 같습니다.  
-> https://github.com/falsy/clean-architecture-with-typescript
 
 ## Languages
 
@@ -39,6 +35,25 @@
 
 이후에 이 샘플 프로젝트에서는 `개인 자산 관리` 도메인의 아주 간단한 예제 애플리케이션을 살펴보겠습니다.
 
+## Clean Architecture
+
+![Alt Clean architecture](/_images/clean-architecture.png#gh-light-mode-only)
+![Alt Clean architecture](/_images/clean-architecture-dark.png#gh-dark-mode-only)
+
+다양한 아키텍처들이 그러하듯 클린 아키텍처가 갖는 기본 목적은 관심사를 분리하는 것입니다. 각의 관심사에 따라 계층을 나누고 세부 구현이 아닌 도메인 중심으로 설계하며, 내부 영역이 프레임워크나 데이터베이스, UI 등의 외부 요소에 의존하지 않도록 합니다.
+
+- 세부 구현 영역과 도메인 영역을 구분합니다.
+- 아키텍처는 프레임워크에 의존하지 않습니다.
+- 외부 영역은 내부 영역에 의존할 수 있지만, 내부 영역은 외부 영역에 의존할 수 없습니다.
+- 고수준, 저수준 모듈 모두 추상화에 의존합니다.
+
+## Communitaction Flow
+
+![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
+![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
+
+클린 아키텍처의 흐름을 간단하게 다이어그램으로 표현하면 위와 같습니다.
+
 ## Entities
 
 `Entity`는 도메인 모델링의 핵심 개념 중 하나로, 고유한 식별자(Identity)를 통해 동일성을 유지하면서 상태와 행동을 가지는 객체입니다. `Entity`는 단순히 데이터를 보관하는 구조체가 아니라, 자신의 데이터를 직접 제어하고 관리하는 역할을 하며, 도메인 내에서 중요한 비즈니스 규칙과 로직을 표현합니다.
@@ -60,14 +75,7 @@
 
 ## Use Stack
 
-TypeScript, Webpack, React, React-Query, Emotion, Class-Validator, Axios
-
-## Communitaction Flow
-
-![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
-![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
-
-기본 레이어와 커뮤니케이션 흐름은 `클린 아키텍처` 원칙을 따릅니다.
+TypeScript, Webpack, React, TanStack Query, Emotion, Class-Validator, Axios
 
 ## Directory Structure
 
@@ -201,7 +209,9 @@ interface ICardTxnSummaryVM {
 
 `DI(Dependency injection)`는 Context API와 Provider, Hooks를 사용하여 구성하였습니다.
 
-```ts
+```tsx
+export const DependencyContext = createContext<IDependencies | null>(null)
+
 export default function DependencyProvider({
   children
 }: {
@@ -224,11 +234,24 @@ export default function DependencyProvider({
 }
 ```
 
-그 밖의 샘플 프로젝트에서는 `React-Query`와 고차 컴포넌트(HOC: Higher-Order Component)를 활용하여 UI의 구성 요소들과 `React-Query`와의 의존성을 낮추고 조금 더 컴포넌트 중심으로 서비스를 구성할 수 있도록 설계하였습니다.
+```tsx
+import { useContext } from "react"
+import { DependencyContext } from "di/DependencyContext"
+
+export default function useDependencies() {
+  const dependencies = useContext(DependencyContext)
+  if (!dependencies) {
+    throw new Error("Dependencies not found in context")
+  }
+  return dependencies
+}
+```
+
+그 밖의 샘플 프로젝트에서는 `TanStack Query`와 고차 컴포넌트(HOC: Higher-Order Component)를 활용하여 UI의 구성 요소들과 `TanStack Query`와의 의존성을 낮추고 조금 더 컴포넌트 중심으로 서비스를 구성할 수 있도록 설계하였습니다.
 
 예를 들면, 샘플 프로젝트에서 카드 리스트를 화면을 출력하는 컴포넌트 구조는 아래와 같습니다.
 
-```ts
+```tsx
 // CardSection.tsx
 ...
 export default function CardSection() {
@@ -253,7 +276,7 @@ export default function CardSection() {
 }
 ```
 
-```ts
+```tsx
 // ResCardList.tsx
 ...
 export default function ResCardList({ response }: { response?: Array<ICard> }) {

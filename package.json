@@ -1,7 +1,7 @@
 {
-  "name": "domain-driven-react-architecture",
+  "name": "react-width-clean-architecture",
   "version": "2.0.0",
-  "description": "Domain-driven React architecture configuration with a sample project",
+  "description": "A Sample Project for a React Project Based on Clean Architecture",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",
