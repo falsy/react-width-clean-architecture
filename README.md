@@ -1,3 +1,7 @@
+## ⚠️ Discontinued
+
+> Development of this project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/react-width-clean-architecture)" project.
+
 # React with Clean Architecture
 
 This project is a small idea project for a React architecture based on the principles of `Domain-Driven Design (DDD)` and `Clean Architecture`. The goal of this project is to effectively manage the complexity of the business domain and build a modular, domain-centric design to facilitate easier service expansion and maintenance.

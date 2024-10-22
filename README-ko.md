@@ -1,3 +1,7 @@
+## ⚠️ 중단됨
+
+> 이 프로젝트는 "[clean-architecture-with-typescript](https://github.com/falsy/react-width-clean-architecture)" 프로젝트와 많은 부분 중복되어 개발이 중단되었습니다.
+
 # React with Clean Architecture
 
 이 프로젝트는 `도메인 주도 디자인(DDD: Domain-driven Design)`의 원칙과 `클린 아키텍처`를 기반으로 하는 React 아키텍처의 작은 아이디어 프로젝트입니다. 이 프로젝트의 목표는 비즈니스 도메인의 복잡성을 효과적으로 관리하고 모듈식 도메인 중심 디자인을 구축하여 서비스의 확장과 유지 관리를 더 쉽게 만드는 것입니다.
