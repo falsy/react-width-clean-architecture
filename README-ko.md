@@ -1,6 +1,6 @@
 ## ⚠️ 중단됨
 
-> 이 프로젝트는 "[clean-architecture-with-typescript](https://github.com/falsy/react-width-clean-architecture)" 프로젝트와 많은 부분 중복되어 개발이 중단되었습니다.
+> 이 프로젝트는 "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" 프로젝트와 많은 부분 중복되어 개발이 중단되었습니다.
 
 # React with Clean Architecture
 

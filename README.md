@@ -1,6 +1,6 @@
 ## ⚠️ Discontinued
 
-> Development of this project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/react-width-clean-architecture)" project.
+> Development of this project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" project.
 
 # React with Clean Architecture
 
